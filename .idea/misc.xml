@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_connection.xml" value="0.15390625" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_home.xml" value="0.15390625" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_login.xml" value="0.15390625" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_registration.xml" value="0.15390625" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/app_bar_home.xml" value="0.15390625" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/car_details_cardview.xml" value="0.15390625" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_user_profile.xml" value="0.15390625" />
+      </map>
+    </option>
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
