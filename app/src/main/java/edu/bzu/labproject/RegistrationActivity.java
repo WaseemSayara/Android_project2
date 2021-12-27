@@ -33,8 +33,12 @@ public class RegistrationActivity extends Activity {
         ArrayAdapter genderArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, genderOptions);
         genderSpinner.setAdapter(genderArrayAdapter);
 
+        final Spinner nationalitySpinner = (Spinner) findViewById(R.id.nationalitySpinner);
+        String[] nationalityOptions = {"Palestinian", "Jordanian", "Syrian", "Lebanese", "Iraqi", "Egyptian"};
+        ArrayAdapter nationalityArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, nationalityOptions);
+        nationalitySpinner.setAdapter(nationalityArrayAdapter);
         final Spinner countrySpinner = (Spinner) findViewById(R.id.countrySpinner);
-        String[] countryOptions = {"Palestine", "Jordan", "Syria", "Lebanon"};
+        String[] countryOptions = {"Palestine", "Jordan", "Syria", "Lebanon", "Iraq", "Egypt"};
         ArrayAdapter countryArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, countryOptions);
         countrySpinner.setAdapter(countryArrayAdapter);
 
@@ -43,16 +47,22 @@ public class RegistrationActivity extends Activity {
         String[] citiesOfJordan = {"Amman", "Zarqa", "Jarash"};
         String[] citiesOfSyria = {"Aleppo", "Damascus", "Homs", "Raqqa"};
         String[] citiesOfLebanon = {"Beirut", "Tripoli", "Sidon", "Baalbek"};
+        String[] citiesOfIraq = {"Baghdad", "Basra", "Najaf"};
+        String[] citiesOfEgypt = {"Cairo", "Alexandria", "Mansoura", "Ismailia"};
         citiesOfCountryMap.put("Palestine", citiesOfPalestine);
         citiesOfCountryMap.put("Jordan", citiesOfJordan);
         citiesOfCountryMap.put("Syria", citiesOfSyria);
         citiesOfCountryMap.put("Lebanon", citiesOfLebanon);
+        citiesOfCountryMap.put("Iraq", citiesOfIraq);
+        citiesOfCountryMap.put("Egypt", citiesOfEgypt);
 
         final HashMap<String, String> phoneCodeOfCountryMap = new HashMap<>();
         phoneCodeOfCountryMap.put("Palestine", "+972");
         phoneCodeOfCountryMap.put("Jordan", "+962");
         phoneCodeOfCountryMap.put("Syria", "+963");
         phoneCodeOfCountryMap.put("Lebanon", "+961");
+        phoneCodeOfCountryMap.put("Iraq", "+964");
+        phoneCodeOfCountryMap.put("Egypt", "+20");
 
         final Spinner citySpinner = (Spinner) findViewById(R.id.citySpinner);
         final EditText phoneCode = (EditText) findViewById(R.id.phoneCodeField);

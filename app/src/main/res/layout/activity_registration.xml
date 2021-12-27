@@ -38,22 +38,21 @@
         android:hint="First Name"
         android:inputType="textPersonName"
         android:textColor="@android:color/white"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/phoneCodeField"
-        android:layout_width="185dp"
+        android:layout_width="131dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/emailAddressInput"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="455dp"
+        android:layout_marginTop="387dp"
         android:ems="10"
         android:hint="Phone Code"
         android:inputType="text"
         android:textColor="@android:color/white"
-        android:textSize="21sp"
-        />
+        android:textSize="21sp" />
 
     <EditText
         android:id="@+id/lastNameInput"
@@ -68,22 +67,22 @@
         android:hint="Last Name"
         android:inputType="textPersonName"
         android:textColor="@android:color/white"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/phoneNumberInput"
-        android:layout_width="183dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/emailAddressInput"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="193dp"
-        android:layout_marginTop="455dp"
+        android:layout_marginStart="142dp"
+        android:layout_marginTop="389dp"
         android:drawableLeft="@drawable/ic_phone"
         android:ems="10"
         android:hint="Number"
         android:inputType="textPersonName|phone"
         android:textColor="@android:color/white"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/passwordInput"
@@ -91,14 +90,14 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/emailAddressInput"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="330dp"
+        android:layout_marginStart="-1dp"
+        android:layout_marginBottom="450dp"
         android:drawableLeft="@drawable/ic_lock"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textColor="@android:color/white"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/confirmPasswordInput"
@@ -106,32 +105,83 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/emailAddressInput"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="270dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="399dp"
         android:drawableLeft="@drawable/ic_lock"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:textColor="@android:color/white"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/salaryInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/emailAddressInput"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="189dp"
+        android:layout_marginTop="448dp"
+        android:ems="10"
+        android:hint="Salary"
+        android:inputType="textPersonName|phone"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/occupationInput"
+        android:layout_width="191dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/emailAddressInput"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-6dp"
+        android:layout_marginTop="500dp"
+        android:ems="10"
+        android:hint="Occupation"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/familySizeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/emailAddressInput"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="189dp"
+        android:layout_marginTop="502dp"
+        android:ems="10"
+        android:hint="Family Size"
+        android:inputType="textPersonName|phone"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
 
     <Spinner
         android:id="@+id/countrySpinner"
-        android:layout_width="185dp"
-        android:layout_height="wrap_content"
+        android:layout_width="187dp"
+        android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginBottom="224dp" />
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="171dp" />
 
     <Spinner
         android:id="@+id/citySpinner"
-        android:layout_width="185dp"
-        android:layout_height="wrap_content"
+        android:layout_width="188dp"
+        android:layout_height="41dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="212dp"
-        android:layout_marginBottom="224dp" />
+        android:layout_marginStart="213dp"
+        android:layout_marginBottom="169dp" />
+
+    <Spinner
+        android:id="@+id/nationalitySpinner"
+        android:layout_width="193dp"
+        android:layout_height="46dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="302dp" />
 
     <Spinner
         android:id="@+id/genderSpinner"
@@ -140,7 +190,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="22dp"
-        android:layout_marginBottom="392dp" />
+        android:layout_marginBottom="511dp" />
 
     <android.support.v7.widget.CardView
         android:layout_width="375dp"
@@ -148,7 +198,7 @@
         android:layout_alignEnd="@+id/firstNameInput"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="-185dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="50dp"
         app:cardBackgroundColor="@color/colorAccent"
         app:cardCornerRadius="25dp">
 
@@ -163,8 +213,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="6dp"
                 android:background="@color/colorAccent"
                 android:text="Register"
