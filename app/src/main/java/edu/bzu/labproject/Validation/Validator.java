@@ -8,21 +8,21 @@ public class Validator {
             return false;
     }
     public static boolean checkFirstNameValidity(String firstName){
-        if(firstName.length()< 2)
+        if(firstName.length()< 3 || firstName.length() > 20)
             return false;
         else
             return true;
     }
 
     public static boolean checkLastNameValidity(String lastName){
-        if(lastName.length() < 2)
+        if(lastName.length()< 3 || lastName.length() > 20)
             return false;
         else
             return true;
     }
 
     public static boolean checkPasswordValidity(String password){
-        String PASSWORD_REGEX = "^(?=.{5,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~@#$%-._]).*$";
+        String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$!%?&])[A-Za-z\\d@#$!%?&]{8,15}$";
         if(password.matches(PASSWORD_REGEX))
             return true;
         else
