@@ -43,7 +43,7 @@ public class LoginActivity extends Activity {
         openRegistrationForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toRegistrationActivityIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
+                Intent toRegistrationActivityIntent = new Intent(LoginActivity.this, RegisterType.class);
                 LoginActivity.this.startActivity(toRegistrationActivityIntent);
 
             }
