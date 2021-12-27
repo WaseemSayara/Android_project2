@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerVertical="true"
+    android:orientation="vertical"
+    android:background="@drawable/bluebg"
+    tools:context=".ContactUs">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="175dp">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="25dp"
+            app:srcCompat="@drawable/greencall" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="151dp"
+            android:layout_marginBottom="23dp"
+            app:srcCompat="@drawable/googlemaps" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="24dp"
+            app:srcCompat="@drawable/gmail" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="25dp"
+        android:orientation="vertical"
+        android:layout_marginTop="25dp">
+        <Button
+            android:id="@+id/callUsButton"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:background="#00ff00"
+            android:drawableLeft="@drawable/ic_call_white_24dp"
+            android:text="Call Us"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textAllCaps="true"/>
+
+        <Button
+            android:id="@+id/mapsButton"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:background="#3b5998"
+            android:drawableLeft="@drawable/ic_map_white_24dp"
+            android:text="Find Us Via Maps"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="true"/>
+
+        <Button
+            android:id="@+id/emailUsButton"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:background="@android:color/holo_red_light"
+            android:drawableLeft="@drawable/ic_email_white_24dp"
+            android:text="Email Us"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="true"/>
+    </LinearLayout>
+
+</LinearLayout>
