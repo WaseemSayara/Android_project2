@@ -21,6 +21,31 @@ public class Validator {
             return true;
     }
 
+    public static boolean checkOccupationValidity(String occupation){
+        if(occupation.length() > 20)
+            return false;
+        else
+            return true;
+    }
+
+    public static boolean checkSalaryValidity(String salary){
+        try {
+            double d = Double.parseDouble(salary);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+            return true;
+    }
+
+    public static boolean checkFamilySizeValidity(String familySize){
+        try {
+            double d = Double.parseDouble(familySize);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
     public static boolean checkPasswordValidity(String password){
         String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$!%?&])[A-Za-z\\d@#$!%?&]{8,15}$";
         if(password.matches(PASSWORD_REGEX))

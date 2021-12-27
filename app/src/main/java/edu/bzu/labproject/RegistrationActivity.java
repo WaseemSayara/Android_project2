@@ -21,7 +21,7 @@ import edu.bzu.labproject.Validation.Validator;
 
 public class RegistrationActivity extends Activity {
     private boolean allInputsValidated = true;
-    private String emailAddress, firstName, lastName, password, confirmPassword, phoneNumber;
+    private String emailAddress, firstName, lastName, password, confirmPassword, phoneNumber, salary, occupation, familySize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +86,9 @@ public class RegistrationActivity extends Activity {
         final EditText firstNameInputField = (EditText) findViewById(R.id.firstNameInput);
         final EditText lastNameInputField = (EditText) findViewById(R.id.lastNameInput);
         final EditText passwordInputField = (EditText) findViewById(R.id.passwordInput);
+        final EditText salaryInputField = (EditText) findViewById(R.id.salaryInput);
+        final EditText familySizeInputField = (EditText) findViewById(R.id.familySizeInput);
+        final EditText occupationInputField = (EditText) findViewById(R.id.occupationInput);
         final EditText confirmPasswordInputField = (EditText) findViewById(R.id.confirmPasswordInput);
         final EditText phoneNumberInputField = (EditText) findViewById(R.id.phoneNumberInput);
 
@@ -130,6 +133,10 @@ public class RegistrationActivity extends Activity {
                 lastName = lastNameInputField.getText().toString().trim();
                 password = passwordInputField.getText().toString().trim();
                 confirmPassword = confirmPasswordInputField.getText().toString().trim();
+                salary = salaryInputField.getText().toString().trim();
+                occupation = occupationInputField.getText().toString().trim();
+                familySize = familySizeInputField.getText().toString().trim();
+                lastName = lastNameInputField.getText().toString().trim();
                 phoneNumber = phoneNumberInputField.getText().toString().trim();
                 allInputsValidated = true;
 
@@ -204,6 +211,48 @@ public class RegistrationActivity extends Activity {
                 }
                 else {
                     confirmPasswordInputField.setError(getResources().getString(R.string.error_required_field));
+                    allInputsValidated = false;
+                }
+
+                if(Validator.checkRequiredFieldConstraint(salary)){
+                    if(Validator.checkLastNameValidity(salary)){
+                        salaryInputField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person,0,R.drawable.ic_check,0);
+                    }
+                    else {
+                        salaryInputField.setError(getResources().getString(R.string.error_invalid_salary));
+                        allInputsValidated = false;
+                    }
+                }
+                else {
+                    salaryInputField.setError(getResources().getString(R.string.error_required_field));
+                    allInputsValidated = false;
+                }
+
+                if(Validator.checkRequiredFieldConstraint(familySize)){
+                    if(Validator.checkLastNameValidity(familySize)){
+                        familySizeInputField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person,0,R.drawable.ic_check,0);
+                    }
+                    else {
+                        familySizeInputField.setError(getResources().getString(R.string.error_invalid_family));
+                        allInputsValidated = false;
+                    }
+                }
+                else {
+                    familySizeInputField.setError(getResources().getString(R.string.error_required_field));
+                    allInputsValidated = false;
+                }
+
+                if(Validator.checkRequiredFieldConstraint(occupation)){
+                    if(Validator.checkLastNameValidity(occupation)){
+                        occupationInputField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person,0,R.drawable.ic_check,0);
+                    }
+                    else {
+                        occupationInputField.setError(getResources().getString(R.string.error_invalid_occupation_length));
+                        allInputsValidated = false;
+                    }
+                }
+                else {
+                    occupationInputField.setError(getResources().getString(R.string.error_required_field));
                     allInputsValidated = false;
                 }
 

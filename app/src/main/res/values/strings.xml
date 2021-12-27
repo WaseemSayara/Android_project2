@@ -7,10 +7,13 @@
     <string name="error_required_field">Required Field</string>
     <string name="error_invalid_email">Invalid Email Address</string>
     <string name="error_email_exists">Email Address Already Exists</string>
-    <string name="error_invalid_firstname">Firstname must be at least 3 characters</string>
-    <string name="error_invalid_lastname">Lastname must be at least 3 characters</string>
-    <string name="error_invalid_password">Password Must Consist of at least 1 Number, 1 Special Character and 1 Letter</string>
-    <string name="error_invalid_password_length">Password Must Be At Least 5 Characters</string>
+    <string name="error_invalid_firstname">Firstname must be at least 3 and at most 20 characters</string>
+    <string name="error_invalid_lastname">Lastname must be at least  3 and at most 20 characters</string>
+    <string name="error_invalid_password">Password Must Consist of at least 1 Number, 1 Special Character, 1 lower Letter and 1 upper Letter</string>
+    <string name="error_invalid_password_length">Password Must Be At Least 8 and at most 20 characters</string>
+    <string name="error_invalid_occupation_length">Occupation Must Be At Most 20 characters</string>
+    <string name="error_invalid_salary">Salary Must Be A NUMBER</string>
+    <string name="error_invalid_family">Family Size Must Be A NUMBER</string>
     <string name="error_passwords_mismatch">Passwords Do NOT Match!</string>
     <string name="error_invalid_phone">Invalid Phone Number</string>
     <string name="check_validation_errors">ERROR: CHECK INVALID INPUTS</string>
