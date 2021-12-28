@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity
 
         LoginSessionManager userLoginSession = new LoginSessionManager(getApplicationContext());
         User loggedInUser = userLoginSession.getCurrentlyLoggedInUser();
-        Toast.makeText(getApplicationContext(),"Welcome Back, " + loggedInUser.getFirstName(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Welcome Back, " + loggedInUser.getFirstName(), Toast.LENGTH_SHORT).show();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,12 +56,17 @@ public class HomeActivity extends AppCompatActivity
         View navHeaderView = navigationView.getHeaderView(0);
         ImageView navHeaderImage = (ImageView) navHeaderView.findViewById(R.id.headerImageView);
         TextView navHeaderEmail = (TextView) navHeaderView.findViewById(R.id.headerEmailAddress);
-        TextView navHeaderName =  (TextView) navHeaderView.findViewById(R.id.headerCustomerFullName);
+        TextView navHeaderName = (TextView) navHeaderView.findViewById(R.id.headerCustomerFullName);
+        try {
+            if (loggedInUser.getGender().equals("Male"))
+                navHeaderImage.setImageResource(R.drawable.maleuser);
+            else
+                navHeaderImage.setImageResource(R.drawable.femaleuser);
+        }catch (Exception e){
 
-        if(loggedInUser.getGender().equals("Male"))
             navHeaderImage.setImageResource(R.drawable.maleuser);
-        else
-            navHeaderImage.setImageResource(R.drawable.femaleuser);
+
+        }
 
         navHeaderEmail.setText(loggedInUser.getEmailAddress());
         navHeaderName.setText(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
@@ -149,15 +154,26 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_user_profile) {
             final FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            UserProfileFragment userProfileFragment = new UserProfileFragment();
-            fragmentTransaction.replace(R.id.homeContent, userProfileFragment);
-            fragmentTransaction.commit();
+            LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext(), false);
+            boolean type = loginSession.getUser_Type();
+            if (type) {
+                UserProfileFragment userProfileFragment = new UserProfileFragment();
+                fragmentTransaction.replace(R.id.homeContent, userProfileFragment);
+                fragmentTransaction.commit();
+            } else {
+
+                AgencyUserProfileFragment agencyUserProfileFragment = new AgencyUserProfileFragment();
+                fragmentTransaction.replace(R.id.homeContent, agencyUserProfileFragment);
+                fragmentTransaction.commit();
+
+
+            }
 
 
         } else if (id == R.id.nav_logout) {
             LoginSessionManager session = new LoginSessionManager(getApplicationContext());
             session.clearLoginSessionOnLogout();
-            Intent redirectToLoginPage = new Intent(HomeActivity.this,LoginActivity.class);
+            Intent redirectToLoginPage = new Intent(HomeActivity.this, LoginActivity.class);
             HomeActivity.this.startActivity(redirectToLoginPage);
         }
 

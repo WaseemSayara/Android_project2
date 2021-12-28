@@ -177,6 +177,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    public AgencyUser getAgencyUserByEmailAddress(String emailAddress) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(TABLE_AGENCY_USERS, new String[]{ID_COL, EMAIL_COL, HASHED_PASSWORD_COL,
+                        AGENCY_NAME_COL, COUNTRY_COL, CITY_COL, PHONE_NUMBER_COL},
+                EMAIL_COL + "=?", new String[]{emailAddress}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            AgencyUser user = new AgencyUser();
+            user.setId(cursor.getInt(0));
+            user.setEmailAddress(cursor.getString(1));
+            user.setHashedPassword(cursor.getString(2));
+            user.setAgencytName(cursor.getString(3));
+            user.setCountry(cursor.getString(4));
+            user.setCity(cursor.getString(5));
+            user.setPhoneNumber(cursor.getString(6));
+
+            return user;
+        }
+
+        return null;
+    }
+
     public User getCustomerById(Integer customerId) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(TABLE_USERS, new String[]{ID_COL, EMAIL_COL, HASHED_PASSWORD_COL,

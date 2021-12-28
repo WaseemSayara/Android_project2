@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import edu.bzu.labproject.Models.AgencyUser;
 import edu.bzu.labproject.Models.User;
 import edu.bzu.labproject.SQLite.DatabaseHelper;
 import edu.bzu.labproject.Security.LoginSessionManager;
@@ -70,7 +71,7 @@ public class LoginActivity extends Activity {
                         }
 
                         //Save Logged-In User in a Login Session Using Shared Preferences
-                        LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext());
+                        LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext(),true);
                         loginSession.saveUserLoginSession(user);
 
                         Intent toHomePageIntent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -82,7 +83,35 @@ public class LoginActivity extends Activity {
                     }
                 }
                 else {
-                    emailAddressEditText.setError(getResources().getString(R.string.error_email_doesnot_exist));
+                    AgencyUser agencyUser = databaseHelper.getAgencyUserByEmailAddress(emailAddress);
+                    if (agencyUser != null) {
+
+                        //Compare Password to Stored Password Hash to Perform User Login
+                        String password = passwordEditText.getText().toString().trim();
+                        if (SecurityUtils.verifyPasswordsMatch(password, agencyUser.getHashedPassword())) {
+                            //Check if Remember Me Checkbox is Checked
+                            if (rememberMe.isChecked()) {
+                                //Save Email Address to Shared Preferences
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("EmailAddress", emailAddress);
+                                editor.putString("Password", password);
+                                editor.commit();
+                            }
+
+                            //Save Logged-In User in a Login Session Using Shared Preferences
+                            LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext(),false);
+                            loginSession.saveAgencyUserLoginSession(agencyUser);
+
+                            Intent toHomePageIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                            LoginActivity.this.startActivity(toHomePageIntent);
+                            LoginActivity.this.finish();
+                        } else {
+                            passwordEditText.setError(getResources().getString(R.string.error_wrong_password));
+                        }
+
+                    } else {
+                        emailAddressEditText.setError(getResources().getString(R.string.error_email_doesnot_exist));
+                    }
                 }
             }
         });
