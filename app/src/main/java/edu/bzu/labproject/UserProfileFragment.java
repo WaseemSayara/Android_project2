@@ -81,6 +81,11 @@ public class UserProfileFragment extends Fragment {
         final EditText updateFirstNameEt = new EditText(getActivity());
         final EditText updateLastNameEt = new EditText(getActivity());
         final EditText updateEmailAddressEt = new EditText(getActivity());
+        final EditText updatePhoneEt = new EditText(getActivity());
+        final EditText updateSalaryEt = new EditText(getActivity());
+        final EditText updateFamilySizeEt = new EditText(getActivity());
+        final EditText updateOccupationEt = new EditText(getActivity());
+
         updateFirstNameEt.setHint("First Name");
         updateFirstNameEt.setEnabled(true);
         updateFirstNameEt.setBackgroundColor(getActivity().getResources().getColor(android.R.color.white));
@@ -100,6 +105,29 @@ public class UserProfileFragment extends Fragment {
         updateEmailAddressEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
         updateEmailAddressEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_email, 0, 0, 0);
 
+        updatePhoneEt.setHint("Phone");
+        updatePhoneEt.setEnabled(true);
+        updatePhoneEt.setBackgroundColor(getActivity().getResources().getColor(android.R.color.white));
+        updatePhoneEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
+        updatePhoneEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person, 0, 0, 0);
+
+        updateSalaryEt.setHint("Salary");
+        updateSalaryEt.setEnabled(true);
+        updateSalaryEt.setBackgroundColor(getActivity().getResources().getColor(android.R.color.white));
+        updateSalaryEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
+        updateSalaryEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person, 0, 0, 0);
+
+        updateFamilySizeEt.setHint("Family Size");
+        updateFamilySizeEt.setEnabled(true);
+        updateFamilySizeEt.setBackgroundColor(getActivity().getResources().getColor(android.R.color.white));
+        updateFamilySizeEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
+        updateFamilySizeEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person, 0, 0, 0);
+
+        updateOccupationEt.setHint("Occupation");
+        updateOccupationEt.setEnabled(true);
+        updateOccupationEt.setBackgroundColor(getActivity().getResources().getColor(android.R.color.white));
+        updateOccupationEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
+        updateOccupationEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person, 0, 0, 0);
 
 
         final LinearLayout updatePromptLayout = new LinearLayout(getActivity());
@@ -107,9 +135,13 @@ public class UserProfileFragment extends Fragment {
         updatePromptLayout.setLayoutParams(layoutParams);
         updatePromptLayout.setPadding(20,20,20,20);
         updatePromptLayout.setOrientation(LinearLayout.VERTICAL);
+        updatePromptLayout.addView(updateEmailAddressEt);
         updatePromptLayout.addView(updateFirstNameEt);
         updatePromptLayout.addView(updateLastNameEt);
-        updatePromptLayout.addView(updateEmailAddressEt);
+        updatePromptLayout.addView(updatePhoneEt);
+        updatePromptLayout.addView(updateOccupationEt);
+        updatePromptLayout.addView(updateSalaryEt);
+        updatePromptLayout.addView(updateFamilySizeEt);
 
         final DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
 
@@ -128,10 +160,15 @@ public class UserProfileFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         User updatedUser = new User();
-                        String updatedFirstName, updatedLastName, updatedEmailAddress;
+                        String updatedFirstName, updatedLastName, updatedEmailAddress, updatePhone, updateSalary,
+                                updateFamilySize, updateOccupation;
                         updatedFirstName = updateFirstNameEt.getText().toString().trim();
                         updatedLastName = updateLastNameEt.getText().toString().trim();
                         updatedEmailAddress = updateEmailAddressEt.getText().toString().trim();
+                        updatePhone = updatePhoneEt.getText().toString().trim();
+                        updateSalary = updateSalaryEt.getText().toString().trim();
+                        updateFamilySize = updateFamilySizeEt.getText().toString().trim();
+                        updateOccupation = updateOccupationEt.getText().toString().trim();
 
                         if(!updatedFirstName.isEmpty()){
                             if(Validator.checkFirstNameValidity(updatedFirstName)){
@@ -177,6 +214,60 @@ public class UserProfileFragment extends Fragment {
                         else {
                             updatedUser.setEmailAddress(loggedInUser.getEmailAddress());
                         }
+
+                        if(!updatePhone.isEmpty()){
+                            if(Validator.checkPhoneNumberValidity(updatePhone)){
+                                updatedUser.setPhoneNumber(updatePhone);
+                            }
+                            else {
+                                updatePhoneEt.setError(getResources().getString(R.string.error_invalid_phone));
+                                allInputsValidated = false;
+                            }
+                        }
+                        else {
+                            updatedUser.setPhoneNumber(loggedInUser.getPhoneNumber());
+                        }
+
+                        if(!updateSalary.isEmpty()){
+                            if(Validator.checkSalaryValidity(updateSalary)){
+                                updatedUser.setSalary(updateSalary);
+                            }
+                            else {
+                                updateSalaryEt.setError(getResources().getString(R.string.error_invalid_salary));
+                                allInputsValidated = false;
+                            }
+                        }
+                        else {
+                            updatedUser.setSalary(loggedInUser.getSalary());
+                        }
+
+                        if(!updateFamilySize.isEmpty()){
+                            if(Validator.checkFamilySizeValidity(updateFamilySize)){
+                                updatedUser.setFamilySize(updateFamilySize);
+                            }
+                            else {
+                                updateFamilySizeEt.setError(getResources().getString(R.string.error_invalid_family));
+                                allInputsValidated = false;
+                            }
+                        }
+                        else {
+                            updatedUser.setFamilySize(loggedInUser.getFamilySize());
+                        }
+
+                        if(!updateOccupation.isEmpty()){
+                            if(Validator.checkOccupationValidity(updateOccupation)){
+                                updatedUser.setOccupation(updateOccupation);
+                            }
+                            else {
+                                updateOccupationEt.setError(getResources().getString(R.string.error_invalid_occupation_length));
+                                allInputsValidated = false;
+                            }
+                        }
+                        else {
+                            updatedUser.setOccupation(loggedInUser.getOccupation());
+                        }
+
+
 
                         if(allInputsValidated) {
                             databaseHelper.updateCustomerInformation(updatedUser, loggedInUser.getEmailAddress());

@@ -72,6 +72,10 @@ public class LoginSessionManager {
         this.editor.putString(SHAREDPREF_KEY_FIRSTNAME, updatedUser.getFirstName());
         this.editor.putString(SHAREDPREF_KEY_LASTNAME, updatedUser.getLastName());
         this.editor.putString(SHAREDPREF_KEY_EMAIL, updatedUser.getEmailAddress());
+        this.editor.putString(SHAREDPREF_KEY_SALARY, updatedUser.getSalary());
+        this.editor.putString(SHAREDPREF_KEY_FAMILY_SIZE, updatedUser.getFamilySize());
+        this.editor.putString(SHAREDPREF_KEY_OCCUPATION, updatedUser.getOccupation());
+        this.editor.putString(SHAREDPREF_KEY_PHONE, updatedUser.getPhoneNumber());
         this.editor.commit();
     }
 

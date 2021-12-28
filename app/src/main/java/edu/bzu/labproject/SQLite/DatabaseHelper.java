@@ -229,6 +229,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(EMAIL_COL, updatedUser.getEmailAddress());
         contentValues.put(FIRSTNAME_COL, updatedUser.getFirstName());
         contentValues.put(LASTNAME_COL, updatedUser.getLastName());
+        contentValues.put(SALARY_COL, updatedUser.getSalary());
+        contentValues.put(FAMILY_SIZE_COL, updatedUser.getFamilySize());
+        contentValues.put(OCCUPATION_COL, updatedUser.getOccupation());
+        contentValues.put(PHONE_NUMBER_COL, updatedUser.getPhoneNumber());
         int rowsAffected = sqLiteDatabase.update(TABLE_USERS, contentValues, EMAIL_COL + " = ?", new String[]{emailAddress});
         if (rowsAffected == 0)
             return false;
