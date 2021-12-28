@@ -16,6 +16,10 @@ public class LoginSessionManager {
     private static final String SHAREDPREF_KEY_CITY = "City";
     private static final String SHAREDPREF_KEY_PHONE = "Phone_Number";
     private static final String SHAREDPREF_KEY_ISLOGGEDIN = "isUserLoggedIn";
+    private static final String SHAREDPREF_KEY_NATIONALITY = "Nationality";
+    private static final String SHAREDPREF_KEY_SALARY = "Salary";
+    private static final String SHAREDPREF_KEY_FAMILY_SIZE = "Family_Size";
+    private static final String SHAREDPREF_KEY_OCCUPATION = "Occupation";
 
     private Context context;
     private SharedPreferences sharedPreferences;
@@ -38,6 +42,10 @@ public class LoginSessionManager {
         this.editor.putString(SHAREDPREF_KEY_COUNTRY, loggedInUser.getCountry());
         this.editor.putString(SHAREDPREF_KEY_CITY, loggedInUser.getCity());
         this.editor.putString(SHAREDPREF_KEY_PHONE, loggedInUser.getPhoneNumber());
+        this.editor.putString(SHAREDPREF_KEY_NATIONALITY, loggedInUser.getNationality());
+        this.editor.putString(SHAREDPREF_KEY_SALARY, loggedInUser.getSalary());
+        this.editor.putString(SHAREDPREF_KEY_FAMILY_SIZE, loggedInUser.getFamilySize());
+        this.editor.putString(SHAREDPREF_KEY_OCCUPATION, loggedInUser.getOccupation());
         this.editor.putBoolean(SHAREDPREF_KEY_ISLOGGEDIN, this.isLoggedIn);
         this.editor.commit();
     }
@@ -59,6 +67,10 @@ public class LoginSessionManager {
         loggedInUser.setCountry(this.sharedPreferences.getString(SHAREDPREF_KEY_COUNTRY,null));
         loggedInUser.setCity(this.sharedPreferences.getString(SHAREDPREF_KEY_CITY,null));
         loggedInUser.setPhoneNumber(this.sharedPreferences.getString(SHAREDPREF_KEY_PHONE,null));
+        loggedInUser.setNationality(this.sharedPreferences.getString(SHAREDPREF_KEY_NATIONALITY,null));
+        loggedInUser.setSalary(this.sharedPreferences.getString(SHAREDPREF_KEY_SALARY,null));
+        loggedInUser.setFamilySize(this.sharedPreferences.getString(SHAREDPREF_KEY_FAMILY_SIZE,null));
+        loggedInUser.setOccupation(this.sharedPreferences.getString(SHAREDPREF_KEY_OCCUPATION,null));
         return loggedInUser;
     }
 

@@ -151,7 +151,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public User getUserByEmailAddress(String emailAddress) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(TABLE_USERS, new String[]{ID_COL, EMAIL_COL, HASHED_PASSWORD_COL,
-                        FIRSTNAME_COL, LASTNAME_COL, GENDER_COL, COUNTRY_COL, CITY_COL, PHONE_NUMBER_COL},
+                        FIRSTNAME_COL, LASTNAME_COL, GENDER_COL, COUNTRY_COL, CITY_COL, PHONE_NUMBER_COL, NATIONALITY_COL
+                , SALARY_COL, FAMILY_SIZE_COL, OCCUPATION_COL},
                 EMAIL_COL + "=?", new String[]{emailAddress}, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -165,6 +166,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             user.setCountry(cursor.getString(6));
             user.setCity(cursor.getString(7));
             user.setPhoneNumber(cursor.getString(8));
+            user.setNationality(cursor.getString(9));
+            user.setSalary(cursor.getString(10));
+            user.setFamilySize(cursor.getString(11));
+            user.setOccupation(cursor.getString(12));
 
             return user;
         }

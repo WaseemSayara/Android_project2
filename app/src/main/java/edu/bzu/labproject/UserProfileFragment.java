@@ -56,6 +56,11 @@ public class UserProfileFragment extends Fragment {
         final TextView genderTextView = (TextView) getActivity().findViewById(R.id.genderTextView);
         final TextView locationTextView = (TextView) getActivity().findViewById(R.id.locationTextView);
         final TextView phoneNumberTextView = (TextView) getActivity().findViewById(R.id.phoneNumberTextView);
+        final TextView nationalityTextView = (TextView) getActivity().findViewById(R.id.nationalityTextView);
+        final TextView familySizeTextView = (TextView) getActivity().findViewById(R.id.familySizeTextView);
+        final TextView occupationTextView = (TextView) getActivity().findViewById(R.id.occupationTextView);
+        final TextView salaryTextView = (TextView) getActivity().findViewById(R.id.salaryTextView);
+
 
 
         if(loggedInUser.getGender().equals("Male"))
@@ -68,6 +73,10 @@ public class UserProfileFragment extends Fragment {
         genderTextView.setText(loggedInUser.getGender());
         locationTextView.setText(loggedInUser.getCity() + ", " + loggedInUser.getCountry());
         phoneNumberTextView.setText(loggedInUser.getPhoneNumber());
+        nationalityTextView.setText(loggedInUser.getNationality());
+        salaryTextView.setText(loggedInUser.getSalary());
+        familySizeTextView.setText(loggedInUser.getFamilySize());
+        occupationTextView.setText(loggedInUser.getOccupation());
 
         final EditText updateFirstNameEt = new EditText(getActivity());
         final EditText updateLastNameEt = new EditText(getActivity());
