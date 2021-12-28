@@ -12,6 +12,8 @@ import java.util.List;
 import edu.bzu.labproject.Models.Car;
 import edu.bzu.labproject.Models.Reservation;
 import edu.bzu.labproject.Models.User;
+import edu.bzu.labproject.Models.AgencyUser;
+
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     //Database Settings: Name and Version
@@ -20,6 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //Table Names
     private static final String TABLE_USERS = "USERS";
+    private static final String TABLE_AGENCY_USERS = "AGENCY_USERS";
     private static final String TABLE_CARS = "CARS";
     private static final String TABLE_RESERVATIONS = "RESERVATIONS";
     private static final String TABLE_FAVORITES = "FAVORITES";
@@ -38,6 +41,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COUNTRY_COL = "COUNTRY";
     private static final String CITY_COL = "CITY";
     private static final String PHONE_NUMBER_COL = "PHONE_NUMBER";
+    private static final String NATIONALITY_COL = "NATIONALITY";
+    private static final String SALARY_COL = "SALARY";
+    private static final String FAMILY_SIZE_COL = "FAMILY_SIZE";
+    private static final String OCCUPATION_COL = "OCCUPATION";
+    private static final String AGENCY_NAME_COL = "AGENCY_NAME";
 
     //Cars Table Column Names
     private static final String YEAR_COL = "YEAR";
@@ -53,9 +61,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //SQL Statements for Tables Creation
-    String SQL_CREATE_TABLE_USERS = "CREATE TABLE " + TABLE_USERS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + EMAIL_COL + " TEXT NOT NULL," +
+    String SQL_CREATE_TABLE_USERS = "CREATE TABLE " + TABLE_USERS + "(" + ID_COL + " INTEGER ," + EMAIL_COL + " TEXT PRIMARY KEY NOT NULL," +
             HASHED_PASSWORD_COL + " TEXT NOT NULL," + FIRSTNAME_COL + " TEXT NOT NULL," + LASTNAME_COL + " TEXT NOT NULL," +
-            GENDER_COL + " TEXT NOT NULL," + COUNTRY_COL + " TEXT NOT NULL," + CITY_COL + " TEXT NOT NULL," + PHONE_NUMBER_COL + " TEXT NOT NULL)";
+            GENDER_COL + " TEXT NOT NULL," + COUNTRY_COL + " TEXT NOT NULL," + CITY_COL + " TEXT NOT NULL," + PHONE_NUMBER_COL + " TEXT NOT NULL," + NATIONALITY_COL +
+            " TEXT NOT NULL," + SALARY_COL + " TEXT NOT NULL," + FAMILY_SIZE_COL + " TEXT NOT NULL," + OCCUPATION_COL + " TEXT NOT NULL)";
+
+    String SQL_CREATE_TABLE_AGENCY_USERS = "CREATE TABLE " + TABLE_AGENCY_USERS + "(" + ID_COL + " INTEGER ," + EMAIL_COL + " TEXT PRIMARY KEY NOT NULL," +
+            HASHED_PASSWORD_COL + " TEXT NOT NULL," + AGENCY_NAME_COL + " TEXT NOT NULL," + COUNTRY_COL + " TEXT NOT NULL," + CITY_COL +
+            " TEXT NOT NULL," + PHONE_NUMBER_COL + " TEXT NOT NULL)";
+
+    String SQL_TRY_CREATE_TABLE_AGENCY_USERS = "CREATE TABLE IF NOT EXISTS" + TABLE_USERS + "(" + ID_COL + " INTEGER ," + EMAIL_COL + " TEXT PRIMARY KEY NOT NULL," +
+            HASHED_PASSWORD_COL + " TEXT NOT NULL," + AGENCY_NAME_COL + " TEXT NOT NULL," + COUNTRY_COL + " TEXT NOT NULL," + CITY_COL +
+            " TEXT NOT NULL," + PHONE_NUMBER_COL + " TEXT NOT NULL)";
+
 
     String SQL_CREATE_TABLE_CARS = "CREATE TABLE " + TABLE_CARS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + YEAR_COL + " INTEGER NOT NULL," +
             MAKE_COL + " TEXT NOT NULL," + MODEL_COL + " TEXT NOT NULL," + DISTANCE_COL + " TEXT NOT NULL," + PRICE_COL + " INTEGER NOT NULL," +
@@ -76,14 +94,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_TABLE_USERS);
+        db.execSQL(SQL_CREATE_TABLE_AGENCY_USERS);
         db.execSQL(SQL_CREATE_TABLE_CARS);
         db.execSQL(SQL_CREATE_TABLE_RESERVATIONS);
         db.execSQL(SQL_CREATE_TABLE_FAVORITES);
+        System.out.println("hiiiiiiiiiiiiiiiiiiiiiiiiiiii\n\n");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        onCreate(db);
     }
 
     public boolean addUser(User user) {
@@ -97,9 +117,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COUNTRY_COL, user.getCountry());
         contentValues.put(CITY_COL, user.getCity());
         contentValues.put(PHONE_NUMBER_COL, user.getPhoneNumber());
-
+        contentValues.put(NATIONALITY_COL, user.getNationality());
+        contentValues.put(SALARY_COL, user.getSalary());
+        contentValues.put(FAMILY_SIZE_COL, user.getFamilySize());
+        contentValues.put(OCCUPATION_COL, user.getOccupation());
         long result;
         if ((result = sqLiteDatabase.insert(TABLE_USERS, null, contentValues)) == -1)
+            return false;
+
+        else
+            return true;
+
+    }
+    public boolean addAgencyUser(AgencyUser agencyUser) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(EMAIL_COL, agencyUser.getEmailAddress());
+        contentValues.put(HASHED_PASSWORD_COL, agencyUser.getHashedPassword());
+        contentValues.put(AGENCY_NAME_COL, agencyUser.getAgencyName());
+        contentValues.put(COUNTRY_COL, agencyUser.getCountry());
+        contentValues.put(CITY_COL, agencyUser.getCity());
+        contentValues.put(PHONE_NUMBER_COL, agencyUser.getPhoneNumber());
+
+        long result;
+        if ((result = sqLiteDatabase.insert(TABLE_AGENCY_USERS, null, contentValues)) == -1)
             return false;
 
         else

@@ -28,6 +28,13 @@ public class Validator {
             return true;
     }
 
+    public static boolean checkAgencyNameValidity(String agencyName){
+        if(agencyName.length() > 20)
+            return false;
+        else
+            return true;
+    }
+
     public static boolean checkSalaryValidity(String salary){
         try {
             double d = Double.parseDouble(salary);

@@ -10,13 +10,17 @@ public class User {
     private String country;
     private String city;
     private String phoneNumber;
+    private String nationality;
+    private String salary;
+    private String occupation;
+    private String familySize;
 
     public User() {
     }
 
     public User(Integer id, String emailAddress, String hashedPassword, String firstName,
-                String lastName, String gender, String country, String city, String phoneNumber) {
-
+                String lastName, String gender, String country, String city, String phoneNumber,
+                String nationality, String salary, String occupation, String familySize) {
         this.id = id;
         this.emailAddress = emailAddress;
         this.hashedPassword = hashedPassword;
@@ -26,8 +30,11 @@ public class User {
         this.country = country;
         this.city = city;
         this.phoneNumber = phoneNumber;
+        this.nationality = nationality;
+        this.salary = salary;
+        this.occupation = occupation;
+        this.familySize = familySize;
     }
-
 
     public Integer getId() {
         return id;
@@ -101,18 +108,54 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    public String getFamilySize() {
+        return familySize;
+    }
+
+    public void setFamilySize(String familySize) {
+        this.familySize = familySize;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", emailAddress='" + emailAddress + '\'' +
-                ", passwordHash='" + hashedPassword + '\'' +
+                ", hashedPassword='" + hashedPassword + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", gender='" + gender + '\'' +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", nationality='" + nationality + '\'' +
+                ", salary=" + salary +
+                ", occupation='" + occupation + '\'' +
+                ", familySize=" + familySize +
                 '}';
     }
 }

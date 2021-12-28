@@ -10,6 +10,7 @@ import android.widget.Button;
 public class RegisterType extends AppCompatActivity {
 
     private Button openTenantRegistrationForm;
+    private Button openAgencyRegistrationForm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,16 @@ public class RegisterType extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent toRegistrationActivityIntent = new Intent(RegisterType.this, RegistrationActivity.class);
+                RegisterType.this.startActivity(toRegistrationActivityIntent);
+
+            }
+        });
+
+        openAgencyRegistrationForm = (Button) findViewById(R.id.rentingAgencyButton);
+        openAgencyRegistrationForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toRegistrationActivityIntent = new Intent(RegisterType.this, RegistrationRenting.class);
                 RegisterType.this.startActivity(toRegistrationActivityIntent);
 
             }

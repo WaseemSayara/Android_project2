@@ -110,6 +110,11 @@ public class RegistrationActivity extends Activity {
                         user.setCountry(countrySpinner.getSelectedItem().toString());
                         user.setCity(citySpinner.getSelectedItem().toString());
                         user.setPhoneNumber(phoneCode.getText().toString() + " - " + phoneNumber);
+                        user.setFamilySize(familySize);
+                        user.setNationality(nationalitySpinner.getSelectedItem().toString());
+                        user.setOccupation(occupation);
+                        user.setSalary(salary);
+
 
                         boolean insertFlag;
                         if((insertFlag = databaseHelper.addUser(user)))
@@ -215,7 +220,7 @@ public class RegistrationActivity extends Activity {
                 }
 
                 if(Validator.checkRequiredFieldConstraint(salary)){
-                    if(Validator.checkLastNameValidity(salary)){
+                    if(Validator.checkSalaryValidity(salary)){
                         salaryInputField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person,0,R.drawable.ic_check,0);
                     }
                     else {
@@ -229,7 +234,7 @@ public class RegistrationActivity extends Activity {
                 }
 
                 if(Validator.checkRequiredFieldConstraint(familySize)){
-                    if(Validator.checkLastNameValidity(familySize)){
+                    if(Validator.checkFamilySizeValidity(familySize)){
                         familySizeInputField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person,0,R.drawable.ic_check,0);
                     }
                     else {
@@ -243,7 +248,7 @@ public class RegistrationActivity extends Activity {
                 }
 
                 if(Validator.checkRequiredFieldConstraint(occupation)){
-                    if(Validator.checkLastNameValidity(occupation)){
+                    if(Validator.checkOccupationValidity(occupation)){
                         occupationInputField.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person,0,R.drawable.ic_check,0);
                     }
                     else {
