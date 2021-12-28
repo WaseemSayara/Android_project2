@@ -188,7 +188,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             user.setId(cursor.getInt(0));
             user.setEmailAddress(cursor.getString(1));
             user.setHashedPassword(cursor.getString(2));
-            user.setAgencytName(cursor.getString(3));
+            user.setAgencyName(cursor.getString(3));
             user.setCountry(cursor.getString(4));
             user.setCity(cursor.getString(5));
             user.setPhoneNumber(cursor.getString(6));
@@ -234,6 +234,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(OCCUPATION_COL, updatedUser.getOccupation());
         contentValues.put(PHONE_NUMBER_COL, updatedUser.getPhoneNumber());
         int rowsAffected = sqLiteDatabase.update(TABLE_USERS, contentValues, EMAIL_COL + " = ?", new String[]{emailAddress});
+        if (rowsAffected == 0)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean updateAgencyInformation(AgencyUser updatedUser, String emailAddress) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(EMAIL_COL, updatedUser.getEmailAddress());
+        contentValues.put(AGENCY_NAME_COL, updatedUser.getAgencyName());
+        contentValues.put(PHONE_NUMBER_COL, updatedUser.getPhoneNumber());
+        int rowsAffected = sqLiteDatabase.update(TABLE_AGENCY_USERS, contentValues, EMAIL_COL + " = ?", new String[]{emailAddress});
         if (rowsAffected == 0)
             return false;
         else

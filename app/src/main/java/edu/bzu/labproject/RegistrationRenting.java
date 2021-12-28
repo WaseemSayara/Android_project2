@@ -1,6 +1,5 @@
 package edu.bzu.labproject;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -94,7 +93,7 @@ public class RegistrationRenting extends AppCompatActivity {
                         AgencyUser agencyUser = new AgencyUser();
                         agencyUser.setEmailAddress(emailAddress);
                         agencyUser.setHashedPassword(SecurityUtils.generate_MD5_Secure_Password(password));
-                        agencyUser.setAgencytName(agencyName);
+                        agencyUser.setAgencyName(agencyName);
                         agencyUser.setCountry(countryAgencySpinner.getSelectedItem().toString());
                         agencyUser.setCity(citySpinner.getSelectedItem().toString());
                         agencyUser.setPhoneNumber(phoneCode.getText().toString() + " - " + phoneNumber);

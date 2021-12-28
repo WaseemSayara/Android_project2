@@ -53,7 +53,7 @@ public class AgencyUser {
         return agencyName;
     }
 
-    public void setAgencytName(String agencyName) {
+    public void setAgencyName(String agencyName) {
         this.agencyName = agencyName;
     }
 

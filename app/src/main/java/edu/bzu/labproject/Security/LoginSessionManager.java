@@ -79,6 +79,13 @@ public class LoginSessionManager {
         this.editor.commit();
     }
 
+    public void updateCurrentAgencyLoginSession(AgencyUser updatedUser){
+        this.editor.putString(SHAREDPREF_KEY_AGENCYNAME, updatedUser.getAgencyName());
+        this.editor.putString(SHAREDPREF_KEY_EMAIL, updatedUser.getEmailAddress());
+        this.editor.putString(SHAREDPREF_KEY_PHONE, updatedUser.getPhoneNumber());
+        this.editor.commit();
+    }
+
     public User getCurrentlyLoggedInUser(){
         User loggedInUser = new User();
         loggedInUser.setId(this.sharedPreferences.getInt(SHAREDPREF_KEY_ID, -1));
@@ -99,7 +106,7 @@ public class LoginSessionManager {
     public AgencyUser getCurrentlyLoggedInAgencyUser(){
         AgencyUser loggedInUser = new AgencyUser();
         loggedInUser.setId(this.sharedPreferences.getInt(SHAREDPREF_KEY_ID, -1));
-        loggedInUser.setAgencytName(this.sharedPreferences.getString(SHAREDPREF_KEY_AGENCYNAME,null));
+        loggedInUser.setAgencyName(this.sharedPreferences.getString(SHAREDPREF_KEY_AGENCYNAME,null));
         loggedInUser.setEmailAddress(this.sharedPreferences.getString(SHAREDPREF_KEY_EMAIL,null));
         loggedInUser.setCountry(this.sharedPreferences.getString(SHAREDPREF_KEY_COUNTRY,null));
         loggedInUser.setCity(this.sharedPreferences.getString(SHAREDPREF_KEY_CITY,null));

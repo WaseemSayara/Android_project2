@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.bzu.labproject.Models.AgencyUser;
-import edu.bzu.labproject.Models.User;
 import edu.bzu.labproject.SQLite.DatabaseHelper;
 import edu.bzu.labproject.Security.LoginSessionManager;
 import edu.bzu.labproject.Validation.Validator;
@@ -62,20 +61,21 @@ public class AgencyUserProfileFragment extends Fragment {
         locationTextView.setText(loggedInUser.getCity() + ", " + loggedInUser.getCountry());
         phoneNumberTextView.setText(loggedInUser.getPhoneNumber());
 
-        final EditText updateFirstNameEt = new EditText(getActivity());
-        final EditText updateLastNameEt = new EditText(getActivity());
+        final EditText updateAgencyNameEt = new EditText(getActivity());
+        final EditText updatedPhoneEt = new EditText(getActivity());
         final EditText updateEmailAddressEt = new EditText(getActivity());
-        updateFirstNameEt.setHint("First Name");
-        updateFirstNameEt.setEnabled(true);
-        updateFirstNameEt.setBackgroundColor(getActivity().getResources().getColor(android.R.color.white));
-        updateFirstNameEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
-        updateFirstNameEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person, 0, 0, 0);
 
-        updateLastNameEt.setHint("Last Name");
-        updateLastNameEt.setEnabled(true);
-        updateLastNameEt.setBackgroundColor(getActivity().getResources().getColor(android.R.color.white));
-        updateLastNameEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
-        updateLastNameEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person, 0, 0, 0);
+        updateAgencyNameEt.setHint("Agency Name");
+        updateAgencyNameEt.setEnabled(true);
+        updateAgencyNameEt.setBackgroundColor(getActivity().getResources().getColor(android.R.color.white));
+        updateAgencyNameEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
+        updateAgencyNameEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person, 0, 0, 0);
+
+        updatedPhoneEt.setHint("Phone");
+        updatedPhoneEt.setEnabled(true);
+        updatedPhoneEt.setBackgroundColor(getActivity().getResources().getColor(android.R.color.white));
+        updatedPhoneEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
+        updatedPhoneEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person, 0, 0, 0);
 
 
         updateEmailAddressEt.setHint("Email");
@@ -91,8 +91,8 @@ public class AgencyUserProfileFragment extends Fragment {
         updatePromptLayout.setLayoutParams(layoutParams);
         updatePromptLayout.setPadding(20,20,20,20);
         updatePromptLayout.setOrientation(LinearLayout.VERTICAL);
-        updatePromptLayout.addView(updateFirstNameEt);
-        updatePromptLayout.addView(updateLastNameEt);
+        updatePromptLayout.addView(updateAgencyNameEt);
+        updatePromptLayout.addView(updatedPhoneEt);
         updatePromptLayout.addView(updateEmailAddressEt);
 
         final DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
@@ -111,10 +111,10 @@ public class AgencyUserProfileFragment extends Fragment {
                 okButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        User updatedUser = new User();
-                        String updatedFirstName, updatedLastName, updatedEmailAddress;
-                        updatedFirstName = updateFirstNameEt.getText().toString().trim();
-                        updatedLastName = updateLastNameEt.getText().toString().trim();
+                        AgencyUser updatedUser = new AgencyUser();
+                        String updatedAgencyName, updatedPhone, updatedEmailAddress;
+                        updatedAgencyName = updateAgencyNameEt.getText().toString().trim();
+                        updatedPhone = updatedPhoneEt.getText().toString().trim();
                         updatedEmailAddress = updateEmailAddressEt.getText().toString().trim();
 
 
@@ -137,12 +137,38 @@ public class AgencyUserProfileFragment extends Fragment {
                             updatedUser.setEmailAddress(loggedInUser.getEmailAddress());
                         }
 
+                        if(!updatedPhone.isEmpty()){
+                            if(Validator.checkPhoneNumberValidity(updatedPhone)){
+                                updatedUser.setPhoneNumber(updatedPhone);
+                            }
+                            else {
+                                updatedPhoneEt.setError(getResources().getString(R.string.error_invalid_phone));
+                                allInputsValidated = false;
+                            }
+                        }
+                        else {
+                            updatedUser.setPhoneNumber(loggedInUser.getPhoneNumber());
+                        }
+
+                        if(!updatedAgencyName.isEmpty()){
+                            if(Validator.checkAgencyNameValidity(updatedAgencyName)){
+                                updatedUser.setAgencyName(updatedAgencyName);
+                            }
+                            else {
+                                updateAgencyNameEt.setError(getResources().getString(R.string.error_invalid_phone));
+                                allInputsValidated = false;
+                            }
+                        }
+                        else {
+                            updatedUser.setAgencyName(loggedInUser.getAgencyName());
+                        }
+
                         if(allInputsValidated) {
-                            databaseHelper.updateCustomerInformation(updatedUser, loggedInUser.getEmailAddress());
-                            loginSessionManager.updateCurrentLoginSession(updatedUser);
+                            databaseHelper.updateAgencyInformation(updatedUser, loggedInUser.getEmailAddress());
+                            loginSessionManager.updateCurrentAgencyLoginSession(updatedUser);
                             final TextView headerNameTextView = (TextView) getActivity().findViewById(R.id.headerCustomerFullName);
                             final TextView headerEmailTextView = (TextView) getActivity().findViewById(R.id.headerEmailAddress);
-                            headerNameTextView.setText(updatedUser.getFirstName() + " " + updatedUser.getLastName());
+                            headerNameTextView.setText(updatedUser.getAgencyName());
                             headerEmailTextView.setText(updatedUser.getEmailAddress());
                             Toast.makeText(getActivity().getApplicationContext(), "Successfully Updated", Toast.LENGTH_SHORT).show();
                             updateAlertDialog.dismiss();
