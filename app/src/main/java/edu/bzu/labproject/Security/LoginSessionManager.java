@@ -29,7 +29,6 @@ public class LoginSessionManager {
     private SharedPreferences.Editor editor;
     private boolean isLoggedIn;
     // false is Agency user and true is  user
-    private boolean type;
 
 
     public LoginSessionManager(Context context){
@@ -37,13 +36,6 @@ public class LoginSessionManager {
         this.sharedPreferences = context.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE );
         this.editor = this.sharedPreferences.edit();
         this.isLoggedIn=true;
-    }
-    public LoginSessionManager(Context context, boolean type){
-        this.context = context;
-        this.sharedPreferences = context.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE );
-        this.editor = this.sharedPreferences.edit();
-        this.isLoggedIn=true;
-        this.type=type;
     }
 
     public void saveUserLoginSession(User loggedInUser){
@@ -59,6 +51,7 @@ public class LoginSessionManager {
         this.editor.putString(SHAREDPREF_KEY_SALARY, loggedInUser.getSalary());
         this.editor.putString(SHAREDPREF_KEY_FAMILY_SIZE, loggedInUser.getFamilySize());
         this.editor.putString(SHAREDPREF_KEY_OCCUPATION, loggedInUser.getOccupation());
+        this.editor.putBoolean(SHAREDPREF_KEY_TYPE, true);
         this.editor.putBoolean(SHAREDPREF_KEY_ISLOGGEDIN, this.isLoggedIn);
         this.editor.commit();
     }
@@ -70,6 +63,7 @@ public class LoginSessionManager {
         this.editor.putString(SHAREDPREF_KEY_COUNTRY, loggedInUser.getCountry());
         this.editor.putString(SHAREDPREF_KEY_CITY, loggedInUser.getCity());
         this.editor.putString(SHAREDPREF_KEY_PHONE, loggedInUser.getPhoneNumber());
+        this.editor.putBoolean(SHAREDPREF_KEY_TYPE, false);
         this.editor.putBoolean(SHAREDPREF_KEY_ISLOGGEDIN, this.isLoggedIn);
         this.editor.commit();
     }
@@ -109,6 +103,9 @@ public class LoginSessionManager {
         return loggedInUser;
     }
 
+    public void setUser_Type(boolean type){
+        this.editor.putBoolean(SHAREDPREF_KEY_TYPE, type);
+    }
     public boolean getUser_Type(){
         return this.sharedPreferences.getBoolean(SHAREDPREF_KEY_TYPE,false);
     }

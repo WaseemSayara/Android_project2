@@ -154,8 +154,9 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_user_profile) {
             final FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext(), false);
+            LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext());
             boolean type = loginSession.getUser_Type();
+            System.out.println(type);
             if (type) {
                 UserProfileFragment userProfileFragment = new UserProfileFragment();
                 fragmentTransaction.replace(R.id.homeContent, userProfileFragment);
@@ -165,8 +166,6 @@ public class HomeActivity extends AppCompatActivity
                 AgencyUserProfileFragment agencyUserProfileFragment = new AgencyUserProfileFragment();
                 fragmentTransaction.replace(R.id.homeContent, agencyUserProfileFragment);
                 fragmentTransaction.commit();
-
-
             }
 
 

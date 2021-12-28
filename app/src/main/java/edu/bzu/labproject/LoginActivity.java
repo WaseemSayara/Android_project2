@@ -71,8 +71,9 @@ public class LoginActivity extends Activity {
                         }
 
                         //Save Logged-In User in a Login Session Using Shared Preferences
-                        LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext(),true);
+                        LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext());
                         loginSession.saveUserLoginSession(user);
+                        loginSession.setUser_Type(true);
 
                         Intent toHomePageIntent = new Intent(LoginActivity.this, HomeActivity.class);
                         LoginActivity.this.startActivity(toHomePageIntent);
@@ -99,8 +100,9 @@ public class LoginActivity extends Activity {
                             }
 
                             //Save Logged-In User in a Login Session Using Shared Preferences
-                            LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext(),false);
+                            LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext());
                             loginSession.saveAgencyUserLoginSession(agencyUser);
+                            loginSession.setUser_Type(false);
 
                             Intent toHomePageIntent = new Intent(LoginActivity.this, HomeActivity.class);
                             LoginActivity.this.startActivity(toHomePageIntent);
