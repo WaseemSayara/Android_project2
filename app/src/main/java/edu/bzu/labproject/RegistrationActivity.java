@@ -2,6 +2,7 @@ package edu.bzu.labproject;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -117,9 +118,11 @@ public class RegistrationActivity extends Activity {
 
 
                         boolean insertFlag;
-                        if((insertFlag = databaseHelper.addUser(user)))
-                        Toast.makeText(getApplicationContext(),"Registered Successfully", Toast.LENGTH_SHORT).show();
-
+                        if((insertFlag = databaseHelper.addUser(user))) {
+                            Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+                            Intent toRegistrationActivityIntent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                            RegistrationActivity.this.startActivity(toRegistrationActivityIntent);
+                        }
                         else {
                             Toast.makeText(getApplicationContext(),"ERROR: Registeration Failed", Toast.LENGTH_SHORT).show();
                         }
