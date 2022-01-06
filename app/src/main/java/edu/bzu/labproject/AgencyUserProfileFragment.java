@@ -63,7 +63,6 @@ public class AgencyUserProfileFragment extends Fragment {
 
         final EditText updateAgencyNameEt = new EditText(getActivity());
         final EditText updatedPhoneEt = new EditText(getActivity());
-        final EditText updateEmailAddressEt = new EditText(getActivity());
 
         updateAgencyNameEt.setHint("Agency Name");
         updateAgencyNameEt.setEnabled(true);
@@ -78,11 +77,6 @@ public class AgencyUserProfileFragment extends Fragment {
         updatedPhoneEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person, 0, 0, 0);
 
 
-        updateEmailAddressEt.setHint("Email");
-        updateEmailAddressEt.setEnabled(true);
-        updateEmailAddressEt.setBackgroundColor(getActivity().getResources().getColor(android.R.color.white));
-        updateEmailAddressEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
-        updateEmailAddressEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_email, 0, 0, 0);
 
 
 
@@ -93,7 +87,6 @@ public class AgencyUserProfileFragment extends Fragment {
         updatePromptLayout.setOrientation(LinearLayout.VERTICAL);
         updatePromptLayout.addView(updateAgencyNameEt);
         updatePromptLayout.addView(updatedPhoneEt);
-        updatePromptLayout.addView(updateEmailAddressEt);
 
         final DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
 
@@ -115,27 +108,6 @@ public class AgencyUserProfileFragment extends Fragment {
                         String updatedAgencyName, updatedPhone, updatedEmailAddress;
                         updatedAgencyName = updateAgencyNameEt.getText().toString().trim();
                         updatedPhone = updatedPhoneEt.getText().toString().trim();
-                        updatedEmailAddress = updateEmailAddressEt.getText().toString().trim();
-
-
-                        if(!updatedEmailAddress.isEmpty()){
-                            if(Validator.checkEmailAddressValidity(updatedEmailAddress)){
-                                if(!databaseHelper.userAlreadyExists(updatedEmailAddress)) {
-                                    updatedUser.setEmailAddress(updatedEmailAddress);
-                                }
-                                else {
-                                    updateEmailAddressEt.setError(getResources().getString(R.string.error_email_exists));
-                                    allInputsValidated = false;
-                                }
-                            }
-                            else {
-                                updateEmailAddressEt.setError(getResources().getString(R.string.error_invalid_email));
-                                allInputsValidated = false;
-                            }
-                        }
-                        else {
-                            updatedUser.setEmailAddress(loggedInUser.getEmailAddress());
-                        }
 
                         if(!updatedPhone.isEmpty()){
                             if(Validator.checkPhoneNumberValidity(updatedPhone)){

@@ -80,7 +80,6 @@ public class UserProfileFragment extends Fragment {
 
         final EditText updateFirstNameEt = new EditText(getActivity());
         final EditText updateLastNameEt = new EditText(getActivity());
-        final EditText updateEmailAddressEt = new EditText(getActivity());
         final EditText updatePhoneEt = new EditText(getActivity());
         final EditText updateSalaryEt = new EditText(getActivity());
         final EditText updateFamilySizeEt = new EditText(getActivity());
@@ -98,12 +97,6 @@ public class UserProfileFragment extends Fragment {
         updateLastNameEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
         updateLastNameEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_person, 0, 0, 0);
 
-
-        updateEmailAddressEt.setHint("Email");
-        updateEmailAddressEt.setEnabled(true);
-        updateEmailAddressEt.setBackgroundColor(getActivity().getResources().getColor(android.R.color.white));
-        updateEmailAddressEt.setHintTextColor(getActivity().getResources().getColor(android.R.color.darker_gray));
-        updateEmailAddressEt.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_email, 0, 0, 0);
 
         updatePhoneEt.setHint("Phone");
         updatePhoneEt.setEnabled(true);
@@ -135,7 +128,6 @@ public class UserProfileFragment extends Fragment {
         updatePromptLayout.setLayoutParams(layoutParams);
         updatePromptLayout.setPadding(20,20,20,20);
         updatePromptLayout.setOrientation(LinearLayout.VERTICAL);
-        updatePromptLayout.addView(updateEmailAddressEt);
         updatePromptLayout.addView(updateFirstNameEt);
         updatePromptLayout.addView(updateLastNameEt);
         updatePromptLayout.addView(updatePhoneEt);
@@ -164,7 +156,6 @@ public class UserProfileFragment extends Fragment {
                                 updateFamilySize, updateOccupation;
                         updatedFirstName = updateFirstNameEt.getText().toString().trim();
                         updatedLastName = updateLastNameEt.getText().toString().trim();
-                        updatedEmailAddress = updateEmailAddressEt.getText().toString().trim();
                         updatePhone = updatePhoneEt.getText().toString().trim();
                         updateSalary = updateSalaryEt.getText().toString().trim();
                         updateFamilySize = updateFamilySizeEt.getText().toString().trim();
@@ -194,25 +185,6 @@ public class UserProfileFragment extends Fragment {
                         }
                         else {
                             updatedUser.setLastName(loggedInUser.getLastName());
-                        }
-
-                        if(!updatedEmailAddress.isEmpty()){
-                            if(Validator.checkEmailAddressValidity(updatedEmailAddress)){
-                                if(!databaseHelper.userAlreadyExists(updatedEmailAddress)) {
-                                    updatedUser.setEmailAddress(updatedEmailAddress);
-                                }
-                                else {
-                                    updateEmailAddressEt.setError(getResources().getString(R.string.error_email_exists));
-                                    allInputsValidated = false;
-                                }
-                            }
-                            else {
-                                updateEmailAddressEt.setError(getResources().getString(R.string.error_invalid_email));
-                                allInputsValidated = false;
-                            }
-                        }
-                        else {
-                            updatedUser.setEmailAddress(loggedInUser.getEmailAddress());
                         }
 
                         if(!updatePhone.isEmpty()){
