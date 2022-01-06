@@ -31,10 +31,10 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        CDXHistoryFragment cdxHistoryFragment = new CDXHistoryFragment();
+        CarsMenuFragment carsMenuFragment = new CarsMenuFragment();
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.homeContent, cdxHistoryFragment, "CDX_History");
+        fragmentTransaction.add(R.id.homeContent, carsMenuFragment, "Cars_Menu");
         fragmentTransaction.commit();
 
         LoginSessionManager userLoginSession = new LoginSessionManager(getApplicationContext());
@@ -111,21 +111,20 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-            final FragmentManager fragmentManager = getSupportFragmentManager();
-            final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            CDXHistoryFragment cdxHistoryFragment = new CDXHistoryFragment();
-            fragmentTransaction.replace(R.id.homeContent, cdxHistoryFragment, "CDX_History");
-            fragmentTransaction.commit();
 
-        } else if (id == R.id.nav_cars) {
+         if (id == R.id.nav_home) {
             final FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             CarsMenuFragment carsMenuFragment = new CarsMenuFragment();
             fragmentTransaction.replace(R.id.homeContent, carsMenuFragment, "Cars_Menu");
             fragmentTransaction.commit();
 
+         } else if (id == R.id.nav_search) {
+             final FragmentManager fragmentManager = getSupportFragmentManager();
+             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+             SearchFragment searchFragment = new SearchFragment();
+             fragmentTransaction.replace(R.id.homeContent, searchFragment, "Search_Fragment");
+             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_reservations) {
             final FragmentManager fragmentManager = getSupportFragmentManager();

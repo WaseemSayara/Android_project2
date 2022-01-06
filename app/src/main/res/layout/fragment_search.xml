@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:autofillHints="Minimum"
+    android:orientation="vertical"
+    tools:context=".SearchFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/search_city_textview"
+            android:layout_width="115dp"
+            android:layout_height="match_parent"
+            android:text="City:"
+            android:textSize="24sp" />
+
+        <Spinner
+            android:id="@+id/search_city_Spinner"
+            android:layout_width="261dp"
+            android:layout_height="48dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/search_area_textview"
+            android:layout_width="116dp"
+            android:layout_height="40dp"
+            android:text="Area:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/search_min_area_edittext"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="60dp"
+            android:ems="10"
+            android:hint="Minimum"
+            android:inputType="number"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/search_max_area_edittext"
+            android:layout_width="101dp"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="Maximum"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/search_bedroom_textview"
+            android:layout_width="116dp"
+            android:layout_height="42dp"
+            android:text="Bedroom:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/search_min_bedroom_edittext"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="60dp"
+            android:ems="10"
+            android:hint="Minimum"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/search_max_bedroom_edittext"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="Maximum"
+            android:inputType="number" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/search_price_textview"
+            android:layout_width="116dp"
+            android:layout_height="42dp"
+            android:text="Price:"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/search_min_price_edittext"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginRight="60dp"
+            android:ems="10"
+            android:hint="Minimum"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/search_max_price_edittext"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="Maximum"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/search_furnished_radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="117dp"
+                android:layout_marginRight="65dp"
+                android:text="Furnished"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <RadioButton
+                android:id="@+id/search_unfurnished_radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UnFurnished"
+                tools:ignore="TouchTargetSizeCheck" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/search_balcony_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="117dp"
+            android:layout_marginRight="36dp"
+            android:minHeight="48dp"
+            android:text="Has A Balcony" />
+
+        <CheckBox
+            android:id="@+id/search_garden_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="Has A Garden" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/search_click_button"
+            android:layout_width="408dp"
+            android:layout_height="56dp"
+            android:text="Button" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -147,27 +147,27 @@ public class CarsMenuFragment extends Fragment {
                             }
                         })
                         .collect(Collectors.toList());
-//
-//                FragmentTransaction ft = getFragmentManager().beginTransaction();
-//
-//                for(Car car: carsList){
-//                    Bundle args = new Bundle();
-//                    args.putInt("ID", car.getCarId());
-//                    args.putInt("YEAR", car.getYearOfProduction());
-//                    args.putString("MAKE", car.getManufacturingCompany());
-//                    args.putString("MODEL", car.getCarModel());
-//                    args.putString("DISTANCE", car.getDistanceTraveled());
-//                    args.putString("PRICE", car.getCarPrice());
-//                    args.putBoolean("HAD_ACCIDENTS", car.HadAccidents());
-//
-//                    CarDetailsViewFragment carDetailsFragment = new CarDetailsViewFragment();
-//                    carDetailsFragment.setArguments(args);
-//                    ft.add(R.id.carsLinearLayoutView, carDetailsFragment);
-//                }
-//                ft.commit();
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+                for(Car car: carsList){
+                    Bundle args = new Bundle();
+                    args.putInt("ID", car.getCarId());
+                    args.putInt("YEAR", car.getYearOfProduction());
+                    args.putString("MAKE", car.getManufacturingCompany());
+                    args.putString("MODEL", car.getCarModel());
+                    args.putString("DISTANCE", car.getDistanceTraveled());
+                    args.putString("PRICE", car.getCarPrice());
+                    args.putBoolean("HAD_ACCIDENTS", car.HadAccidents());
+
+                    CarDetailsViewFragment carDetailsFragment = new CarDetailsViewFragment();
+                    carDetailsFragment.setArguments(args);
+                    ft.add(R.id.carsLinearLayoutView, carDetailsFragment);
+                }
+                ft.commit();
             }
         });
-
+int i =0;
         for(Car car: carsList){
             Bundle args = new Bundle();
             args.putInt("ID", car.getCarId());
@@ -181,6 +181,10 @@ public class CarsMenuFragment extends Fragment {
             CarDetailsViewFragment carDetailsFragment = new CarDetailsViewFragment();
             carDetailsFragment.setArguments(args);
             fragmentTransaction.add(R.id.carsLinearLayoutView, carDetailsFragment);
+            i++;
+            if (i==5){
+                break;
+            }
         }
         fragmentTransaction.commit();
     }
