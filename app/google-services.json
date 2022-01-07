@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "646479350773",
+    "project_id": "android-project-eeb12",
+    "storage_bucket": "android-project-eeb12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646479350773:android:c0494d5493982233216ebc",
+        "android_client_info": {
+          "package_name": "edu.bzu.labproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646479350773-ut76p2g0sv8u6okq9atcsr1rvsi7t4ij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1rKX9rqzf5iw0SLsnySd-kx8kHTlYaRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646479350773-ut76p2g0sv8u6okq9atcsr1rvsi7t4ij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

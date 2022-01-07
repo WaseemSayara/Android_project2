@@ -104,7 +104,7 @@ public class LoginActivity extends Activity {
                             loginSession.saveAgencyUserLoginSession(agencyUser);
                             loginSession.setUser_Type(false);
 
-                            Intent toHomePageIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                            Intent toHomePageIntent = new Intent(LoginActivity.this, HomeAgencyActivity.class);
                             LoginActivity.this.startActivity(toHomePageIntent);
                             LoginActivity.this.finish();
                         } else {

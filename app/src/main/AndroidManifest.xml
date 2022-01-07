@@ -14,6 +14,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".HomeAgencyActivity"
+            android:exported="true"
+            android:label="@string/title_activity_home_agency"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".RegistrationRenting"
             android:exported="true" />
         <activity

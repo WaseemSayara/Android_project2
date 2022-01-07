@@ -17,13 +17,14 @@ import edu.bzu.labproject.Models.AgencyUser;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     //Database Settings: Name and Version
-    private static final String DATABASE_NAME = "CDX";
+    private static final String DATABASE_NAME = "MyHouse";
     private static final int DATABASE_VERSION = 1;
 
     //Table Names
     private static final String TABLE_USERS = "USERS";
     private static final String TABLE_AGENCY_USERS = "AGENCY_USERS";
     private static final String TABLE_CARS = "CARS";
+    private static final String TABLE_HOUSES = "HOUSES";
     private static final String TABLE_RESERVATIONS = "RESERVATIONS";
     private static final String TABLE_FAVORITES = "FAVORITES";
 
@@ -55,6 +56,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String PRICE_COL = "PRICE";
     private static final String ACCIDENTS_COL = "HAD_ACCIDENTS";
 
+    //HOUSES Table Column Names
+    private static final String CITY = "CITY";
+    private static final String POSTAL_ADDRESS = "POSTAL_ADDRESS";
+    private static final String AREA = "AREA";
+    private static final String CONSTRUCTION = "CONSTRUCTION";
+    private static final String BEDROOMS = "BEDROOMS";
+    private static final String PRICE = "PRICE";
+    private static final String STATUS = "STATUS";
+    private static final String FURNISHED = "FURNISHED";
+    private static final String PHOTOS = "PHOTOS";
+    private static final String AVAILABILITY_DATE = "AVAILABILITY_DATE";
+    private static final String DESCRIPTION = "DESCRIPTION";
+
+
     //Reservations Table Column Names
     private static final String DATE_COL = "DATE";
     private static final String TIME_COL = "TIME";
@@ -79,6 +94,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             MAKE_COL + " TEXT NOT NULL," + MODEL_COL + " TEXT NOT NULL," + DISTANCE_COL + " TEXT NOT NULL," + PRICE_COL + " INTEGER NOT NULL," +
             ACCIDENTS_COL + " BOOLEAN NOT NULL)";
 
+    String SQL_CREATE_TABLE_HOUSES = "CREATE TABLE " + TABLE_HOUSES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + CITY + " TEXT NOT NULL," +
+            POSTAL_ADDRESS + " TEXT NOT NULL," + AREA + " INTEGER NOT NULL," + CONSTRUCTION + " INTEGER NOT NULL," + BEDROOMS + " INTEGER NOT NULL," +
+            PRICE + " INTEGER NOT NULL,"+ STATUS + " BOOLEAN NOT NULL,"+ FURNISHED + " BOOLEAN NOT NULL,"+ PHOTOS + " TEXT NOT NULL,"+ AVAILABILITY_DATE + " DATE NOT NULL,"+ DESCRIPTION + " TEXT NOT NULL)";
+
+
     String SQL_CREATE_TABLE_RESERVATIONS = "CREATE TABLE " + TABLE_RESERVATIONS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL," +
             CAR_ID_COL + " INTEGER NOT NULL," +
             DATE_COL + " TEXT NOT NULL," + TIME_COL + " TEXT NOT NULL)";
@@ -98,6 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_CARS);
         db.execSQL(SQL_CREATE_TABLE_RESERVATIONS);
         db.execSQL(SQL_CREATE_TABLE_FAVORITES);
+        db.execSQL(SQL_CREATE_TABLE_HOUSES);
         System.out.println("hiiiiiiiiiiiiiiiiiiiiiiiiiiii\n\n");
     }
 

@@ -109,6 +109,8 @@ public class AgencyUserProfileFragment extends Fragment {
                         updatedAgencyName = updateAgencyNameEt.getText().toString().trim();
                         updatedPhone = updatedPhoneEt.getText().toString().trim();
 
+
+                        updatedUser.setEmailAddress(loggedInUser.getEmailAddress());
                         if(!updatedPhone.isEmpty()){
                             if(Validator.checkPhoneNumberValidity(updatedPhone)){
                                 updatedUser.setPhoneNumber(updatedPhone);

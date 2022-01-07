@@ -161,6 +161,9 @@ public class UserProfileFragment extends Fragment {
                         updateFamilySize = updateFamilySizeEt.getText().toString().trim();
                         updateOccupation = updateOccupationEt.getText().toString().trim();
 
+
+                        updatedUser.setEmailAddress(loggedInUser.getEmailAddress());
+
                         if(!updatedFirstName.isEmpty()){
                             if(Validator.checkFirstNameValidity(updatedFirstName)){
                                 updatedUser.setFirstName(updatedFirstName);

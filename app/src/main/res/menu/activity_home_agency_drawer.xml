@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_post_property"
+            android:icon="@drawable/ic_baseline_add_24"
+            android:title="Post A Property" />
+        <item
+            android:id="@+id/nav_edit_property"
+            android:icon="@drawable/ic_baseline_edit_24"
+            android:title="Edit A Property" />
+        <item
+            android:id="@+id/nav_rental_agency_history"
+            android:icon="@drawable/ic_baseline_history_24"
+            android:title="History" />
+
+        <item
+            android:id="@+id/nav_contactus"
+            android:icon="@drawable/ic_contactus_black_24dp"
+            android:title="Contact Us"/>
+    </group>
+
+    <item android:title="User Settings">
+        <menu>
+            <item
+                android:id="@+id/nav_user_profile"
+                android:icon="@drawable/ic_profile_black_24dp"
+                android:title="Profile" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout_black_24dp"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

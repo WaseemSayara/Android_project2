@@ -13,6 +13,8 @@
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.287109375" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_connection.xml" value="0.15390625" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_home.xml" value="0.15390625" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_home_Agency.xml" value="0.15390625" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_home_agency.xml" value="0.143359375" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_login.xml" value="0.15390625" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_register_type.xml" value="0.275" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_registration.xml" value="0.15390625" />
@@ -25,7 +27,10 @@
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_cars_menu.xml" value="0.275" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_search.xml" value="0.275" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_user_profile.xml" value="0.15390625" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/menu/activity_home_Agency_drawer.xml" value="0.15390625" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/menu/activity_home_drawer.xml" value="0.275" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/menu/home.xml" value="0.15390625" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/menu/home_agency.xml" value="0.15390625" />
       </map>
     </option>
   </component>
