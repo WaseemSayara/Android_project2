@@ -112,11 +112,11 @@ public class HomeAgencyActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.homeContent, carsMenuFragment, "Cars_Menu");
             fragmentTransaction.commit();
 
-        } else if (id == R.id.nav_search) {
+        } else if (id == R.id.nav_post_property) {
             final FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            SearchFragment searchFragment = new SearchFragment();
-            fragmentTransaction.replace(R.id.homeContent, searchFragment, "Search_Fragment");
+            AddPropertiesFragment addPropertiesFragment = new AddPropertiesFragment();
+            fragmentTransaction.replace(R.id.homeContent,addPropertiesFragment , "Add_Properties");
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_reservations) {

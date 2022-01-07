@@ -7,6 +7,13 @@ public class Validator {
         else
             return false;
     }
+
+    public static boolean checkRequiredFieldConstraint(Integer field){
+        if(field!=null)
+            return true;
+        else
+            return false;
+    }
     public static boolean checkFirstNameValidity(String firstName){
         if(firstName.length()< 3 || firstName.length() > 20)
             return false;
@@ -77,6 +84,21 @@ public class Validator {
     public static boolean checkEmailAddressValidity(String emailAddress){
         String EMAIL_ADDRESS_REGEX = "^[A-Za-z0-9+_.-]+@(.+)$";
         if(emailAddress.matches(EMAIL_ADDRESS_REGEX))
+            return true;
+        else
+            return false;
+    }
+
+    public static boolean checkDescriptionValidity(String description){
+        if(description.length() > 20 && description.length() < 200)
+            return true;
+        else
+            return false;
+    }
+
+    public static boolean checkDateValidity(String date){
+        String Date_REGEX = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
+        if(date.matches(Date_REGEX))
             return true;
         else
             return false;

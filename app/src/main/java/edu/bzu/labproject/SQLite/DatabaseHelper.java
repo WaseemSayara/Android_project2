@@ -10,6 +10,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 import edu.bzu.labproject.Models.Car;
+import edu.bzu.labproject.Models.House;
 import edu.bzu.labproject.Models.Reservation;
 import edu.bzu.labproject.Models.User;
 import edu.bzu.labproject.Models.AgencyUser;
@@ -53,21 +54,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String MAKE_COL = "MAKE";
     private static final String MODEL_COL = "MODEL";
     private static final String DISTANCE_COL = "DISTANCE";
-    private static final String PRICE_COL = "PRICE";
     private static final String ACCIDENTS_COL = "HAD_ACCIDENTS";
 
     //HOUSES Table Column Names
-    private static final String CITY = "CITY";
-    private static final String POSTAL_ADDRESS = "POSTAL_ADDRESS";
-    private static final String AREA = "AREA";
-    private static final String CONSTRUCTION = "CONSTRUCTION";
-    private static final String BEDROOMS = "BEDROOMS";
-    private static final String PRICE = "PRICE";
-    private static final String STATUS = "STATUS";
-    private static final String FURNISHED = "FURNISHED";
-    private static final String PHOTOS = "PHOTOS";
-    private static final String AVAILABILITY_DATE = "AVAILABILITY_DATE";
-    private static final String DESCRIPTION = "DESCRIPTION";
+    private static final String POSTAL_ADDRESS_COL = "POSTAL_ADDRESS";
+    private static final String AREA_COL = "AREA";
+    private static final String CONSTRUCTION_COL = "CONSTRUCTION";
+    private static final String BEDROOMS_COL = "BEDROOMS";
+    private static final String PRICE_COL = "PRICE";
+    private static final String STATUS_COL = "STATUS";
+    private static final String FURNISHED_COL = "FURNISHED";
+    private static final String PHOTOS_COL = "PHOTOS";
+    private static final String AVAILABILITY_DATE_COL = "AVAILABILITY_DATE";
+    private static final String DESCRIPTION_COL = "DESCRIPTION";
 
 
     //Reservations Table Column Names
@@ -94,9 +93,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             MAKE_COL + " TEXT NOT NULL," + MODEL_COL + " TEXT NOT NULL," + DISTANCE_COL + " TEXT NOT NULL," + PRICE_COL + " INTEGER NOT NULL," +
             ACCIDENTS_COL + " BOOLEAN NOT NULL)";
 
-    String SQL_CREATE_TABLE_HOUSES = "CREATE TABLE " + TABLE_HOUSES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + CITY + " TEXT NOT NULL," +
-            POSTAL_ADDRESS + " TEXT NOT NULL," + AREA + " INTEGER NOT NULL," + CONSTRUCTION + " INTEGER NOT NULL," + BEDROOMS + " INTEGER NOT NULL," +
-            PRICE + " INTEGER NOT NULL,"+ STATUS + " BOOLEAN NOT NULL,"+ FURNISHED + " BOOLEAN NOT NULL,"+ PHOTOS + " TEXT NOT NULL,"+ AVAILABILITY_DATE + " DATE NOT NULL,"+ DESCRIPTION + " TEXT NOT NULL)";
+    String SQL_CREATE_TABLE_HOUSES = "CREATE TABLE " + TABLE_HOUSES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + CITY_COL + " TEXT NOT NULL," +
+            POSTAL_ADDRESS_COL + " TEXT NOT NULL," + AREA_COL + " INTEGER NOT NULL," + CONSTRUCTION_COL + " INTEGER NOT NULL," + BEDROOMS_COL + " INTEGER NOT NULL," +
+            PRICE_COL + " INTEGER NOT NULL,"+ STATUS_COL + " BOOLEAN NOT NULL,"+ FURNISHED_COL + " BOOLEAN NOT NULL,"+ PHOTOS_COL +
+            " TEXT NOT NULL,"+ AVAILABILITY_DATE_COL + " DATE NOT NULL,"+ DESCRIPTION_COL + " TEXT NOT NULL)";
 
 
     String SQL_CREATE_TABLE_RESERVATIONS = "CREATE TABLE " + TABLE_RESERVATIONS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL," +
@@ -297,6 +297,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long result;
         if ((result = sqLiteDatabase.insert(TABLE_CARS, null, contentValues)) != -1)
+            return true;
+        else
+            return false;
+    }
+
+    public boolean addHouse(House house) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CITY_COL, house.getCity());
+        contentValues.put(POSTAL_ADDRESS_COL, house.getPostalAddress());
+        contentValues.put(AREA_COL, house.getArea());
+        contentValues.put(CONSTRUCTION_COL, house.getConstructionYear());
+        contentValues.put(BEDROOMS_COL, house.getBedrooms());
+        contentValues.put(PRICE_COL, house.getPrice());
+        contentValues.put(STATUS_COL, house.isStatus());
+        contentValues.put(FURNISHED_COL, house.isFurnished());
+        contentValues.put(PHOTOS_COL, house.getPhotos());
+        contentValues.put(AVAILABILITY_DATE_COL, house.getAvailabilityDate().toString());
+        contentValues.put(DESCRIPTION_COL, house.getDescription());
+
+        long result;
+        if ((result = sqLiteDatabase.insert(TABLE_HOUSES, null, contentValues)) != -1)
             return true;
         else
             return false;
