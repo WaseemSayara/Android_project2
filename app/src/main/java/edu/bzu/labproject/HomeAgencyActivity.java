@@ -32,10 +32,10 @@ public class HomeAgencyActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_agency);
 
-        CarsMenuFragment carsMenuFragment = new CarsMenuFragment();
+        HouseMenuFragment houseMenuFragment = new HouseMenuFragment();
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.homeContent, carsMenuFragment, "Cars_Menu");
+        fragmentTransaction.add(R.id.homeContent, houseMenuFragment, "House_Menu");
         fragmentTransaction.commit();
 
         LoginSessionManager userLoginSession = new LoginSessionManager(getApplicationContext());
@@ -108,8 +108,8 @@ public class HomeAgencyActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             final FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            CarsMenuFragment carsMenuFragment = new CarsMenuFragment();
-            fragmentTransaction.replace(R.id.homeContent, carsMenuFragment, "Cars_Menu");
+            HouseMenuFragment houseMenuFragment = new HouseMenuFragment();
+            fragmentTransaction.replace(R.id.homeContent, houseMenuFragment, "House_Menu");
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_post_property) {

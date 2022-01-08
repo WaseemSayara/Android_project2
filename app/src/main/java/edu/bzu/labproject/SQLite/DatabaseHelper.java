@@ -371,6 +371,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    public List<House> getAllHouses() {
+        List<House> allHousesList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(
+                TABLE_HOUSES, new String[]{ID_COL, CITY_COL, POSTAL_ADDRESS_COL, AREA_COL, CONSTRUCTION_COL,
+                        BEDROOMS_COL, PRICE_COL,STATUS_COL,FURNISHED_COL,PHOTOS_COL,AVAILABILITY_DATE_COL,DESCRIPTION_COL},
+                null,null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                House house = new House();
+                house.setHouseId(cursor.getInt(0));
+                house.setCity(cursor.getString(1));
+                house.setPostalAddress(cursor.getString(2));
+                house.setArea(cursor.getInt(3));
+                house.setConstructionYear(cursor.getInt(4));
+                house.setBedrooms(cursor.getInt(5));
+                house.setPrice(cursor.getInt(6));
+                house.setStatus(cursor.getInt(7) == 1);
+                house.setFurnished(cursor.getInt(8) == 1);
+                house.setPhotos(String.valueOf(cursor.getInt(9)));
+                house.setAvailabilityDate(String.valueOf(cursor.getInt(10)));
+                house.setDescription(cursor.getString(11));
+
+                allHousesList.add(house);
+                cursor.moveToNext();
+            }
+            return allHousesList;
+        }
+        return null;
+    }
+
     public List<Car> getCustomerAvailableCars(Integer customerId) {
         List<Car> allCarsList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();

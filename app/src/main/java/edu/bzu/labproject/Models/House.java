@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class House {
 
 
-    private Integer carId;
+    private Integer houseId;
     @SerializedName("city")
     private String city;
     @SerializedName("postalAddress")
@@ -35,7 +35,7 @@ public class House {
     public House(Integer carId, String city, String postalAddress, Integer area,
                  Integer constructionYear, Integer bedrooms, Integer price, boolean status,
                  boolean furnished, String photos, String availabilityDate, String description) {
-        this.carId = carId;
+        this.houseId = carId;
         this.city = city;
         this.postalAddress = postalAddress;
         this.area = area;
@@ -49,12 +49,12 @@ public class House {
         this.description = description;
     }
 
-    public Integer getCarId() {
-        return carId;
+    public Integer getHouseId() {
+        return houseId;
     }
 
-    public void setCarId(Integer carId) {
-        this.carId = carId;
+    public void setHouseId(Integer carId) {
+        this.houseId = carId;
     }
 
     public String getCity() {
@@ -148,7 +148,7 @@ public class House {
     @Override
     public String toString() {
         return "House{" +
-                "carId=" + carId +
+                "carId=" + houseId +
                 ", city='" + city + '\'' +
                 ", postalAddress='" + postalAddress + '\'' +
                 ", area=" + area +
