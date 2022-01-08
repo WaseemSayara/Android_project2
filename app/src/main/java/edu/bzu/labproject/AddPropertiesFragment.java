@@ -139,6 +139,7 @@ public class AddPropertiesFragment extends Fragment {
                         house.setAvailabilityDate(date);
                         house.setDescription(description);
                         house.setPhotos(photo);
+                        house.setAgencyId(loggedInUser.getId());
                         house.setAgencyName(loggedInUser.getAgencyName());
                         System.out.println(house.toString());
 

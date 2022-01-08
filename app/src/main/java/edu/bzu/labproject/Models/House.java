@@ -6,6 +6,7 @@ public class House {
 
 
     private Integer houseId;
+    private Integer agencyId;
     @SerializedName("city")
     private String city;
     @SerializedName("postalAddress")
@@ -49,6 +50,15 @@ public class House {
         this.photos = photos;
         this.availabilityDate = availabilityDate;
         this.description = description;
+    }
+
+
+    public Integer getAgencyId() {
+        return agencyId;
+    }
+
+    public void setAgencyId(Integer agencyId) {
+        this.agencyId = agencyId;
     }
 
     public Integer getHouseId() {

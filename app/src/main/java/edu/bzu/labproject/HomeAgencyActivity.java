@@ -119,11 +119,11 @@ public class HomeAgencyActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.homeContent,addPropertiesFragment , "Add_Properties");
             fragmentTransaction.commit();
 
-        } else if (id == R.id.nav_reservations) {
+        } else if (id == R.id.nav_rental_agency_history) {
             final FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            MyReservationsFragment myReservationsFragment = new MyReservationsFragment();
-            fragmentTransaction.replace(R.id.homeContent, myReservationsFragment, "My_History");
+            AgencyReservationFragment agencyReservationsFragment = new AgencyReservationFragment();
+            fragmentTransaction.replace(R.id.homeContent, agencyReservationsFragment, "My_History");
             fragmentTransaction.commit();
 
 

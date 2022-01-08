@@ -152,6 +152,7 @@ public class MyFavoritesViewFragment extends Fragment {
                                         String[] dateTimeArray = dateTime.split(" ");
                                         String date = dateTimeArray[0];
                                         String time = dateTimeArray[1];
+                                        Integer agencyId = getArguments().getInt("AGENCY_ID");
 
                                         Reservation reservation = new Reservation();
                                         reservation.setCustomerId(customerId);
@@ -159,6 +160,9 @@ public class MyFavoritesViewFragment extends Fragment {
                                         reservation.setDate(date);
                                         reservation.setTime(time);
                                         reservation.setPeriod(period);
+                                        reservation.setAgencyId(agencyId);
+
+
 
                                         databaseHelper.reserveHouseByCustomer(reservation);
                                         Snackbar.make(v, "Reserved Successfully", Snackbar.LENGTH_LONG).show();

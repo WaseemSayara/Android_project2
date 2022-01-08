@@ -16,6 +16,7 @@
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_home.xml" value="0.15390625" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_home_Agency.xml" value="0.15390625" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_home_agency.xml" value="0.143359375" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_house_reservation_agency_cardview.xml" value="0.14296875" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_login.xml" value="0.15390625" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_register_type.xml" value="0.275" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/activity_registration.xml" value="0.15390625" />
@@ -26,6 +27,9 @@
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/content_home.xml" value="0.14296875" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/favorites_card_view.xml" value="0.14296875" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_add_properties.xml" value="0.22" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_agecy_reservation_view.xml" value="0.14296875" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_agency_reservation.xml" value="0.14296875" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_agency_reservation_view.xml" value="0.14296875" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_agency_user_profile.xml" value="0.275" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_cars_menu.xml" value="0.275" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_house_details_view.xml" value="0.22" />

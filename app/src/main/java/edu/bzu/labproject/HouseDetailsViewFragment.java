@@ -141,12 +141,16 @@ public class HouseDetailsViewFragment extends Fragment {
                                         String date = dateTimeArray[0];
                                         String time = dateTimeArray[1];
 
+                                        Integer agencyId = getArguments().getInt("AGENCY_ID");
+
                                         Reservation reservation = new Reservation();
                                         reservation.setCustomerId(customerId);
                                         reservation.setHouseId(houseId);
                                         reservation.setDate(date);
                                         reservation.setTime(time);
+                                        reservation.setAgencyId(agencyId);
                                         reservation.setPeriod(period);
+
 
                                         databaseHelper.reserveHouseByCustomer(reservation);
                                         Snackbar.make(v, "Reserved Successfully", Snackbar.LENGTH_LONG).show();

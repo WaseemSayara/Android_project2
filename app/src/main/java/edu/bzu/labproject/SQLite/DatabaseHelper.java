@@ -37,6 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Common Column Names
     private static final String ID_COL = "ID";
     private static final String USER_ID_COL = "USER_ID";
+    private static final String AGENCY_USER_ID_COL = "AGENCY_ID";
     private static final String CAR_ID_COL = "CAR_ID";
     private static final String HOUSE_ID_COL = "HOUSE_ID";
     //Customers Table Column Names
@@ -82,16 +83,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //SQL Statements for Tables Creation
-    String SQL_CREATE_TABLE_USERS = "CREATE TABLE " + TABLE_USERS + "(" + ID_COL + " INTEGER ," + EMAIL_COL + " TEXT PRIMARY KEY NOT NULL," +
+    String SQL_CREATE_TABLE_USERS = "CREATE TABLE " + TABLE_USERS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + EMAIL_COL + " TEXT  NOT NULL," +
             HASHED_PASSWORD_COL + " TEXT NOT NULL," + FIRSTNAME_COL + " TEXT NOT NULL," + LASTNAME_COL + " TEXT NOT NULL," +
             GENDER_COL + " TEXT NOT NULL," + COUNTRY_COL + " TEXT NOT NULL," + CITY_COL + " TEXT NOT NULL," + PHONE_NUMBER_COL + " TEXT NOT NULL," + NATIONALITY_COL +
             " TEXT NOT NULL," + SALARY_COL + " TEXT NOT NULL," + FAMILY_SIZE_COL + " TEXT NOT NULL," + OCCUPATION_COL + " TEXT NOT NULL)";
 
-    String SQL_CREATE_TABLE_AGENCY_USERS = "CREATE TABLE " + TABLE_AGENCY_USERS + "(" + ID_COL + " INTEGER ," + EMAIL_COL + " TEXT PRIMARY KEY NOT NULL," +
-            HASHED_PASSWORD_COL + " TEXT NOT NULL," + AGENCY_NAME_COL + " TEXT NOT NULL," + COUNTRY_COL + " TEXT NOT NULL," + CITY_COL +
-            " TEXT NOT NULL," + PHONE_NUMBER_COL + " TEXT NOT NULL)";
-
-    String SQL_TRY_CREATE_TABLE_AGENCY_USERS = "CREATE TABLE IF NOT EXISTS" + TABLE_USERS + "(" + ID_COL + " INTEGER ," + EMAIL_COL + " TEXT PRIMARY KEY NOT NULL," +
+    String SQL_CREATE_TABLE_AGENCY_USERS = "CREATE TABLE " + TABLE_AGENCY_USERS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + EMAIL_COL + " TEXT NOT NULL," +
             HASHED_PASSWORD_COL + " TEXT NOT NULL," + AGENCY_NAME_COL + " TEXT NOT NULL," + COUNTRY_COL + " TEXT NOT NULL," + CITY_COL +
             " TEXT NOT NULL," + PHONE_NUMBER_COL + " TEXT NOT NULL)";
 
@@ -100,14 +97,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             MAKE_COL + " TEXT NOT NULL," + MODEL_COL + " TEXT NOT NULL," + DISTANCE_COL + " TEXT NOT NULL," + PRICE_COL + " INTEGER NOT NULL," +
             ACCIDENTS_COL + " BOOLEAN NOT NULL)";
 
-    String SQL_CREATE_TABLE_HOUSES = "CREATE TABLE " + TABLE_HOUSES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + AGENCY_NAME_COL + " TEXT NOT NULL,"
+    String SQL_CREATE_TABLE_HOUSES = "CREATE TABLE " + TABLE_HOUSES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + AGENCY_NAME_COL + " TEXT NOT NULL,"+ AGENCY_USER_ID_COL + " INTEGAR NOT NULL,"
             + CITY_COL + " TEXT NOT NULL," + POSTAL_ADDRESS_COL + " TEXT NOT NULL," + AREA_COL + " INTEGER NOT NULL," + CONSTRUCTION_COL + " INTEGER NOT NULL," + BEDROOMS_COL + " INTEGER NOT NULL," +
             PRICE_COL + " INTEGER NOT NULL,"+ STATUS_COL + " BOOLEAN NOT NULL,"+ FURNISHED_COL + " BOOLEAN NOT NULL,"+ PHOTOS_COL +
             " TEXT NOT NULL,"+ AVAILABILITY_DATE_COL + " TEXT NOT NULL,"+ DESCRIPTION_COL + " TEXT NOT NULL)";
 
 
     String SQL_CREATE_TABLE_RESERVATIONS = "CREATE TABLE " + TABLE_RESERVATIONS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL," +
-            HOUSE_ID_COL + " INTEGER NOT NULL," +
+            HOUSE_ID_COL + " INTEGER NOT NULL," + AGENCY_USER_ID_COL + " INTEGER NOT NULL," +
             DATE_COL + " TEXT NOT NULL," + PERIOD_COL + " INTEGER NOT NULL," + TIME_COL + " TEXT NOT NULL)";
 
     String SQL_CREATE_TABLE_FAVORITES = "CREATE TABLE " + TABLE_FAVORITES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL,"
@@ -312,6 +309,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(CITY_COL, house.getCity());
+        contentValues.put(AGENCY_USER_ID_COL, house.getAgencyId());
         contentValues.put(POSTAL_ADDRESS_COL, house.getPostalAddress());
         contentValues.put(AREA_COL, house.getArea());
         contentValues.put(CONSTRUCTION_COL, house.getConstructionYear());
@@ -386,6 +384,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return " ";
     }
+    public String getUserNameByUserId(Integer userId) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(TABLE_USERS, new String[]{FIRSTNAME_COL,LASTNAME_COL},
+                ID_COL + "=" + userId, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            String FirstName = cursor.getString(0);
+            String LastName = cursor.getString(1);
+            return FirstName + " " + LastName;
+        }
+        return " ";
+    }
+
+
 
 
     public List<Car> getAllCars() {
@@ -418,7 +429,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(
                 TABLE_HOUSES, new String[]{ID_COL, CITY_COL, POSTAL_ADDRESS_COL, AREA_COL, CONSTRUCTION_COL,
-                        BEDROOMS_COL, PRICE_COL,STATUS_COL,FURNISHED_COL,PHOTOS_COL,AVAILABILITY_DATE_COL,DESCRIPTION_COL},
+                        BEDROOMS_COL, PRICE_COL,STATUS_COL,FURNISHED_COL,PHOTOS_COL,AVAILABILITY_DATE_COL,DESCRIPTION_COL,AGENCY_USER_ID_COL},
                 null,null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -436,6 +447,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 house.setPhotos(String.valueOf(cursor.getInt(9)));
                 house.setAvailabilityDate(cursor.getString(10));
                 house.setDescription(cursor.getString(11));
+                house.setAgencyId(cursor.getInt(12));
 
                 allHousesList.add(house);
                 cursor.moveToNext();
@@ -536,6 +548,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(DATE_COL, reservation.getDate());
         contentValues.put(TIME_COL, reservation.getTime());
         contentValues.put(PERIOD_COL, reservation.getPeriod());
+        contentValues.put(AGENCY_USER_ID_COL, reservation.getAgencyId());
+
 
         ContentValues contentValues2 = new ContentValues();
         contentValues2.put(STATUS_COL, true);
@@ -606,6 +620,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 reservation.setDate(date);
                 reservation.setTime(time);
                 reservation.setPeriod(period);
+                reservationList.add(reservation);
+
+                cursor.moveToNext();
+            }
+
+            return reservationList;
+        }
+        return null;
+    }
+
+    public List<Reservation> getReservationsByAgencyId(Integer AgencyId){
+        List<Reservation> reservationList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(
+                TABLE_RESERVATIONS, new String[]{HOUSE_ID_COL, DATE_COL, TIME_COL, PERIOD_COL,USER_ID_COL},
+                AGENCY_USER_ID_COL + "=" + AgencyId, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                Integer houseId = cursor.getInt(0);
+                String date = cursor.getString(1);
+                String time = cursor.getString(2);
+                String period = cursor.getString(3);
+                Integer customerId = cursor.getInt(4);
+
+                Reservation reservation = new Reservation();
+                reservation.setHouseId(houseId);
+                reservation.setDate(date);
+                reservation.setTime(time);
+                reservation.setPeriod(period);
+                reservation.setCustomerId(customerId);
                 reservationList.add(reservation);
 
                 cursor.moveToNext();

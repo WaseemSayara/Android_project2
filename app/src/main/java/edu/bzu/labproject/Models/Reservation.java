@@ -3,9 +3,11 @@ package edu.bzu.labproject.Models;
 public class Reservation {
     private Integer customerId;
     private Integer houseId;
+    private Integer agencyId;
     private String date;
     private String time;
     private String period;
+
 
     public Reservation() {
     }
@@ -24,6 +26,14 @@ public class Reservation {
 
     public void setHouseId(Integer houseId) {
         this.houseId = houseId;
+    }
+
+    public Integer getAgencyId() {
+        return agencyId;
+    }
+
+    public void setAgencyId(Integer agencyId) {
+        this.agencyId = agencyId;
     }
 
     public String getDate() {

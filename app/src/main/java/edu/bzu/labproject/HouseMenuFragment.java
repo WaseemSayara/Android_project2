@@ -173,6 +173,7 @@ public class HouseMenuFragment extends Fragment {
         for(House house: houseList){
             Bundle args = new Bundle();
             args.putInt("ID", house.getHouseId());
+            args.putInt("AGENCY_ID", house.getAgencyId());
             args.putString("CITY", house.getCity());
             args.putString("ADDRESS", house.getPostalAddress());
             args.putInt("AREA", house.getArea());
