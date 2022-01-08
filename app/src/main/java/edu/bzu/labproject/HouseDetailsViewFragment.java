@@ -119,7 +119,7 @@ public class HouseDetailsViewFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Integer customerId = loginSessionManager.getCurrentlyLoggedInUser().getId();
-                                Integer carId = getArguments().getInt("ID");
+                                Integer houseId = getArguments().getInt("ID");
                                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
                                 LocalDateTime now = LocalDateTime.now();
                                 String dateTime = dtf.format(now);
@@ -129,19 +129,19 @@ public class HouseDetailsViewFragment extends Fragment {
 
                                 Reservation reservation = new Reservation();
                                 reservation.setCustomerId(customerId);
-                                reservation.setCarId(carId);
+                                reservation.setHouseId(houseId);
                                 reservation.setDate(date);
                                 reservation.setTime(time);
 
-                                databaseHelper.reserveCarByCustomer(reservation);
+                                databaseHelper.reserveHouseByCustomer(reservation);
                                 Snackbar.make(v, "Reserved Successfully", Snackbar.LENGTH_LONG).show();
 
                                 //This is to reload the Cars Menu Fragment After Successful Reservation By Customer
                                 final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                 final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                Fragment carsMenuFragment = fragmentManager.findFragmentByTag("Cars_Menu");
-                                fragmentTransaction.detach(carsMenuFragment);
-                                fragmentTransaction.attach(carsMenuFragment);
+                                Fragment houseMenuFragment = fragmentManager.findFragmentByTag("House_Menu");
+                                fragmentTransaction.detach(houseMenuFragment);
+                                fragmentTransaction.attach(houseMenuFragment);
                                 fragmentTransaction.commit();
                             }
                         })

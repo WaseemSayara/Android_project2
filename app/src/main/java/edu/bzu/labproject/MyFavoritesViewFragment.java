@@ -83,17 +83,14 @@ public class MyFavoritesViewFragment extends Fragment {
                 Integer houseId = getArguments().getInt("ID");
                 databaseHelper.removeFromFavorites(customerId, houseId);
                 Snackbar.make(v, "Removed From Favorites", Snackbar.LENGTH_LONG).show();
-                System.out.println("helooooooooo");
 
                 //This is to reload the Cars Menu Fragment after successfully adding a car to favorites by customer
                 final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment houseMenuFragment = fragmentManager.findFragmentByTag("My_Favorites");
-                System.out.println("helooooooooo2");
                 fragmentTransaction.detach(houseMenuFragment);
                 fragmentTransaction.attach(houseMenuFragment);
                 fragmentTransaction.commit();
-                System.out.println("helooooooooo3");
             }
         });
 

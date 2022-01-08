@@ -2,7 +2,7 @@ package edu.bzu.labproject.Models;
 
 public class Reservation {
     private Integer customerId;
-    private Integer carId;
+    private Integer houseId;
     private String date;
     private String time;
 
@@ -17,12 +17,12 @@ public class Reservation {
         this.customerId = customerId;
     }
 
-    public Integer getCarId() {
-        return carId;
+    public Integer getHouseId() {
+        return houseId;
     }
 
-    public void setCarId(Integer carId) {
-        this.carId = carId;
+    public void setHouseId(Integer houseId) {
+        this.houseId = houseId;
     }
 
     public String getDate() {

@@ -110,11 +110,11 @@ public class CarDetailsViewFragment extends Fragment {
 
                                 Reservation reservation = new Reservation();
                                 reservation.setCustomerId(customerId);
-                                reservation.setCarId(carId);
+                                reservation.setHouseId(carId);
                                 reservation.setDate(date);
                                 reservation.setTime(time);
 
-                                databaseHelper.reserveCarByCustomer(reservation);
+                                databaseHelper.reserveHouseByCustomer(reservation);
                                 Snackbar.make(v, "Reserved Successfully", Snackbar.LENGTH_LONG).show();
 
                                 //This is to reload the Cars Menu Fragment After Successful Reservation By Customer

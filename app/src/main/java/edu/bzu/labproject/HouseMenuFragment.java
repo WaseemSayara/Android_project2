@@ -185,6 +185,8 @@ public class HouseMenuFragment extends Fragment {
             args.putString("DATE", house.getAvailabilityDate());
             args.putString("DESCRIPTION", house.getDescription());
 
+            System.out.println(house.toString());
+
             HouseDetailsViewFragment houseDetailsFragment = new HouseDetailsViewFragment();
             houseDetailsFragment.setArguments(args);
             fragmentTransaction.add(R.id.housesLinearLayoutView, houseDetailsFragment);

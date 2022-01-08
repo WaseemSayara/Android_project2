@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import edu.bzu.labproject.Models.Car;
+import edu.bzu.labproject.Models.House;
 import edu.bzu.labproject.Models.Reservation;
 import edu.bzu.labproject.SQLite.DatabaseHelper;
 import edu.bzu.labproject.Security.LoginSessionManager;
@@ -49,15 +50,20 @@ public class MyReservationsFragment extends Fragment {
         List<Reservation> reservationsList = databaseHelper.getReservationsByCustomerId(loggedInCustomerId);
         if(reservationsList != null){
             for(Reservation reservation: reservationsList){
-                Car car = databaseHelper.getCarById(reservation.getCarId());
+                House house = databaseHelper.getHouseById(reservation.getHouseId());
                 Bundle args = new Bundle();
-                args.putInt("ID", car.getCarId());
-                args.putInt("YEAR", car.getYearOfProduction());
-                args.putString("MAKE", car.getManufacturingCompany());
-                args.putString("MODEL", car.getCarModel());
-                args.putString("DISTANCE", car.getDistanceTraveled());
-                args.putString("PRICE", car.getCarPrice());
-                args.putBoolean("HAD_ACCIDENTS", car.HadAccidents());
+                args.putInt("ID", house.getHouseId());
+                args.putString("CITY", house.getCity());
+                args.putString("ADDRESS", house.getPostalAddress());
+                args.putInt("AREA", house.getArea());
+                args.putInt("YEAR", house.getConstructionYear());
+                args.putInt("BEDROOM", house.getBedrooms());
+                args.putInt("PRICE", house.getPrice());
+                args.putBoolean("STATUS", house.isStatus());
+                args.putBoolean("FURNISHED", house.isFurnished());
+                args.putString("PHOTO", house.getPhotos());
+                args.putString("DATE", house.getAvailabilityDate());
+                args.putString("DESCRIPTION", house.getDescription());
 
                 //Put Date and Time of Reservation in Arguments Bundle
                 args.putString("RES_DATE", reservation.getDate());

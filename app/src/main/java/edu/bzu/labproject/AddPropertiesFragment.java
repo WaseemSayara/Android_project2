@@ -124,7 +124,7 @@ public class AddPropertiesFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         House house = new House();
                         house.setCity(city);
-                        house.setPostalAddress(SecurityUtils.generate_MD5_Secure_Password(address));
+                        house.setPostalAddress(address);
                         house.setArea(area);
                         house.setConstructionYear(year);
                         house.setBedrooms(bedroom);
@@ -132,6 +132,7 @@ public class AddPropertiesFragment extends Fragment {
                         house.setAvailabilityDate(date);
                         house.setDescription(description);
                         house.setPhotos(photo);
+                        System.out.println(house.toString());
 
 
                         boolean insertFlag;

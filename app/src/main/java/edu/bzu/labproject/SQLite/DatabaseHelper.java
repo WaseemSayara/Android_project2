@@ -96,7 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     String SQL_CREATE_TABLE_HOUSES = "CREATE TABLE " + TABLE_HOUSES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + CITY_COL + " TEXT NOT NULL," +
             POSTAL_ADDRESS_COL + " TEXT NOT NULL," + AREA_COL + " INTEGER NOT NULL," + CONSTRUCTION_COL + " INTEGER NOT NULL," + BEDROOMS_COL + " INTEGER NOT NULL," +
             PRICE_COL + " INTEGER NOT NULL,"+ STATUS_COL + " BOOLEAN NOT NULL,"+ FURNISHED_COL + " BOOLEAN NOT NULL,"+ PHOTOS_COL +
-            " TEXT NOT NULL,"+ AVAILABILITY_DATE_COL + " DATE NOT NULL,"+ DESCRIPTION_COL + " TEXT NOT NULL)";
+            " TEXT NOT NULL,"+ AVAILABILITY_DATE_COL + " TEXT NOT NULL,"+ DESCRIPTION_COL + " TEXT NOT NULL)";
 
 
     String SQL_CREATE_TABLE_RESERVATIONS = "CREATE TABLE " + TABLE_RESERVATIONS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL," +
@@ -119,7 +119,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_RESERVATIONS);
         db.execSQL(SQL_CREATE_TABLE_FAVORITES);
         db.execSQL(SQL_CREATE_TABLE_HOUSES);
-        System.out.println("hiiiiiiiiiiiiiiiiiiiiiiiiiiii\n\n");
     }
 
     @Override
@@ -417,7 +416,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 house.setStatus(cursor.getInt(7) == 1);
                 house.setFurnished(cursor.getInt(8) == 1);
                 house.setPhotos(String.valueOf(cursor.getInt(9)));
-                house.setAvailabilityDate(String.valueOf(cursor.getInt(10)));
+                house.setAvailabilityDate(cursor.getString(10));
                 house.setDescription(cursor.getString(11));
 
                 allHousesList.add(house);
@@ -499,16 +498,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean reserveCarByCustomer(Reservation reservation) {
+//    public boolean reserveCarByCustomer(Reservation reservation) {
+//
+//        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put(USER_ID_COL, reservation.getCustomerId());
+//        contentValues.put(CAR_ID_COL, reservation.getCarId());
+//        contentValues.put(DATE_COL, reservation.getDate());
+//        contentValues.put(TIME_COL, reservation.getTime());
+//        return sqLiteDatabase.insert(TABLE_RESERVATIONS, null, contentValues) != -1;
+//    }
+
+    public boolean reserveHouseByCustomer(Reservation reservation) {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(USER_ID_COL, reservation.getCustomerId());
-        contentValues.put(CAR_ID_COL, reservation.getCarId());
+        contentValues.put(HOUSE_ID_COL, reservation.getHouseId());
         contentValues.put(DATE_COL, reservation.getDate());
         contentValues.put(TIME_COL, reservation.getTime());
         return sqLiteDatabase.insert(TABLE_RESERVATIONS, null, contentValues) != -1;
     }
+
 
     public List<Reservation> getAllReservations(){
         List<Reservation> allReservations = new ArrayList<>();
@@ -526,7 +537,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 Reservation reservation = new Reservation();
                 reservation.setCustomerId(customerId);
-                reservation.setCarId(carId);
+                reservation.setHouseId(carId);
                 reservation.setDate(date);
                 reservation.setTime(time);
                 allReservations.add(reservation);
@@ -544,17 +555,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Reservation> reservationList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(
-                TABLE_RESERVATIONS, new String[]{CAR_ID_COL, DATE_COL, TIME_COL},
+                TABLE_RESERVATIONS, new String[]{HOUSE_ID_COL, DATE_COL, TIME_COL},
                 USER_ID_COL + "=" + customerId, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                Integer carId = cursor.getInt(0);
+                Integer houseId = cursor.getInt(0);
                 String date = cursor.getString(1);
                 String time = cursor.getString(2);
 
                 Reservation reservation = new Reservation();
-                reservation.setCarId(carId);
+                reservation.setHouseId(houseId);
                 reservation.setDate(date);
                 reservation.setTime(time);
                 reservationList.add(reservation);
