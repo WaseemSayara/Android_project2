@@ -5,6 +5,7 @@ public class Reservation {
     private Integer houseId;
     private String date;
     private String time;
+    private String period;
 
     public Reservation() {
     }
@@ -39,5 +40,13 @@ public class Reservation {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
     }
 }

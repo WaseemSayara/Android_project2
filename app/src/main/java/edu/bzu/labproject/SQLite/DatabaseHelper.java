@@ -7,7 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import edu.bzu.labproject.Models.Car;
 import edu.bzu.labproject.Models.House;
@@ -72,6 +77,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Reservations Table Column Names
     private static final String DATE_COL = "DATE";
     private static final String TIME_COL = "TIME";
+    private static final String PERIOD_COL = "PERIOD";
+
 
 
     //SQL Statements for Tables Creation
@@ -93,15 +100,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             MAKE_COL + " TEXT NOT NULL," + MODEL_COL + " TEXT NOT NULL," + DISTANCE_COL + " TEXT NOT NULL," + PRICE_COL + " INTEGER NOT NULL," +
             ACCIDENTS_COL + " BOOLEAN NOT NULL)";
 
-    String SQL_CREATE_TABLE_HOUSES = "CREATE TABLE " + TABLE_HOUSES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + CITY_COL + " TEXT NOT NULL," +
-            POSTAL_ADDRESS_COL + " TEXT NOT NULL," + AREA_COL + " INTEGER NOT NULL," + CONSTRUCTION_COL + " INTEGER NOT NULL," + BEDROOMS_COL + " INTEGER NOT NULL," +
+    String SQL_CREATE_TABLE_HOUSES = "CREATE TABLE " + TABLE_HOUSES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + AGENCY_NAME_COL + " TEXT NOT NULL,"
+            + CITY_COL + " TEXT NOT NULL," + POSTAL_ADDRESS_COL + " TEXT NOT NULL," + AREA_COL + " INTEGER NOT NULL," + CONSTRUCTION_COL + " INTEGER NOT NULL," + BEDROOMS_COL + " INTEGER NOT NULL," +
             PRICE_COL + " INTEGER NOT NULL,"+ STATUS_COL + " BOOLEAN NOT NULL,"+ FURNISHED_COL + " BOOLEAN NOT NULL,"+ PHOTOS_COL +
             " TEXT NOT NULL,"+ AVAILABILITY_DATE_COL + " TEXT NOT NULL,"+ DESCRIPTION_COL + " TEXT NOT NULL)";
 
 
     String SQL_CREATE_TABLE_RESERVATIONS = "CREATE TABLE " + TABLE_RESERVATIONS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL," +
             HOUSE_ID_COL + " INTEGER NOT NULL," +
-            DATE_COL + " TEXT NOT NULL," + TIME_COL + " TEXT NOT NULL)";
+            DATE_COL + " TEXT NOT NULL," + PERIOD_COL + " INTEGER NOT NULL," + TIME_COL + " TEXT NOT NULL)";
 
     String SQL_CREATE_TABLE_FAVORITES = "CREATE TABLE " + TABLE_FAVORITES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL,"
             + HOUSE_ID_COL + " INTEGER NOT NULL)";
@@ -315,6 +322,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(PHOTOS_COL, house.getPhotos());
         contentValues.put(AVAILABILITY_DATE_COL, house.getAvailabilityDate().toString());
         contentValues.put(DESCRIPTION_COL, house.getDescription());
+        contentValues.put(AGENCY_NAME_COL, house.getAgencyName());
 
         long result;
         if ((result = sqLiteDatabase.insert(TABLE_HOUSES, null, contentValues)) != -1)
@@ -367,6 +375,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return null;
+    }
+
+    public String getAgencyNameByHouseId(Integer houseId) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(TABLE_HOUSES, new String[]{AGENCY_NAME_COL},
+                ID_COL + "=" + houseId, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            return cursor.getString(0);
+        }
+        return " ";
     }
 
 
@@ -517,6 +535,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(HOUSE_ID_COL, reservation.getHouseId());
         contentValues.put(DATE_COL, reservation.getDate());
         contentValues.put(TIME_COL, reservation.getTime());
+        contentValues.put(PERIOD_COL, reservation.getPeriod());
+
+        ContentValues contentValues2 = new ContentValues();
+        contentValues2.put(STATUS_COL, true);
+
+        Date date = new Date();
+        //This method returns the time in millis
+        long timeMilli = date.getTime();
+        long newTime = timeMilli + 86400000L * Long.parseLong(reservation.getPeriod());
+        Date result = new Date(newTime);
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = dateFormat.format(result);
+
+        contentValues2.put(AVAILABILITY_DATE_COL, strDate);
+
+        sqLiteDatabase.update(TABLE_HOUSES, contentValues2,ID_COL + "= ?", new String[]{reservation.getHouseId().toString()});
+
         return sqLiteDatabase.insert(TABLE_RESERVATIONS, null, contentValues) != -1;
     }
 
@@ -555,7 +591,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Reservation> reservationList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(
-                TABLE_RESERVATIONS, new String[]{HOUSE_ID_COL, DATE_COL, TIME_COL},
+                TABLE_RESERVATIONS, new String[]{HOUSE_ID_COL, DATE_COL, TIME_COL, PERIOD_COL},
                 USER_ID_COL + "=" + customerId, null, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -563,11 +599,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Integer houseId = cursor.getInt(0);
                 String date = cursor.getString(1);
                 String time = cursor.getString(2);
+                String period = cursor.getString(3);
 
                 Reservation reservation = new Reservation();
                 reservation.setHouseId(houseId);
                 reservation.setDate(date);
                 reservation.setTime(time);
+                reservation.setPeriod(period);
                 reservationList.add(reservation);
 
                 cursor.moveToNext();

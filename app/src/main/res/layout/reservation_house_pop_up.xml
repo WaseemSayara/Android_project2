@@ -14,7 +14,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="519dp"
             android:padding="8dp">
 
             <ImageView
@@ -310,6 +310,38 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textSize="19sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/popPeriodDateLabel"
+                android:layout_width="250dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/popdescriptionTextView"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="5dp"
+                android:background="#2196F3"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Enter Number Of Days You Want to rent this property"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/popPeriodDateEditText"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/popdescriptionTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/popPeriodDateLabel"
+                android:hint="# of Days"
+                android:paddingLeft="15dp"
+
+                android:paddingRight="15dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black"
+                android:textColorHint="#2196F3" />
 
         </RelativeLayout>
 

@@ -12,14 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import edu.bzu.labproject.Models.Reservation;
 import edu.bzu.labproject.SQLite.DatabaseHelper;
 import edu.bzu.labproject.Security.LoginSessionManager;
+import edu.bzu.labproject.Validation.Validator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,6 +78,7 @@ public class MyFavoritesViewFragment extends Fragment {
         favdescriptionTextView.setText(houseDescription);
 
         final Button removeFavoriteButton = (Button) fragView.findViewById(R.id.favRemoveButton);
+        final Button favReserveButton = (Button) fragView.findViewById(R.id.favreserveButton);
 
         removeFavoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,67 +102,84 @@ public class MyFavoritesViewFragment extends Fragment {
 
 
 
-//        favsReserveButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                View reservePopupView = getLayoutInflater().inflate(R.layout.reservation_pop_up, null);
-//                final TextView popupMakeAndModel = (TextView) reservePopupView.findViewById(R.id.popupMakeAndModel);
-//                final TextView popupYearTextView = (TextView) reservePopupView.findViewById(R.id.popupYearTextView);
-//                final TextView popupDistanceTextView = (TextView) reservePopupView.findViewById(R.id.popupDistanceTextView);
-//                final TextView popupAccidentsTextView = (TextView) reservePopupView.findViewById(R.id.popupAccidentsTextView);
-//                final TextView popupPriceTextView = (TextView) reservePopupView.findViewById(R.id.popupPriceTextView);
-//
-//                popupYearTextView.setText(carYearOfProduction);
-//                popupMakeAndModel.setText(carMake + " " + carModel);
-//                popupDistanceTextView.setText(carDistanceTraveled);
-//                popupPriceTextView.setText(
-//                        carPrice.length() > 6 ?
-//                                "$ " + carPrice.substring(0,1) + "," +
-//                                        carPrice.substring(carPrice.length() - 6, carPrice.length() - 3) +
-//                                        "," + carPrice.substring(carPrice.length() - 3, carPrice.length()) :
-//                                "$ " + carPrice.substring(0, carPrice.length() - 3) +
-//                                        "," + carPrice.substring(carPrice.length() - 3, carPrice.length()));
-//
-//                popupAccidentsTextView.setText(carHadAccidents);
-//
-//                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity())
-//                        .setView(reservePopupView)
-//                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                Integer customerId = loginSessionManager.getCurrentlyLoggedInUser().getId();
-//                                Integer carId = getArguments().getInt("ID");
-//                                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-//                                LocalDateTime now = LocalDateTime.now();
-//                                String dateTime = dtf.format(now);
-//                                String[] dateTimeArray = dateTime.split(" ");
-//                                String date = dateTimeArray[0];
-//                                String time = dateTimeArray[1];
-//
-//                                Reservation reservation = new Reservation();
-//                                reservation.setCustomerId(customerId);
-//                                reservation.setCarId(carId);
-//                                reservation.setDate(date);
-//                                reservation.setTime(time);
-//
-//                                databaseHelper.reserveCarByCustomer(reservation);
-//                                databaseHelper.removeFromFavorites(customerId, carId);
-//                                Snackbar.make(v, "Reserved Successfully", Snackbar.LENGTH_LONG).show();
-//
-//                                //To Reload My Favorites Fragment After Successful Reservation By Customer
-//                                final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                                final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                                Fragment myFavoritesFragment = fragmentManager.findFragmentByTag("My_Favorites");
-//                                fragmentTransaction.detach(myFavoritesFragment);
-//                                fragmentTransaction.attach(myFavoritesFragment);
-//                                fragmentTransaction.commit();
-//                            }
-//                        })
-//                        .setNegativeButton("Cancel", null);
-//
-//                alertDialog.show();
-//            }
-//        });
+        favReserveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View reservePopupView = getLayoutInflater().inflate(R.layout.reservation_house_pop_up, null);
+                final TextView popcityTextView = (TextView) reservePopupView.findViewById(R.id.popcityTextView);
+                final TextView popaddressTextView = (TextView) reservePopupView.findViewById(R.id.poppostalAddressTextView);
+                final TextView popareaTextView = (TextView) reservePopupView.findViewById(R.id.popsurfaceAreaTextView);
+                final TextView popyearTextView = (TextView) reservePopupView.findViewById(R.id.popconstructionYearTextView);
+                final TextView popbedroomTextView = (TextView) reservePopupView.findViewById(R.id.popbedroomsTextView);
+                final TextView poppriceTextView = (TextView) reservePopupView.findViewById(R.id.poppriceTextView);
+                final TextView popstatusTextView = (TextView) reservePopupView.findViewById(R.id.popstatusTextView);
+                final TextView popfurnishedTextView = (TextView) reservePopupView.findViewById(R.id.popfurnishedTextView);
+                final TextView popdateTextView = (TextView) reservePopupView.findViewById(R.id.popavailabilityDateTextView);
+                final TextView popdescriptionTextView = (TextView) reservePopupView.findViewById(R.id.popdescriptionTextView);
+
+                popcityTextView.setText(houseCity);
+                popaddressTextView.setText(houseAddress);
+                popareaTextView.setText(houseArea.toString());
+                popyearTextView.setText(houseYear.toString());
+                popbedroomTextView.setText(houseBedroom.toString());
+                poppriceTextView.setText("$ " +housePrice.toString());
+                popstatusTextView.setText(houseStatus);
+                popfurnishedTextView.setText(houseFurnished);
+                popdateTextView.setText(houseDate);
+                popdescriptionTextView.setText(houseDescription);
+
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity())
+                        .setView(reservePopupView)
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                final EditText periodEditText = (EditText)reservePopupView.findViewById(R.id.popPeriodDateEditText);
+
+                                String period = periodEditText.getText().toString().trim();
+
+                                try {
+                                    if (!Validator.checkPeriodValidity(period, houseStatus, houseDate)){
+                                        Snackbar.make(v, "Reserved Failed", Snackbar.LENGTH_LONG).show();
+                                    }
+                                    else {
+
+                                        Integer customerId = loginSessionManager.getCurrentlyLoggedInUser().getId();
+                                        Integer houseId = getArguments().getInt("ID");
+                                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                        LocalDateTime now = LocalDateTime.now();
+                                        String dateTime = dtf.format(now);
+                                        String[] dateTimeArray = dateTime.split(" ");
+                                        String date = dateTimeArray[0];
+                                        String time = dateTimeArray[1];
+
+                                        Reservation reservation = new Reservation();
+                                        reservation.setCustomerId(customerId);
+                                        reservation.setHouseId(houseId);
+                                        reservation.setDate(date);
+                                        reservation.setTime(time);
+                                        reservation.setPeriod(period);
+
+                                        databaseHelper.reserveHouseByCustomer(reservation);
+                                        Snackbar.make(v, "Reserved Successfully", Snackbar.LENGTH_LONG).show();
+                                    }
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                                //This is to reload the Cars Menu Fragment After Successful Reservation By Customer
+                                final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                Fragment houseMenuFragment = fragmentManager.findFragmentByTag("My_Favorites");
+                                fragmentTransaction.detach(houseMenuFragment);
+                                fragmentTransaction.attach(houseMenuFragment);
+                                fragmentTransaction.commit();
+                            }
+                        })
+                        .setNegativeButton("Cancel", null);
+
+                alertDialog.show();
+            }
+        });
 
         return fragView;
     }

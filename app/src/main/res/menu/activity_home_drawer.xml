@@ -15,8 +15,8 @@
             android:title="Search" />
         <item
             android:id="@+id/nav_reservations"
-            android:icon="@drawable/ic_description_24dp"
-            android:title="Reservations" />
+            android:icon="@drawable/ic_baseline_history_24"
+            android:title="History" />
         <item
             android:id="@+id/nav_myfavorites"
             android:icon="@drawable/ic_favorite_24dp"

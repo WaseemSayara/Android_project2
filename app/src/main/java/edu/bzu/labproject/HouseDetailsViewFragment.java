@@ -12,14 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import edu.bzu.labproject.Models.Reservation;
 import edu.bzu.labproject.SQLite.DatabaseHelper;
 import edu.bzu.labproject.Security.LoginSessionManager;
+import edu.bzu.labproject.Validation.Validator;
 
 
 /**
@@ -69,7 +72,7 @@ public class HouseDetailsViewFragment extends Fragment {
         Integer houseBedroom = getArguments().getInt("BEDROOM");
         Integer housePrice = getArguments().getInt("PRICE");
         String houseStatus = getArguments().getBoolean("STATUS") ? "Rented" : "Un Rented";
-        String houseFurnished = getArguments().getBoolean("FURNISHED") ? "YES" : "NO";
+        String houseFurnished = getArguments().getBoolean("FURNISHED") ? "NO" : "Yes";
         String housePhoto = getArguments().getString("PHOTO");
         String houseDate = getArguments().getString("DATE");
         String houseDescription = getArguments().getString("DESCRIPTION");
@@ -118,24 +121,39 @@ public class HouseDetailsViewFragment extends Fragment {
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Integer customerId = loginSessionManager.getCurrentlyLoggedInUser().getId();
-                                Integer houseId = getArguments().getInt("ID");
-                                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                LocalDateTime now = LocalDateTime.now();
-                                String dateTime = dtf.format(now);
-                                String[] dateTimeArray = dateTime.split(" ");
-                                String date = dateTimeArray[0];
-                                String time = dateTimeArray[1];
 
-                                Reservation reservation = new Reservation();
-                                reservation.setCustomerId(customerId);
-                                reservation.setHouseId(houseId);
-                                reservation.setDate(date);
-                                reservation.setTime(time);
+                                final EditText periodEditText = (EditText)reservePopupView.findViewById(R.id.popPeriodDateEditText);
 
-                                databaseHelper.reserveHouseByCustomer(reservation);
-                                Snackbar.make(v, "Reserved Successfully", Snackbar.LENGTH_LONG).show();
+                                String period = periodEditText.getText().toString().trim();
 
+                                try {
+                                    if (!Validator.checkPeriodValidity(period, houseStatus, houseDate)){
+                                        Snackbar.make(v, "Reserved Failed", Snackbar.LENGTH_LONG).show();
+                                    }
+                                    else {
+
+                                        Integer customerId = loginSessionManager.getCurrentlyLoggedInUser().getId();
+                                        Integer houseId = getArguments().getInt("ID");
+                                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                        LocalDateTime now = LocalDateTime.now();
+                                        String dateTime = dtf.format(now);
+                                        String[] dateTimeArray = dateTime.split(" ");
+                                        String date = dateTimeArray[0];
+                                        String time = dateTimeArray[1];
+
+                                        Reservation reservation = new Reservation();
+                                        reservation.setCustomerId(customerId);
+                                        reservation.setHouseId(houseId);
+                                        reservation.setDate(date);
+                                        reservation.setTime(time);
+                                        reservation.setPeriod(period);
+
+                                        databaseHelper.reserveHouseByCustomer(reservation);
+                                        Snackbar.make(v, "Reserved Successfully", Snackbar.LENGTH_LONG).show();
+                                    }
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
                                 //This is to reload the Cars Menu Fragment After Successful Reservation By Customer
                                 final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                 final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

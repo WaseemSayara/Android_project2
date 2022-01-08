@@ -13,8 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import edu.bzu.labproject.Models.AgencyUser;
 import edu.bzu.labproject.Models.House;
+import edu.bzu.labproject.Models.User;
 import edu.bzu.labproject.SQLite.DatabaseHelper;
+import edu.bzu.labproject.Security.LoginSessionManager;
 import edu.bzu.labproject.Security.SecurityUtils;
 import edu.bzu.labproject.Validation.Validator;
 
@@ -122,6 +125,10 @@ public class AddPropertiesFragment extends Fragment {
                 .setPositiveButton(R.string.dialog_ok_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
+                        LoginSessionManager userLoginSession = new LoginSessionManager(getActivity().getApplicationContext());
+                        AgencyUser loggedInUser = userLoginSession.getCurrentlyLoggedInAgencyUser();
+
                         House house = new House();
                         house.setCity(city);
                         house.setPostalAddress(address);
@@ -132,6 +139,7 @@ public class AddPropertiesFragment extends Fragment {
                         house.setAvailabilityDate(date);
                         house.setDescription(description);
                         house.setPhotos(photo);
+                        house.setAgencyName(loggedInUser.getAgencyName());
                         System.out.println(house.toString());
 
 

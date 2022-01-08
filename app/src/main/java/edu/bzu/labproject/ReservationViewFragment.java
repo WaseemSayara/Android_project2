@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import edu.bzu.labproject.SQLite.DatabaseHelper;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -29,38 +31,32 @@ public class ReservationViewFragment extends Fragment {
         final TextView resaddressTextView = (TextView) fragView.findViewById(R.id.respostalAddressTextView);
         final TextView resareaTextView = (TextView) fragView.findViewById(R.id.ressurfaceAreaTextView);
         final TextView resyearTextView = (TextView) fragView.findViewById(R.id.resconstructionYearTextView);
-        final TextView resbedroomTextView = (TextView) fragView.findViewById(R.id.resbedroomsTextView);
         final TextView respriceTextView = (TextView) fragView.findViewById(R.id.respriceTextView);
-        final TextView resstatusTextView = (TextView) fragView.findViewById(R.id.resstatusTextView);
-        final TextView resfurnishedTextView = (TextView) fragView.findViewById(R.id.resfurnishedTextView);
-        final TextView resdateTextView = (TextView) fragView.findViewById(R.id.resavailabilityDateTextView);
         final TextView resdescriptionTextView = (TextView) fragView.findViewById(R.id.resdescriptionTextView);
+        final TextView resperiodTextView = (TextView) fragView.findViewById(R.id.resPeriodTextView);
+        final TextView resagencyTextView = (TextView) fragView.findViewById(R.id.resAgencyLabelTextView);
 
 
         String houseCity = String.valueOf(getArguments().getString("CITY"));
         String houseAddress  = getArguments().getString("ADDRESS");
         Integer houseArea = getArguments().getInt("AREA");
         Integer houseYear = getArguments().getInt("YEAR");
-        Integer houseBedroom = getArguments().getInt("BEDROOM");
         Integer housePrice = getArguments().getInt("PRICE");
-        String houseStatus = getArguments().getBoolean("STATUS") ? "Rented" : "Un Rented";
-        String houseFurnished = getArguments().getBoolean("FURNISHED") ? "YES" : "NO";
-        String housePhoto = getArguments().getString("PHOTO");
-        String houseDate = getArguments().getString("DATE");
         String houseDescription = getArguments().getString("DESCRIPTION");
-        String reservationDate = getArguments().getString("RES_DATE");
-        String reservationTime = getArguments().getString("RES_TIME");
+        String reservePeriod = getArguments().getString("PERIOD");
+
+        final DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
+        String agencyName = databaseHelper.getAgencyNameByHouseId(getArguments().getInt("ID"));
+
 
         rescityTextView.setText(houseCity);
         resaddressTextView.setText(houseAddress);
         resareaTextView.setText(houseArea.toString());
         resyearTextView.setText(houseYear.toString());
-        resbedroomTextView.setText(houseBedroom.toString());
         respriceTextView.setText("$ " + housePrice.toString());
-        resstatusTextView.setText(houseStatus);
-        resfurnishedTextView.setText(houseFurnished);
-        resdateTextView.setText(houseDate);
         resdescriptionTextView.setText(houseDescription);
+        resperiodTextView.setText(reservePeriod);
+        resagencyTextView.setText(agencyName);
 
         return fragView;
 

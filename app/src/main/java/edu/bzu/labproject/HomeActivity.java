@@ -130,7 +130,7 @@ public class HomeActivity extends AppCompatActivity
             final FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             MyReservationsFragment myReservationsFragment = new MyReservationsFragment();
-            fragmentTransaction.replace(R.id.homeContent, myReservationsFragment, "My_Reservations");
+            fragmentTransaction.replace(R.id.homeContent, myReservationsFragment, "My_History");
             fragmentTransaction.commit();
 
 

@@ -40,7 +40,7 @@ public class MyReservationsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getActivity().setTitle("Reservations");
+        getActivity().setTitle("History");
         final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         final DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
@@ -68,6 +68,8 @@ public class MyReservationsFragment extends Fragment {
                 //Put Date and Time of Reservation in Arguments Bundle
                 args.putString("RES_DATE", reservation.getDate());
                 args.putString("RES_TIME", reservation.getTime());
+                args.putString("PERIOD", reservation.getPeriod());
+
 
                 ReservationViewFragment reservationViewFragment = new ReservationViewFragment();
                 reservationViewFragment.setArguments(args);

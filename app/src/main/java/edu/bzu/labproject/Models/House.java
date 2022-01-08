@@ -28,6 +28,8 @@ public class House {
     private String availabilityDate;
     @SerializedName("description")
     private String description;
+    @SerializedName("agencyName")
+    private String agencyName;
 
     public House() {
     }
@@ -87,6 +89,14 @@ public class House {
 
     public void setConstructionYear(Integer constructionYear) {
         this.constructionYear = constructionYear;
+    }
+
+    public String getAgencyName() {
+        return agencyName;
+    }
+
+    public void setAgencyName(String agencyName) {
+        this.agencyName = agencyName;
     }
 
     public Integer getBedrooms() {

@@ -1,5 +1,9 @@
 package edu.bzu.labproject.Validation;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Validator {
     public static boolean checkRequiredFieldConstraint(String field){
         if(!field.isEmpty())
@@ -102,5 +106,33 @@ public class Validator {
             return true;
         else
             return false;
+    }
+
+    public static boolean checkPeriodValidity(String period, String Rented, String date1) throws ParseException {
+        SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");
+        Date date2=formatter1.parse(date1);
+        long millis = date2.getTime();
+
+        Date dateNow = new Date();
+        long timeMilli = dateNow.getTime();
+
+        if (period.isEmpty()){
+            return false;
+        }
+        else if(Rented.compareTo("Rented") == 0){
+            return false;
+        }
+        else if(millis > timeMilli){
+            return false;
+        }
+        else {
+            try {
+                int d = Integer.parseInt(period);
+            } catch (NumberFormatException nfe) {
+                return false;
+            }
+            return true;
+        }
+
     }
 }
