@@ -40,95 +40,128 @@ public class MyFavoritesViewFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View fragView = inflater.inflate(R.layout.favorites_card_view, container, false);
-        final TextView favsMakeAndModel = (TextView) fragView.findViewById(R.id.favsMakeAndModel);
-        final TextView favsYearTextView = (TextView) fragView.findViewById(R.id.favsYearTextView);
-        final TextView favsDistanceTextView = (TextView) fragView.findViewById(R.id.favsDistanceTextView);
-        final TextView favsAccidentsTextView = (TextView) fragView.findViewById(R.id.favAccidentsTextView);
-        final TextView favsPriceTextView = (TextView) fragView.findViewById(R.id.favPriceTextView);
-        final Button favsReserveButton = (Button) fragView.findViewById(R.id.favsReserveButton);
+        final TextView favcityTextView = (TextView) fragView.findViewById(R.id.favcityTextView);
+        final TextView favaddressTextView = (TextView) fragView.findViewById(R.id.favpostalAddressTextView);
+        final TextView favareaTextView = (TextView) fragView.findViewById(R.id.favsurfaceAreaTextView);
+        final TextView favyearTextView = (TextView) fragView.findViewById(R.id.favconstructionYearTextView);
+        final TextView favbedroomTextView = (TextView) fragView.findViewById(R.id.favbedroomsTextView);
+        final TextView favpriceTextView = (TextView) fragView.findViewById(R.id.favpriceTextView);
+        final TextView favstatusTextView = (TextView) fragView.findViewById(R.id.favstatusTextView);
+        final TextView favfurnishedTextView = (TextView) fragView.findViewById(R.id.favfurnishedTextView);
+        final TextView favdateTextView = (TextView) fragView.findViewById(R.id.favavailabilityDateTextView);
+        final TextView favdescriptionTextView = (TextView) fragView.findViewById(R.id.favdescriptionTextView);
 
-        String carYearOfProduction = String.valueOf(getArguments().getInt("YEAR"));
-        String carMake  = getArguments().getString("MAKE");
-        String carModel = getArguments().getString("MODEL");
-        String carDistanceTraveled = getArguments().getString("DISTANCE");
-        String carPrice = getArguments().getString("PRICE");
-        String carHadAccidents = getArguments().getBoolean("HAD_ACCIDENTS") ? "YES" : "NO";
+        String houseCity = String.valueOf(getArguments().getString("CITY"));
+        String houseAddress  = getArguments().getString("ADDRESS");
+        Integer houseArea = getArguments().getInt("AREA");
+        Integer houseYear = getArguments().getInt("YEAR");
+        Integer houseBedroom = getArguments().getInt("BEDROOM");
+        Integer housePrice = getArguments().getInt("PRICE");
+        String houseStatus = getArguments().getBoolean("STATUS") ? "Rented" : "Un Rented";
+        String houseFurnished = getArguments().getBoolean("FURNISHED") ? "YES" : "NO";
+        String housePhoto = getArguments().getString("PHOTO");
+        String houseDate = getArguments().getString("DATE");
+        String houseDescription = getArguments().getString("DESCRIPTION");
 
-        favsYearTextView.setText(carYearOfProduction);
-        favsMakeAndModel.setText(carMake + " " + carModel);
-        favsDistanceTextView.setText(carDistanceTraveled);
-        favsPriceTextView.setText(
-                carPrice.length() > 6 ?
-                        "$ " + carPrice.substring(0,1) + "," +
-                                carPrice.substring(carPrice.length() - 6, carPrice.length() - 3) +
-                                "," + carPrice.substring(carPrice.length() - 3, carPrice.length()) :
-                        "$ " + carPrice.substring(0, carPrice.length() - 3) +
-                                "," + carPrice.substring(carPrice.length() - 3, carPrice.length()));
+        favcityTextView.setText(houseCity);
+        favaddressTextView.setText(houseAddress);
+        favareaTextView.setText(houseArea.toString());
+        favyearTextView.setText(houseYear.toString());
+        favbedroomTextView.setText(houseBedroom.toString());
+        favpriceTextView.setText("$ " + housePrice.toString());
+        favstatusTextView.setText(houseStatus);
+        favfurnishedTextView.setText(houseFurnished);
+        favdateTextView.setText(houseDate);
+        favdescriptionTextView.setText(houseDescription);
 
-        favsAccidentsTextView.setText(carHadAccidents);
+        final Button removeFavoriteButton = (Button) fragView.findViewById(R.id.favRemoveButton);
 
-
-        favsReserveButton.setOnClickListener(new View.OnClickListener() {
+        removeFavoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View reservePopupView = getLayoutInflater().inflate(R.layout.reservation_pop_up, null);
-                final TextView popupMakeAndModel = (TextView) reservePopupView.findViewById(R.id.popupMakeAndModel);
-                final TextView popupYearTextView = (TextView) reservePopupView.findViewById(R.id.popupYearTextView);
-                final TextView popupDistanceTextView = (TextView) reservePopupView.findViewById(R.id.popupDistanceTextView);
-                final TextView popupAccidentsTextView = (TextView) reservePopupView.findViewById(R.id.popupAccidentsTextView);
-                final TextView popupPriceTextView = (TextView) reservePopupView.findViewById(R.id.popupPriceTextView);
+                Integer customerId = loginSessionManager.getCurrentlyLoggedInUser().getId();
+                Integer houseId = getArguments().getInt("ID");
+                databaseHelper.removeFromFavorites(customerId, houseId);
+                Snackbar.make(v, "Removed From Favorites", Snackbar.LENGTH_LONG).show();
+                System.out.println("helooooooooo");
 
-                popupYearTextView.setText(carYearOfProduction);
-                popupMakeAndModel.setText(carMake + " " + carModel);
-                popupDistanceTextView.setText(carDistanceTraveled);
-                popupPriceTextView.setText(
-                        carPrice.length() > 6 ?
-                                "$ " + carPrice.substring(0,1) + "," +
-                                        carPrice.substring(carPrice.length() - 6, carPrice.length() - 3) +
-                                        "," + carPrice.substring(carPrice.length() - 3, carPrice.length()) :
-                                "$ " + carPrice.substring(0, carPrice.length() - 3) +
-                                        "," + carPrice.substring(carPrice.length() - 3, carPrice.length()));
-
-                popupAccidentsTextView.setText(carHadAccidents);
-
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity())
-                        .setView(reservePopupView)
-                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Integer customerId = loginSessionManager.getCurrentlyLoggedInUser().getId();
-                                Integer carId = getArguments().getInt("ID");
-                                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                LocalDateTime now = LocalDateTime.now();
-                                String dateTime = dtf.format(now);
-                                String[] dateTimeArray = dateTime.split(" ");
-                                String date = dateTimeArray[0];
-                                String time = dateTimeArray[1];
-
-                                Reservation reservation = new Reservation();
-                                reservation.setCustomerId(customerId);
-                                reservation.setCarId(carId);
-                                reservation.setDate(date);
-                                reservation.setTime(time);
-
-                                databaseHelper.reserveCarByCustomer(reservation);
-                                databaseHelper.removeFromFavorites(customerId, carId);
-                                Snackbar.make(v, "Reserved Successfully", Snackbar.LENGTH_LONG).show();
-
-                                //To Reload My Favorites Fragment After Successful Reservation By Customer
-                                final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                Fragment myFavoritesFragment = fragmentManager.findFragmentByTag("My_Favorites");
-                                fragmentTransaction.detach(myFavoritesFragment);
-                                fragmentTransaction.attach(myFavoritesFragment);
-                                fragmentTransaction.commit();
-                            }
-                        })
-                        .setNegativeButton("Cancel", null);
-
-                alertDialog.show();
+                //This is to reload the Cars Menu Fragment after successfully adding a car to favorites by customer
+                final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment houseMenuFragment = fragmentManager.findFragmentByTag("My_Favorites");
+                System.out.println("helooooooooo2");
+                fragmentTransaction.detach(houseMenuFragment);
+                fragmentTransaction.attach(houseMenuFragment);
+                fragmentTransaction.commit();
+                System.out.println("helooooooooo3");
             }
         });
+
+
+
+
+
+//        favsReserveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                View reservePopupView = getLayoutInflater().inflate(R.layout.reservation_pop_up, null);
+//                final TextView popupMakeAndModel = (TextView) reservePopupView.findViewById(R.id.popupMakeAndModel);
+//                final TextView popupYearTextView = (TextView) reservePopupView.findViewById(R.id.popupYearTextView);
+//                final TextView popupDistanceTextView = (TextView) reservePopupView.findViewById(R.id.popupDistanceTextView);
+//                final TextView popupAccidentsTextView = (TextView) reservePopupView.findViewById(R.id.popupAccidentsTextView);
+//                final TextView popupPriceTextView = (TextView) reservePopupView.findViewById(R.id.popupPriceTextView);
+//
+//                popupYearTextView.setText(carYearOfProduction);
+//                popupMakeAndModel.setText(carMake + " " + carModel);
+//                popupDistanceTextView.setText(carDistanceTraveled);
+//                popupPriceTextView.setText(
+//                        carPrice.length() > 6 ?
+//                                "$ " + carPrice.substring(0,1) + "," +
+//                                        carPrice.substring(carPrice.length() - 6, carPrice.length() - 3) +
+//                                        "," + carPrice.substring(carPrice.length() - 3, carPrice.length()) :
+//                                "$ " + carPrice.substring(0, carPrice.length() - 3) +
+//                                        "," + carPrice.substring(carPrice.length() - 3, carPrice.length()));
+//
+//                popupAccidentsTextView.setText(carHadAccidents);
+//
+//                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity())
+//                        .setView(reservePopupView)
+//                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Integer customerId = loginSessionManager.getCurrentlyLoggedInUser().getId();
+//                                Integer carId = getArguments().getInt("ID");
+//                                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+//                                LocalDateTime now = LocalDateTime.now();
+//                                String dateTime = dtf.format(now);
+//                                String[] dateTimeArray = dateTime.split(" ");
+//                                String date = dateTimeArray[0];
+//                                String time = dateTimeArray[1];
+//
+//                                Reservation reservation = new Reservation();
+//                                reservation.setCustomerId(customerId);
+//                                reservation.setCarId(carId);
+//                                reservation.setDate(date);
+//                                reservation.setTime(time);
+//
+//                                databaseHelper.reserveCarByCustomer(reservation);
+//                                databaseHelper.removeFromFavorites(customerId, carId);
+//                                Snackbar.make(v, "Reserved Successfully", Snackbar.LENGTH_LONG).show();
+//
+//                                //To Reload My Favorites Fragment After Successful Reservation By Customer
+//                                final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                                final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                                Fragment myFavoritesFragment = fragmentManager.findFragmentByTag("My_Favorites");
+//                                fragmentTransaction.detach(myFavoritesFragment);
+//                                fragmentTransaction.attach(myFavoritesFragment);
+//                                fragmentTransaction.commit();
+//                            }
+//                        })
+//                        .setNegativeButton("Cancel", null);
+//
+//                alertDialog.show();
+//            }
+//        });
 
         return fragView;
     }

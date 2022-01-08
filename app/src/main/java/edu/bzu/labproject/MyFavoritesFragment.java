@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import edu.bzu.labproject.Models.Car;
+import edu.bzu.labproject.Models.House;
 import edu.bzu.labproject.SQLite.DatabaseHelper;
 import edu.bzu.labproject.Security.LoginSessionManager;
 
@@ -46,21 +47,26 @@ public class MyFavoritesFragment extends Fragment {
         final LoginSessionManager loginSessionManager = new LoginSessionManager(getActivity());
 
 
-        List<Car> favoriteCarsList = databaseHelper.getFavoritesByCustomerId(loginSessionManager.getCurrentlyLoggedInUser().getId());
-        if(favoriteCarsList != null) {
-            for (Car car : favoriteCarsList) {
+        List<House> favoriteHousesList = databaseHelper.getFavoritesByCustomerId(loginSessionManager.getCurrentlyLoggedInUser().getId());
+        if(favoriteHousesList != null) {
+            for (House house : favoriteHousesList) {
                 Bundle args = new Bundle();
-                args.putInt("ID", car.getCarId());
-                args.putInt("YEAR", car.getYearOfProduction());
-                args.putString("MAKE", car.getManufacturingCompany());
-                args.putString("MODEL", car.getCarModel());
-                args.putString("DISTANCE", car.getDistanceTraveled());
-                args.putString("PRICE", car.getCarPrice());
-                args.putBoolean("HAD_ACCIDENTS", car.HadAccidents());
+                args.putInt("ID", house.getHouseId());
+                args.putString("CITY", house.getCity());
+                args.putString("ADDRESS", house.getPostalAddress());
+                args.putInt("AREA", house.getArea());
+                args.putInt("YEAR", house.getConstructionYear());
+                args.putInt("BEDROOM", house.getBedrooms());
+                args.putInt("PRICE", house.getPrice());
+                args.putBoolean("STATUS", house.isStatus());
+                args.putBoolean("FURNISHED", house.isFurnished());
+                args.putString("PHOTO", house.getPhotos());
+                args.putString("DATE", house.getAvailabilityDate());
+                args.putString("DESCRIPTION", house.getDescription());
 
                 MyFavoritesViewFragment myFavoritesViewFragment = new MyFavoritesViewFragment();
                 myFavoritesViewFragment.setArguments(args);
-                fragmentTransaction.add(R.id.favoriteCarsLayout, myFavoritesViewFragment);
+                fragmentTransaction.add(R.id.favoriteHousesLayout, myFavoritesViewFragment);
             }
             fragmentTransaction.commit();
         }

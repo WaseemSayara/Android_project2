@@ -33,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String ID_COL = "ID";
     private static final String USER_ID_COL = "USER_ID";
     private static final String CAR_ID_COL = "CAR_ID";
-
+    private static final String HOUSE_ID_COL = "HOUSE_ID";
     //Customers Table Column Names
     private static final String EMAIL_COL = "EMAIL_ADDRESS";
     private static final String HASHED_PASSWORD_COL = "PASSWORD_HASH";
@@ -100,11 +100,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     String SQL_CREATE_TABLE_RESERVATIONS = "CREATE TABLE " + TABLE_RESERVATIONS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL," +
-            CAR_ID_COL + " INTEGER NOT NULL," +
+            HOUSE_ID_COL + " INTEGER NOT NULL," +
             DATE_COL + " TEXT NOT NULL," + TIME_COL + " TEXT NOT NULL)";
 
     String SQL_CREATE_TABLE_FAVORITES = "CREATE TABLE " + TABLE_FAVORITES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL,"
-            + CAR_ID_COL + " INTEGER NOT NULL)";
+            + HOUSE_ID_COL + " INTEGER NOT NULL)";
 
 
     public DatabaseHelper(Context context) {
@@ -342,9 +342,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return null;
-
-
     }
+
+    public House getHouseById(Integer houseId) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(TABLE_HOUSES,new String[]{ID_COL, CITY_COL, POSTAL_ADDRESS_COL, AREA_COL, CONSTRUCTION_COL,
+                        BEDROOMS_COL, PRICE_COL,STATUS_COL,FURNISHED_COL,PHOTOS_COL,AVAILABILITY_DATE_COL,DESCRIPTION_COL},
+                ID_COL + "=" + houseId, null, null, null ,null);
+
+        if (cursor.moveToFirst()) {
+            House house = new House();
+            house.setHouseId(cursor.getInt(0));
+            house.setCity(cursor.getString(1));
+            house.setPostalAddress(cursor.getString(2));
+            house.setArea(cursor.getInt(3));
+            house.setConstructionYear(cursor.getInt(4));
+            house.setBedrooms(cursor.getInt(5));
+            house.setPrice(cursor.getInt(6));
+            house.setStatus(cursor.getInt(7) == 1);
+            house.setFurnished(cursor.getInt(8) == 1);
+            house.setPhotos(String.valueOf(cursor.getInt(9)));
+            house.setAvailabilityDate(String.valueOf(cursor.getInt(10)));
+            house.setDescription(cursor.getString(11));
+            return house;
+        }
+
+        return null;
+    }
+
 
     public List<Car> getAllCars() {
         List<Car> allCarsList = new ArrayList<>();
@@ -429,19 +454,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public List<Car> getFavoritesByCustomerId(Integer customerId) {
-        List<Car> favorites = new ArrayList<>();
+    public List<House> getFavoritesByCustomerId(Integer customerId) {
+        List<House> favorites = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(
-                TABLE_FAVORITES, new String[]{ID_COL, USER_ID_COL, CAR_ID_COL}, USER_ID_COL + "=" + customerId, null, null, null, null);
+                TABLE_FAVORITES, new String[]{ID_COL, USER_ID_COL, HOUSE_ID_COL}, USER_ID_COL + "=" + customerId, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                Integer carId = cursor.getInt(2);
-                Car car = this.getCarById(carId);
-                Log.d("FAV", car.getManufacturingCompany() + car.getCarModel());
-                if (car != null)
-                    favorites.add(car);
+                Integer houseId = cursor.getInt(2);
+                House house = this.getHouseById(houseId);
+                Log.d("FAV", house.getCity());
+                if (house != null)
+                    favorites.add(house);
 
                 cursor.moveToNext();
             }
@@ -460,9 +485,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.insert(TABLE_FAVORITES, null, contentValues) != -1;
     }
 
-    public void removeFromFavorites(Integer customerId, Integer carId){
+    public boolean addFavoriteHouseToCustomer(Integer customerId, Integer houseId) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        sqLiteDatabase.delete(TABLE_FAVORITES, USER_ID_COL + "=" + customerId + " AND " + CAR_ID_COL + "=" + carId , null);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USER_ID_COL, customerId);
+        contentValues.put(HOUSE_ID_COL, houseId);
+        return sqLiteDatabase.insert(TABLE_FAVORITES, null, contentValues) != -1;
+    }
+
+    public void removeFromFavorites(Integer customerId, Integer houseId){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_FAVORITES, USER_ID_COL + "=" + customerId + " AND " + HOUSE_ID_COL + "=" + houseId, null);
 
     }
 

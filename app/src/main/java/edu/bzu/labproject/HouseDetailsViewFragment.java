@@ -104,10 +104,10 @@ public class HouseDetailsViewFragment extends Fragment {
 
                 popcityTextView.setText(houseCity);
                 popaddressTextView.setText(houseAddress);
-                popareaTextView.setText(houseArea);
-                popyearTextView.setText(houseYear);
-                popbedroomTextView.setText(houseBedroom);
-                poppriceTextView.setText(housePrice);
+                popareaTextView.setText(houseArea.toString());
+                popyearTextView.setText(houseYear.toString());
+                popbedroomTextView.setText(houseBedroom.toString());
+                poppriceTextView.setText("$ " +housePrice.toString());
                 popstatusTextView.setText(houseStatus);
                 popfurnishedTextView.setText(houseFurnished);
                 popdateTextView.setText(houseDate);
@@ -155,16 +155,16 @@ public class HouseDetailsViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Integer customerId = loginSessionManager.getCurrentlyLoggedInUser().getId();
-                Integer carId = getArguments().getInt("ID");
-                databaseHelper.addFavoriteCarToCustomer(customerId, carId);
+                Integer houseId = getArguments().getInt("ID");
+                databaseHelper.addFavoriteHouseToCustomer(customerId, houseId);
                 Snackbar.make(v, "Added to Favorites", Snackbar.LENGTH_LONG).show();
 
                 //This is to reload the Cars Menu Fragment after successfully adding a car to favorites by customer
                 final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment carsMenuFragment = fragmentManager.findFragmentByTag("Cars_Menu");
-                fragmentTransaction.detach(carsMenuFragment);
-                fragmentTransaction.attach(carsMenuFragment);
+                Fragment houseMenuFragment = fragmentManager.findFragmentByTag("House_Menu");
+                fragmentTransaction.detach(houseMenuFragment);
+                fragmentTransaction.attach(houseMenuFragment);
                 fragmentTransaction.commit();
             }
         });

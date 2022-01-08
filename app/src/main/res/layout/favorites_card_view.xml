@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        app:cardCornerRadius="20dp" >
+        app:cardCornerRadius="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -18,108 +18,109 @@
             android:padding="8dp">
 
             <ImageView
-                android:id="@+id/goldStarFavs"
+                android:id="@+id/carImage"
                 android:layout_width="120dp"
                 android:layout_height="90dp"
                 android:padding="4dp"
-                android:src="@drawable/goldstarfavorites"/>
+                android:src="@drawable/carlogo2" />
 
             <TextView
-                android:id="@+id/favsMakeAndModel"
-                android:layout_width="wrap_content"
+                android:id="@+id/favHouseTitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/goldStarFavs"
-                android:text="CHEVROLET TORNADO"
+                android:layout_toRightOf="@id/carImage"
+                android:text="House"
+                android:textAlignment="center"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:textColor="#000000"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/favsYearLabel"
+                android:id="@+id/favcityLabel"
                 android:layout_width="105dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/favsMakeAndModel"
+                android:layout_below="@id/favHouseTitle"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@id/goldStarFavs"
+                android:layout_toRightOf="@id/carImage"
                 android:background="@android:color/holo_red_dark"
-                android:text="Year"
+                android:text="City"
                 android:textAlignment="center"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/favsYearTextView"
-                android:layout_width="wrap_content"
+                android:id="@+id/favcityTextView"
+                android:layout_width="156dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/favsMakeAndModel"
+                android:layout_below="@id/favHouseTitle"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@id/favsYearLabel"
+                android:layout_toRightOf="@id/favcityLabel"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:text="2004"
+                android:text="Ramallah"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/favsDistanceLabel"
+                android:id="@+id/favpostalAddressLabel"
                 android:layout_width="105dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/favsYearLabel"
+                android:layout_height="50dp"
+                android:layout_below="@id/favcityLabel"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@id/goldStarFavs"
+                android:layout_toRightOf="@id/carImage"
                 android:background="@android:color/holo_red_dark"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:text="Distance"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
-                android:textStyle="bold"
+                android:text="Address"
                 android:textAlignment="center"
-                android:textColor="@android:color/white"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/favsDistanceTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/favsYearLabel"
+                android:id="@+id/favpostalAddressTextView"
+                android:layout_width="156dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/favcityLabel"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@id/favsDistanceLabel"
+                android:layout_toRightOf="@id/favpostalAddressLabel"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:text="203232 km"
+                android:text="Palestine,Ramallah"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/favAccidentsLabel"
+                android:id="@+id/favsurfaceAreaLabel"
                 android:layout_width="105dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/favsDistanceLabel"
+                android:layout_height="35dp"
+                android:layout_below="@id/favpostalAddressLabel"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@id/goldStarFavs"
+                android:layout_toRightOf="@id/carImage"
                 android:background="@android:color/holo_red_dark"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:text="Accidents ?"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:text="Surface Area"
                 android:textAlignment="center"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"/>
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/favAccidentsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/favsDistanceLabel"
+                android:id="@+id/favsurfaceAreaTextView"
+                android:layout_width="156dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/favpostalAddressLabel"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@id/favAccidentsLabel"
+                android:layout_toRightOf="@id/favsurfaceAreaLabel"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="Yes"
@@ -127,30 +128,219 @@
                 android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/favPriceTextView"
+                android:id="@+id/favconstructionYearLabel"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favsurfaceAreaLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Year"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/favconstructionYearTextView"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favsurfaceAreaTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/favconstructionYearLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="2005"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/favbedroomsLabel"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favconstructionYearLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="#Bedroom"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/favbedroomsTextView"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favconstructionYearTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/favbedroomsLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="2"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+
+            <TextView
+                android:id="@+id/favstatusLabel"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favbedroomsLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Status"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/favstatusTextView"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favbedroomsTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/favstatusLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Rented"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/favfurnishedLabel"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favstatusLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Furnished?"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/favfurnishedTextView"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favstatusTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/favfurnishedLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="yes"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/favavailabilityDateLabel"
+                android:layout_width="105dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/favfurnishedLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Availability Date"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/favavailabilityDateTextView"
+                android:layout_width="156dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/favfurnishedTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/favavailabilityDateLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="12/3/3432"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/favdescriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_below="@id/favavailabilityDateTextView"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="10dp"
+                android:background="#EDC8C8"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="massa massa ultricies mi quis hendrerit dolor magna eget est lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+
+            <TextView
+                android:id="@+id/favpriceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/favsDistanceLabel"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="55dp"
-                android:layout_toRightOf="@id/goldStarFavs"
+                android:layout_below="@id/favpostalAddressLabel"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/favsurfaceAreaLabel"
                 android:text="$ 20,000.00"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="19sp"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/favsReserveButton"
-                android:layout_width="match_parent"
+                android:id="@+id/favreserveButton"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/favPriceTextView"
+                android:layout_below="@id/favpriceTextView"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="5dp"
-                android:layout_toRightOf="@id/goldStarFavs"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="5dp"
+                android:layout_toLeftOf="@id/favconstructionYearLabel"
                 android:drawableLeft="@drawable/ic_reserve_add_check_green_24dp"
                 android:drawablePadding="5dp"
-                android:text="Reserve Now"
+                android:text="Reserve"
+                android:textSize="13sp"
                 android:textStyle="bold" />
 
-
+            <Button
+                android:id="@+id/favRemoveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favreserveButton"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/favconstructionYearLabel"
+                android:drawableLeft="@drawable/ic_baseline_close_24"
+                android:drawablePadding="1dp"
+                android:text="Remove Favorites"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 

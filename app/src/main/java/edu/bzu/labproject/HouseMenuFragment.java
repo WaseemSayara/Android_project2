@@ -169,6 +169,7 @@ public class HouseMenuFragment extends Fragment {
 //            }
 //        });
         int i =0;
+        if (houseList != null)
         for(House house: houseList){
             Bundle args = new Bundle();
             args.putInt("ID", house.getHouseId());
