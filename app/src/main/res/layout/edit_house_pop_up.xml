@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/carImage"
+                android:layout_width="120dp"
+                android:layout_height="90dp"
+                android:padding="4dp"
+                android:src="@drawable/carlogo2" />
+
+            <TextView
+                android:id="@+id/popHouseTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:text="House"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/popbedroomsLabel"
+                android:layout_width="95dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/popHouseTitle"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="#Bedroom"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/popbedroomsTextView"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/popHouseTitle"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/popbedroomsLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+
+            <TextView
+                android:id="@+id/popstatusLabel"
+                android:layout_width="95dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/popbedroomsLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="Status"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/popStatusspinner"
+                android:layout_width="match_parent"
+
+                android:layout_height="40dp"
+                android:layout_below="@id/popbedroomsTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/popstatusLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" />
+
+            <TextView
+                android:id="@+id/popfurnishedLabel"
+                android:layout_width="95dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/popstatusLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="Furnished?"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/popFurnishedspinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/popStatusspinner"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/popstatusLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp" />
+
+            <TextView
+                android:id="@+id/popavailabilityDateLabel"
+                android:layout_width="95dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/popfurnishedLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="Availability Date"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/popavailabilityDateTextView"
+                android:layout_width="156dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/popFurnishedspinner"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/popavailabilityDateLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <EditText
+                android:id="@+id/popdescriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_below="@id/popavailabilityDateTextView"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="15dp"
+                android:background="#EDC8C8"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+
+            <EditText
+                android:id="@+id/poppriceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/carImage"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/popavailabilityDateLabel"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

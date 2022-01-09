@@ -50,30 +50,34 @@ public class MyReservationsFragment extends Fragment {
         List<Reservation> reservationsList = databaseHelper.getReservationsByCustomerId(loggedInCustomerId);
         if(reservationsList != null){
             for(Reservation reservation: reservationsList){
-                House house = databaseHelper.getHouseById(reservation.getHouseId());
-                Bundle args = new Bundle();
-                args.putInt("ID", house.getHouseId());
-                args.putString("CITY", house.getCity());
-                args.putString("ADDRESS", house.getPostalAddress());
-                args.putInt("AREA", house.getArea());
-                args.putInt("YEAR", house.getConstructionYear());
-                args.putInt("BEDROOM", house.getBedrooms());
-                args.putInt("PRICE", house.getPrice());
-                args.putBoolean("STATUS", house.isStatus());
-                args.putBoolean("FURNISHED", house.isFurnished());
-                args.putString("PHOTO", house.getPhotos());
-                args.putString("DATE", house.getAvailabilityDate());
-                args.putString("DESCRIPTION", house.getDescription());
+                try {
+                    House house = databaseHelper.getHouseById(reservation.getHouseId());
+                    Bundle args = new Bundle();
+                    args.putInt("ID", house.getHouseId());
+                    args.putString("CITY", house.getCity());
+                    args.putString("ADDRESS", house.getPostalAddress());
+                    args.putInt("AREA", house.getArea());
+                    args.putInt("YEAR", house.getConstructionYear());
+                    args.putInt("BEDROOM", house.getBedrooms());
+                    args.putInt("PRICE", house.getPrice());
+                    args.putBoolean("STATUS", house.isStatus());
+                    args.putBoolean("FURNISHED", house.isFurnished());
+                    args.putString("PHOTO", house.getPhotos());
+                    args.putString("DATE", house.getAvailabilityDate());
+                    args.putString("DESCRIPTION", house.getDescription());
 
-                //Put Date and Time of Reservation in Arguments Bundle
-                args.putString("RES_DATE", reservation.getDate());
-                args.putString("RES_TIME", reservation.getTime());
-                args.putString("PERIOD", reservation.getPeriod());
+                    //Put Date and Time of Reservation in Arguments Bundle
+                    args.putString("RES_DATE", reservation.getDate());
+                    args.putString("RES_TIME", reservation.getTime());
+                    args.putString("PERIOD", reservation.getPeriod());
 
 
-                ReservationViewFragment reservationViewFragment = new ReservationViewFragment();
-                reservationViewFragment.setArguments(args);
-                fragmentTransaction.add(R.id.reservationsLinearLayout, reservationViewFragment);
+                    ReservationViewFragment reservationViewFragment = new ReservationViewFragment();
+                    reservationViewFragment.setArguments(args);
+                    fragmentTransaction.add(R.id.reservationsLinearLayout, reservationViewFragment);
+                }catch (Exception e){
+
+                }
             }
             fragmentTransaction.commit();
         }

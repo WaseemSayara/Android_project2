@@ -146,11 +146,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(FAMILY_SIZE_COL, user.getFamilySize());
         contentValues.put(OCCUPATION_COL, user.getOccupation());
         long result;
-        if ((result = sqLiteDatabase.insert(TABLE_USERS, null, contentValues)) == -1)
+        if ((result = sqLiteDatabase.insert(TABLE_USERS, null, contentValues)) == -1) {
+            sqLiteDatabase.close();
             return false;
+        }
 
-        else
+        else {
+            sqLiteDatabase.close();
             return true;
+        }
 
     }
     public boolean addAgencyUser(AgencyUser agencyUser) {
@@ -164,11 +168,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(PHONE_NUMBER_COL, agencyUser.getPhoneNumber());
 
         long result;
-        if ((result = sqLiteDatabase.insert(TABLE_AGENCY_USERS, null, contentValues)) == -1)
+        if ((result = sqLiteDatabase.insert(TABLE_AGENCY_USERS, null, contentValues)) == -1) {
+            sqLiteDatabase.close();
             return false;
+        }
 
-        else
+
+        else {
+            sqLiteDatabase.close();
             return true;
+        }
 
     }
 
@@ -194,10 +203,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             user.setSalary(cursor.getString(10));
             user.setFamilySize(cursor.getString(11));
             user.setOccupation(cursor.getString(12));
-
+            cursor.close();
+            sqLiteDatabase.close();
             return user;
         }
 
+        cursor.close();
+        sqLiteDatabase.close();
         return null;
     }
 
@@ -264,6 +276,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
+    public boolean updateHouse(House house) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BEDROOMS_COL, house.getBedrooms());
+        contentValues.put(PRICE_COL, house.getPrice());
+        contentValues.put(STATUS_COL, house.isStatus());
+        contentValues.put(FURNISHED_COL, house.isFurnished());
+        contentValues.put(DESCRIPTION_COL, house.getDescription());
+        contentValues.put(AVAILABILITY_DATE_COL, house.getAvailabilityDate());
+
+        int rowsAffected = sqLiteDatabase.update(TABLE_HOUSES, contentValues, ID_COL + " = ?", new String[]{house.getHouseId().toString()});
+        if (rowsAffected == 0)
+            return false;
+        else
+            return true;
+    }
+
     public boolean updateAgencyInformation(AgencyUser updatedUser, String emailAddress) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -280,6 +309,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteCustomerById(Integer id) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         sqLiteDatabase.delete(TABLE_USERS, ID_COL + "=" + id, null);
+    }
+
+    public void deleteHouseById(Integer id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_HOUSES, ID_COL + "=" + id, null);
     }
 
 
@@ -323,30 +357,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(AGENCY_NAME_COL, house.getAgencyName());
 
         long result;
-        if ((result = sqLiteDatabase.insert(TABLE_HOUSES, null, contentValues)) != -1)
+        if ((result = sqLiteDatabase.insert(TABLE_HOUSES, null, contentValues)) != -1) {
+            sqLiteDatabase.close();
             return true;
+        }
         else
             return false;
-    }
-
-    public Car getCarById(Integer carId) {
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(TABLE_CARS,new String[]{ID_COL, YEAR_COL, MAKE_COL, MODEL_COL, DISTANCE_COL, PRICE_COL, ACCIDENTS_COL},
-                ID_COL + "=" + carId, null, null, null ,null);
-
-        if (cursor.moveToFirst()) {
-            Car car = new Car();
-            car.setCarId(cursor.getInt(0));
-            car.setYearOfProduction(cursor.getInt(1));
-            car.setManufacturingCompany(cursor.getString(2));
-            car.setCarModel(cursor.getString(3));
-            car.setDistanceTraveled(cursor.getString(4));
-            car.setCarPrice(String.valueOf(cursor.getInt(5)));
-            car.setHadAccidents(cursor.getInt(6) == 1);
-            return car;
-        }
-
-        return null;
     }
 
     public House getHouseById(Integer houseId) {
@@ -457,6 +473,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    public List<House> getAllHousesByAgencyId(int agencyId) {
+        List<House> allHousesList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = sqLiteDatabase.query(
+                    TABLE_HOUSES, new String[]{ID_COL, CITY_COL, POSTAL_ADDRESS_COL, AREA_COL, CONSTRUCTION_COL,
+                            BEDROOMS_COL, PRICE_COL, STATUS_COL, FURNISHED_COL, PHOTOS_COL, AVAILABILITY_DATE_COL, DESCRIPTION_COL, AGENCY_USER_ID_COL},
+                    AGENCY_USER_ID_COL + "=" + agencyId, null, null, null, null, null);
+
+            if (cursor.moveToFirst()) {
+                while (!cursor.isAfterLast()) {
+                    House house = new House();
+                    house.setHouseId(cursor.getInt(0));
+                    house.setCity(cursor.getString(1));
+                    house.setPostalAddress(cursor.getString(2));
+                    house.setArea(cursor.getInt(3));
+                    house.setConstructionYear(cursor.getInt(4));
+                    house.setBedrooms(cursor.getInt(5));
+                    house.setPrice(cursor.getInt(6));
+                    house.setStatus(cursor.getInt(7) == 1);
+                    house.setFurnished(cursor.getInt(8) == 1);
+                    house.setPhotos(String.valueOf(cursor.getInt(9)));
+                    house.setAvailabilityDate(cursor.getString(10));
+                    house.setDescription(cursor.getString(11));
+                    house.setAgencyId(cursor.getInt(12));
+
+                    allHousesList.add(house);
+                    cursor.moveToNext();
+                }
+                return allHousesList;
+            }
+            return null;
+        }
+        finally {
+            cursor.close();
+        }
+    }
+
     public List<Car> getCustomerAvailableCars(Integer customerId) {
         List<Car> allCarsList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -528,17 +583,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-//    public boolean reserveCarByCustomer(Reservation reservation) {
-//
-//        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(USER_ID_COL, reservation.getCustomerId());
-//        contentValues.put(CAR_ID_COL, reservation.getCarId());
-//        contentValues.put(DATE_COL, reservation.getDate());
-//        contentValues.put(TIME_COL, reservation.getTime());
-//        return sqLiteDatabase.insert(TABLE_RESERVATIONS, null, contentValues) != -1;
-//    }
-
     public boolean reserveHouseByCustomer(Reservation reservation) {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -568,37 +612,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.update(TABLE_HOUSES, contentValues2,ID_COL + "= ?", new String[]{reservation.getHouseId().toString()});
 
         return sqLiteDatabase.insert(TABLE_RESERVATIONS, null, contentValues) != -1;
-    }
-
-
-    public List<Reservation> getAllReservations(){
-        List<Reservation> allReservations = new ArrayList<>();
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(
-                TABLE_RESERVATIONS, new String[]{USER_ID_COL, CAR_ID_COL, DATE_COL, TIME_COL},
-                null, null, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                Integer customerId = cursor.getInt(0);
-                Integer carId = cursor.getInt(1);
-                String date = cursor.getString(2);
-                String time = cursor.getString(3);
-
-                Reservation reservation = new Reservation();
-                reservation.setCustomerId(customerId);
-                reservation.setHouseId(carId);
-                reservation.setDate(date);
-                reservation.setTime(time);
-                allReservations.add(reservation);
-
-                cursor.moveToNext();
-            }
-
-            return allReservations;
-        }
-
-        return null;
     }
 
     public List<Reservation> getReservationsByCustomerId(Integer customerId){

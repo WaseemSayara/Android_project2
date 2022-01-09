@@ -127,13 +127,13 @@ public class HomeAgencyActivity extends AppCompatActivity
             fragmentTransaction.commit();
 
 
-        } else if (id == R.id.nav_myfavorites) {
+        } else if (id == R.id.nav_edit_property) {
+            System.out.println("lol");
             final FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            MyFavoritesFragment myFavoritesFragment = new MyFavoritesFragment();
-            fragmentTransaction.replace(R.id.homeContent, myFavoritesFragment, "My_Favorites");
+            EditPropertyFragment editPropertyFragment = new EditPropertyFragment();
+            fragmentTransaction.replace(R.id.homeContent, editPropertyFragment, "Edit_Property");
             fragmentTransaction.commit();
-
 
         } else if (id == R.id.nav_contactus) {
             final FragmentManager fragmentManager = getSupportFragmentManager();

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/carImage"
+                android:layout_width="120dp"
+                android:layout_height="90dp"
+                android:padding="4dp"
+                android:src="@drawable/carlogo2" />
+
+            <TextView
+                android:id="@+id/propeditHouseTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:text="House"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/propeditcityLabel"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditHouseTitle"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:text="City"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/propeditcityTextView"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditHouseTitle"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/propeditcityLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Ramallah"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/propeditpostalAddressLabel"
+                android:layout_width="105dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/propeditcityLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Address"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/propeditpostalAddressTextView"
+                android:layout_width="156dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/propeditcityLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/propeditpostalAddressLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Palestine,Ramallah"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/propeditsurfaceAreaLabel"
+                android:layout_width="105dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/propeditpostalAddressLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Surface Area"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/propeditsurfaceAreaTextView"
+                android:layout_width="156dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/propeditpostalAddressLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/propeditsurfaceAreaLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Yes"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/propeditconstructionYearLabel"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditsurfaceAreaLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Year"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/propeditconstructionYearTextView"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditsurfaceAreaTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/propeditconstructionYearLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="2005"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/propeditbedroomsLabel"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditconstructionYearLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="#Bedroom"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/propeditbedroomsTextView"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditconstructionYearTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/propeditbedroomsLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="2"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+
+            <TextView
+                android:id="@+id/propeditstatusLabel"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditbedroomsLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Status"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/propeditstatusTextView"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditbedroomsTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/propeditstatusLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Rented"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/propeditfurnishedLabel"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditstatusLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Furnished?"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/propeditfurnishedTextView"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditstatusTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/propeditfurnishedLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="yes"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/propeditavailabilityDateLabel"
+                android:layout_width="105dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/propeditfurnishedLabel"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/carImage"
+                android:background="@android:color/holo_red_dark"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="Availability Date"
+                android:textAlignment="center"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/propeditavailabilityDateTextView"
+                android:layout_width="156dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/propeditfurnishedTextView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/propeditavailabilityDateLabel"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="12/3/3432"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/propeditdescriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_below="@id/propeditavailabilityDateTextView"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="10dp"
+                android:background="#EDC8C8"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="massa massa ultricies mi quis hendrerit dolor magna eget est lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@android:color/black" />
+
+
+            <TextView
+                android:id="@+id/propeditpriceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditconstructionYearLabel"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/propeditsurfaceAreaLabel"
+                android:text="$ 20,000.00"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/propeditEditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditdescriptionTextView"
+                android:layout_marginStart="80dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:drawableLeft="@drawable/ic_baseline_edit_24"
+                android:drawablePadding="5dp"
+                android:text="Edit"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/propeditRemoveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/propeditdescriptionTextView"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/propeditEditButton"
+                android:drawableLeft="@drawable/ic_baseline_close_24"
+                android:drawablePadding="1dp"
+                android:text="Remove"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
