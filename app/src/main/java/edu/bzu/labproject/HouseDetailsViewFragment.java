@@ -3,6 +3,7 @@ package edu.bzu.labproject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -60,6 +61,9 @@ public class HouseDetailsViewFragment extends Fragment {
         final Button reserveButton = (Button) fragView.findViewById(R.id.reserveButton);
         final Button addToFavoritesButton = (Button) fragView.findViewById(R.id.addToFavButton);
 
+        System.out.println(loginSessionManager.getUser_Type());
+        System.out.println(loginSessionManager.getUser_Guest());
+
         if (!loginSessionManager.getUser_Type()){
             reserveButton.setVisibility(View.INVISIBLE);
             addToFavoritesButton.setVisibility(View.INVISIBLE);
@@ -93,6 +97,11 @@ public class HouseDetailsViewFragment extends Fragment {
         reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (loginSessionManager.getUser_Guest()){
+                    Intent toHomePageIntent = new Intent(getActivity(), LoginActivity.class);
+                    getActivity().startActivity(toHomePageIntent);
+                    getActivity().finish();
+                }
                 View reservePopupView = getLayoutInflater().inflate(R.layout.reservation_house_pop_up, null);
                 final TextView popcityTextView = (TextView) reservePopupView.findViewById(R.id.popcityTextView);
                 final TextView popaddressTextView = (TextView) reservePopupView.findViewById(R.id.poppostalAddressTextView);
@@ -169,13 +178,20 @@ public class HouseDetailsViewFragment extends Fragment {
                         })
                         .setNegativeButton("Cancel", null);
 
-                alertDialog.show();
+                if (!loginSessionManager.getUser_Guest()){
+                    alertDialog.show();
+                }
             }
         });
 
         addToFavoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (loginSessionManager.getUser_Guest()){
+                    Intent toHomePageIntent = new Intent(getActivity(), LoginActivity.class);
+                    getActivity().startActivity(toHomePageIntent);
+                    getActivity().finish();
+                }
                 Integer customerId = loginSessionManager.getCurrentlyLoggedInUser().getId();
                 Integer houseId = getArguments().getInt("ID");
                 databaseHelper.addFavoriteHouseToCustomer(customerId, houseId);

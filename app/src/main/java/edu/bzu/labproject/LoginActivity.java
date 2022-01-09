@@ -44,11 +44,27 @@ public class LoginActivity extends Activity {
         openRegistrationForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent toRegistrationActivityIntent = new Intent(LoginActivity.this, RegisterType.class);
                 LoginActivity.this.startActivity(toRegistrationActivityIntent);
 
             }
         });
+
+        Button guestButton = (Button) findViewById(R.id.guestButton);
+        guestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext());
+                loginSession.clearLoginSessionOnLogout();
+                loginSession.setUser_Guest(true);
+                loginSession.setUser_Type(true);
+                Intent toHomePageIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                LoginActivity.this.startActivity(toHomePageIntent);
+                LoginActivity.this.finish();
+            }});
+
 
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {

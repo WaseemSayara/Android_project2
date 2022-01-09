@@ -110,9 +110,19 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        LoginSessionManager userLoginSession = new LoginSessionManager(getApplicationContext());
 
+        if (userLoginSession.getUser_Guest()){
+            Intent toHomePageIntent = new Intent(HomeActivity.this, LoginActivity.class);
+            HomeActivity.this.startActivity(toHomePageIntent);
+            HomeActivity.this.finish();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }
 
          if (id == R.id.nav_home) {
+
             final FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
              HouseMenuFragment houseMenuFragment = new HouseMenuFragment();

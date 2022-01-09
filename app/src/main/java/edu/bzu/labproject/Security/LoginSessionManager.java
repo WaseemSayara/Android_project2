@@ -23,6 +23,7 @@ public class LoginSessionManager {
     private static final String SHAREDPREF_KEY_OCCUPATION = "Occupation";
     private static final String SHAREDPREF_KEY_AGENCYNAME = "Agencyname";
     private static final String SHAREDPREF_KEY_TYPE = "Type";
+    private static final String SHAREDPREF_KEY_GUEST = "Guest";
 
     private Context context;
     private SharedPreferences sharedPreferences;
@@ -116,9 +117,18 @@ public class LoginSessionManager {
 
     public void setUser_Type(boolean type){
         this.editor.putBoolean(SHAREDPREF_KEY_TYPE, type);
+        this.editor.commit();
     }
     public boolean getUser_Type(){
         return this.sharedPreferences.getBoolean(SHAREDPREF_KEY_TYPE,false);
+    }
+
+    public void setUser_Guest(boolean Guest){
+        this.editor.putBoolean(SHAREDPREF_KEY_GUEST, Guest);
+        this.editor.commit();
+    }
+    public boolean getUser_Guest(){
+        return this.sharedPreferences.getBoolean(SHAREDPREF_KEY_GUEST,false);
     }
 
 
