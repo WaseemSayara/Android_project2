@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import edu.bzu.labproject.Models.AgencyUser;
@@ -31,6 +33,7 @@ public class AddPropertiesFragment extends Fragment {
     private String city, address, description ,photo;
     private Integer  area, year, bedroom, price;
     private String date;
+    private Boolean status, furnished;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -95,6 +98,8 @@ public class AddPropertiesFragment extends Fragment {
         final EditText priceInputField = (EditText) getActivity().findViewById(R.id.Post_Price_editText);
         final EditText dateInputField = (EditText) getActivity().findViewById(R.id.Post_editTextDate);
         final EditText descriptionInputField = (EditText) getActivity().findViewById(R.id.Post_Description_editText);
+        RadioGroup radioGroupStatus = (RadioGroup) getActivity().findViewById(R.id.Post_Status_radioGroup);
+        RadioGroup radioGroupFurnished = (RadioGroup) getActivity().findViewById(R.id.Post_furnished_radioGroup);
 
 
 //        takePhoto.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +146,8 @@ public class AddPropertiesFragment extends Fragment {
                         house.setPhotos(photo);
                         house.setAgencyId(loggedInUser.getId());
                         house.setAgencyName(loggedInUser.getAgencyName());
+                        house.setFurnished(furnished);
+                        house.setStatus(status);
                         System.out.println(house.toString());
 
 
@@ -172,6 +179,26 @@ public class AddPropertiesFragment extends Fragment {
 
                 }catch (Exception e){
 
+                }
+
+                int selectedId = radioGroupStatus.getCheckedRadioButtonId();
+                RadioButton selected = radioGroupStatus.findViewById(selectedId);
+
+                if (selected.getText().toString().compareTo("Rented") == 0){
+                    status = true;
+                }
+                else {
+                    status = false;
+                }
+
+                int selectedId2 = radioGroupFurnished.getCheckedRadioButtonId();
+                RadioButton selected2 = radioGroupFurnished.findViewById(selectedId2);
+
+                if (selected2.getText().toString().compareTo("Furnished") == 0){
+                    furnished = true;
+                }
+                else {
+                    furnished = false;
                 }
 
                 date = dateInputField.getText().toString().trim();
