@@ -9,16 +9,16 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="125dp"
-        android:layout_height="120dp"
+        android:layout_width="208dp"
+        android:layout_height="197dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="143dp"
-        android:layout_marginLeft="143dp"
-        android:layout_marginTop="58dp"
-        android:background="@drawable/carlogo"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/i_house_logo"
         app:srcCompat="@android:color/transparent" />
 
     <EditText
@@ -157,7 +157,7 @@
         android:layout_height="45dp"
         android:layout_alignStart="@+id/imageView5"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-1dp"
+        android:layout_marginStart="40dp"
         android:layout_marginBottom="26dp"
         android:text="Register"
         android:textSize="18sp" />

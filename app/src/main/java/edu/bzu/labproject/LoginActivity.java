@@ -90,6 +90,8 @@ public class LoginActivity extends Activity {
                         LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext());
                         loginSession.saveUserLoginSession(user);
                         loginSession.setUser_Type(true);
+                        loginSession.setUser_Guest(false);
+
 
                         Intent toHomePageIntent = new Intent(LoginActivity.this, HomeActivity.class);
                         LoginActivity.this.startActivity(toHomePageIntent);
@@ -119,6 +121,7 @@ public class LoginActivity extends Activity {
                             LoginSessionManager loginSession = new LoginSessionManager(getApplicationContext());
                             loginSession.saveAgencyUserLoginSession(agencyUser);
                             loginSession.setUser_Type(false);
+                            loginSession.setUser_Guest(false);
 
                             Intent toHomePageIntent = new Intent(LoginActivity.this, HomeAgencyActivity.class);
                             LoginActivity.this.startActivity(toHomePageIntent);

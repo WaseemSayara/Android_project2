@@ -412,7 +412,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return " ";
     }
 
+    public List<String> getAllCities() {
+        List<String> allCitiesList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(
+                TABLE_HOUSES, new String[]{CITY_COL},
+                null,null, CITY_COL, null, null, null);
 
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                allCitiesList.add(cursor.getString(0));
+            }
+            return allCitiesList;
+        }
+        return null;
+    }
 
 
     public List<Car> getAllCars() {

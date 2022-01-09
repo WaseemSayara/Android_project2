@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -58,10 +59,20 @@ public class HouseMenuFragment extends Fragment {
         houseList = databaseHelper.getAllHouses();
 
 
+        // /////////////////////////////////////////////////
+
+        List<String> searchList = new ArrayList<String>();
+        List<String> cities = new ArrayList<String>();
+        cities=databaseHelper.getAllCities();
+
+
+
 
         /**
          * Read and Apply Filters
          */
+
+
 //        final EditText priceFilterValue = (EditText) getActivity().findViewById(R.id.priceFilterVal);
 //        final EditText yearFilterValue = (EditText) getActivity().findViewById(R.id.yearFilterValue);
 //        final Button applyUserFiltersBtn = (Button) getActivity().findViewById(R.id.applyFilterBtn);

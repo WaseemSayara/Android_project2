@@ -39,43 +39,51 @@ public class HomeActivity extends AppCompatActivity
 
         LoginSessionManager userLoginSession = new LoginSessionManager(getApplicationContext());
         User loggedInUser = userLoginSession.getCurrentlyLoggedInUser();
-        Toast.makeText(getApplicationContext(), "Welcome Back, " + loggedInUser.getFirstName(), Toast.LENGTH_SHORT).show();
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (userLoginSession.getUser_Guest()) {
+            Toast.makeText(getApplicationContext(), "Welcome Guest", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Welcome Back, " + loggedInUser.getFirstName(), Toast.LENGTH_SHORT).show();
+        }
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View navHeaderView = navigationView.getHeaderView(0);
-        ImageView navHeaderImage = (ImageView) navHeaderView.findViewById(R.id.headerImageView);
-        TextView navHeaderEmail = (TextView) navHeaderView.findViewById(R.id.headerEmailAddress);
-        TextView navHeaderName = (TextView) navHeaderView.findViewById(R.id.headerCustomerFullName);
+        ImageView navHeaderImage = navHeaderView.findViewById(R.id.headerImageView);
+        TextView navHeaderEmail = navHeaderView.findViewById(R.id.headerEmailAddress);
+        TextView navHeaderName = navHeaderView.findViewById(R.id.headerCustomerFullName);
         try {
             if (loggedInUser.getGender().equals("Male"))
                 navHeaderImage.setImageResource(R.drawable.maleuser);
             else
                 navHeaderImage.setImageResource(R.drawable.femaleuser);
-        }catch (Exception e){
+        } catch (Exception e) {
 
             navHeaderImage.setImageResource(R.drawable.maleuser);
 
         }
 
-        navHeaderEmail.setText(loggedInUser.getEmailAddress());
-        navHeaderName.setText(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
+        if (userLoginSession.getUser_Guest()) {
+            navHeaderEmail.setText("");
+            navHeaderName.setText("Guest");
+        } else {
+            navHeaderEmail.setText(loggedInUser.getEmailAddress());
+            navHeaderName.setText(loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
+        }
 
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -112,29 +120,29 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
         LoginSessionManager userLoginSession = new LoginSessionManager(getApplicationContext());
 
-        if (userLoginSession.getUser_Guest()){
+        if (userLoginSession.getUser_Guest()) {
             Intent toHomePageIntent = new Intent(HomeActivity.this, LoginActivity.class);
             HomeActivity.this.startActivity(toHomePageIntent);
             HomeActivity.this.finish();
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             return true;
         }
 
-         if (id == R.id.nav_home) {
+        if (id == R.id.nav_home) {
 
             final FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-             HouseMenuFragment houseMenuFragment = new HouseMenuFragment();
+            HouseMenuFragment houseMenuFragment = new HouseMenuFragment();
             fragmentTransaction.replace(R.id.homeContent, houseMenuFragment, "House_Menu");
             fragmentTransaction.commit();
 
-         } else if (id == R.id.nav_search) {
-             final FragmentManager fragmentManager = getSupportFragmentManager();
-             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-             SearchFragment searchFragment = new SearchFragment();
-             fragmentTransaction.replace(R.id.homeContent, searchFragment, "Search_Fragment");
-             fragmentTransaction.commit();
+        } else if (id == R.id.nav_search) {
+            final FragmentManager fragmentManager = getSupportFragmentManager();
+            final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            SearchFragment searchFragment = new SearchFragment();
+            fragmentTransaction.replace(R.id.homeContent, searchFragment, "Search_Fragment");
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_reservations) {
             final FragmentManager fragmentManager = getSupportFragmentManager();
@@ -185,7 +193,7 @@ public class HomeActivity extends AppCompatActivity
             HomeActivity.this.startActivity(redirectToLoginPage);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
