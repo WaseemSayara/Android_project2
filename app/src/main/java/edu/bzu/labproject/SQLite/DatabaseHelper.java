@@ -368,7 +368,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public House getHouseById(Integer houseId) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(TABLE_HOUSES,new String[]{ID_COL, CITY_COL, POSTAL_ADDRESS_COL, AREA_COL, CONSTRUCTION_COL,
-                        BEDROOMS_COL, PRICE_COL,STATUS_COL,FURNISHED_COL,PHOTOS_COL,AVAILABILITY_DATE_COL,DESCRIPTION_COL},
+                        BEDROOMS_COL, PRICE_COL,STATUS_COL,FURNISHED_COL,PHOTOS_COL,AVAILABILITY_DATE_COL,DESCRIPTION_COL, AGENCY_USER_ID_COL},
                 ID_COL + "=" + houseId, null, null, null ,null);
 
         if (cursor.moveToFirst()) {
@@ -385,6 +385,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             house.setPhotos(String.valueOf(cursor.getInt(9)));
             house.setAvailabilityDate(String.valueOf(cursor.getInt(10)));
             house.setDescription(cursor.getString(11));
+            house.setAgencyId(cursor.getInt(12));
             return house;
         }
 
@@ -415,13 +416,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<String> getAllCities() {
         List<String> allCitiesList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(
-                TABLE_HOUSES, new String[]{CITY_COL},
-                null,null, CITY_COL, null, null, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT DISTINCT CITY FROM HOUSES",null);
 
+        allCitiesList.add("all");
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
                 allCitiesList.add(cursor.getString(0));
+                cursor.moveToNext();
             }
             return allCitiesList;
         }
@@ -551,6 +552,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return null;
     }
+
+
+    public List<House> getSearchedHouses(String myQuery) {
+        List<House> allHousesList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(
+                TABLE_HOUSES, new String[]{ID_COL, CITY_COL, POSTAL_ADDRESS_COL, AREA_COL, CONSTRUCTION_COL,
+                        BEDROOMS_COL, PRICE_COL,STATUS_COL,FURNISHED_COL,PHOTOS_COL,AVAILABILITY_DATE_COL,DESCRIPTION_COL,AGENCY_USER_ID_COL},
+                myQuery,null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                House house = new House();
+                house.setHouseId(cursor.getInt(0));
+                house.setCity(cursor.getString(1));
+                house.setPostalAddress(cursor.getString(2));
+                house.setArea(cursor.getInt(3));
+                house.setConstructionYear(cursor.getInt(4));
+                house.setBedrooms(cursor.getInt(5));
+                house.setPrice(cursor.getInt(6));
+                house.setStatus(cursor.getInt(7) == 1);
+                house.setFurnished(cursor.getInt(8) == 1);
+                house.setPhotos(String.valueOf(cursor.getInt(9)));
+                house.setAvailabilityDate(cursor.getString(10));
+                house.setDescription(cursor.getString(11));
+                house.setAgencyId(cursor.getInt(12));
+
+                allHousesList.add(house);
+                cursor.moveToNext();
+            }
+            return allHousesList;
+        }
+        return null;
+    }
+
 
     public List<House> getFavoritesByCustomerId(Integer customerId) {
         List<House> favorites = new ArrayList<>();

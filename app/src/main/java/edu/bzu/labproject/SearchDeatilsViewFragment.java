@@ -29,9 +29,9 @@ import edu.bzu.labproject.Validation.Validator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HouseDetailsViewFragment extends Fragment {
+public class SearchDeatilsViewFragment extends Fragment {
 
-    public HouseDetailsViewFragment() {
+    public SearchDeatilsViewFragment() {
         // Required empty public constructor
     }
 
@@ -170,7 +170,7 @@ public class HouseDetailsViewFragment extends Fragment {
                                 //This is to reload the Cars Menu Fragment After Successful Reservation By Customer
                                 final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                 final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                Fragment houseMenuFragment = fragmentManager.findFragmentByTag("House_Menu");
+                                Fragment houseMenuFragment = fragmentManager.findFragmentByTag("Search_Fragment");
                                 fragmentTransaction.detach(houseMenuFragment);
                                 fragmentTransaction.attach(houseMenuFragment);
                                 fragmentTransaction.commit();
@@ -200,7 +200,7 @@ public class HouseDetailsViewFragment extends Fragment {
                 //This is to reload the Cars Menu Fragment after successfully adding a car to favorites by customer
                 final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment houseMenuFragment = fragmentManager.findFragmentByTag("House_Menu");
+                Fragment houseMenuFragment = fragmentManager.findFragmentByTag("Search_Fragment");
                 fragmentTransaction.detach(houseMenuFragment);
                 fragmentTransaction.attach(houseMenuFragment);
                 fragmentTransaction.commit();

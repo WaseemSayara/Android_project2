@@ -10,9 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 
 
 import java.util.ArrayList;
@@ -60,11 +62,6 @@ public class HouseMenuFragment extends Fragment {
 
 
         // /////////////////////////////////////////////////
-
-        List<String> searchList = new ArrayList<String>();
-        List<String> cities = new ArrayList<String>();
-        cities=databaseHelper.getAllCities();
-
 
 
 
