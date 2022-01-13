@@ -128,11 +128,17 @@ public class HomeAgencyActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_edit_property) {
-            System.out.println("lol");
             final FragmentManager fragmentManager = getSupportFragmentManager();
             final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             EditPropertyFragment editPropertyFragment = new EditPropertyFragment();
             fragmentTransaction.replace(R.id.homeContent, editPropertyFragment, "Edit_Property");
+            fragmentTransaction.commit();
+
+        }else if (id == R.id.nav_agency_rental_application) {
+            final FragmentManager fragmentManager = getSupportFragmentManager();
+            final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            AgencyRentApplicationMenuFragment agencyRentApplicationMenuFragment = new AgencyRentApplicationMenuFragment();
+            fragmentTransaction.replace(R.id.homeContent, agencyRentApplicationMenuFragment, "Rental_Application");
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_contactus) {

@@ -21,7 +21,10 @@
             android:id="@+id/nav_rental_agency_history"
             android:icon="@drawable/ic_baseline_history_24"
             android:title="History" />
-
+        <item
+            android:id="@+id/nav_agency_rental_application"
+            android:icon="@drawable/ic_baseline_app_registration_24"
+            android:title="Rental Application" />
         <item
             android:id="@+id/nav_contactus"
             android:icon="@drawable/ic_contactus_black_24dp"

@@ -29,6 +29,8 @@
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/favorites_card_view.xml" value="0.14296875" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_add_properties.xml" value="0.22" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_agecy_reservation_view.xml" value="0.14296875" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_agency_rent_application_menu.xml" value="0.264453125" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_agency_rental_application.xml" value="0.275" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_agency_reservation.xml" value="0.14296875" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_agency_reservation_view.xml" value="0.14296875" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_agency_user_profile.xml" value="0.275" />
@@ -45,6 +47,7 @@
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_second.xml" value="0.1484375" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/fragment_user_profile.xml" value="0.15390625" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/house_reservation_cardview.xml" value="0.17" />
+        <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/pending_reservation_pop_up.xml" value="0.22" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/reservation_house_pop_up.xml" value="0.275" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/layout/reservation_pop_up.xml" value="0.275" />
         <entry key="..\:/Documents/Desktop/AND_PRO/labproject/app/src/main/res/menu/activity_home_Agency_drawer.xml" value="0.15390625" />

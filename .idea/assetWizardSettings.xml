@@ -93,7 +93,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/history/baseline_history_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/app_registration/baseline_app_registration_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -104,7 +104,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="c81919" />
-                            <entry key="outputName" value="ic_baseline_history_24" />
+                            <entry key="outputName" value="ic_baseline_app_registration_24" />
                             <entry key="sourceFile" value="C:\Users\AHA" />
                           </map>
                         </option>

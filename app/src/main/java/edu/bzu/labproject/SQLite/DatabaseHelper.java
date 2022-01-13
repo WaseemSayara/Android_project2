@@ -32,6 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_CARS = "CARS";
     private static final String TABLE_HOUSES = "HOUSES";
     private static final String TABLE_RESERVATIONS = "RESERVATIONS";
+    private static final String TABLE_PENDING_RESERVATIONS = "PENDING_RESERVATIONS";
     private static final String TABLE_FAVORITES = "FAVORITES";
 
     //Common Column Names
@@ -102,13 +103,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             PRICE_COL + " INTEGER NOT NULL,"+ STATUS_COL + " BOOLEAN NOT NULL,"+ FURNISHED_COL + " BOOLEAN NOT NULL,"+ PHOTOS_COL +
             " TEXT NOT NULL,"+ AVAILABILITY_DATE_COL + " TEXT NOT NULL,"+ DESCRIPTION_COL + " TEXT NOT NULL)";
 
-
     String SQL_CREATE_TABLE_RESERVATIONS = "CREATE TABLE " + TABLE_RESERVATIONS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL," +
             HOUSE_ID_COL + " INTEGER NOT NULL," + AGENCY_USER_ID_COL + " INTEGER NOT NULL," +
             DATE_COL + " TEXT NOT NULL," + PERIOD_COL + " INTEGER NOT NULL," + TIME_COL + " TEXT NOT NULL)";
 
+    String SQL_CREATE_TABLE_PENDING_RESERVATIONS = "CREATE TABLE " + TABLE_PENDING_RESERVATIONS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL," +
+            HOUSE_ID_COL + " INTEGER NOT NULL," + AGENCY_USER_ID_COL + " INTEGER NOT NULL," + PERIOD_COL + " INTEGER NOT NULL)";
+
     String SQL_CREATE_TABLE_FAVORITES = "CREATE TABLE " + TABLE_FAVORITES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_ID_COL + " INTEGER NOT NULL,"
             + HOUSE_ID_COL + " INTEGER NOT NULL)";
+
 
 
     public DatabaseHelper(Context context) {
@@ -123,6 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_RESERVATIONS);
         db.execSQL(SQL_CREATE_TABLE_FAVORITES);
         db.execSQL(SQL_CREATE_TABLE_HOUSES);
+        db.execSQL(SQL_CREATE_TABLE_PENDING_RESERVATIONS);
     }
 
     @Override
@@ -213,6 +218,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    public User getUserByUserID(Integer userId) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(TABLE_USERS, new String[]{ID_COL, EMAIL_COL, HASHED_PASSWORD_COL,
+                        FIRSTNAME_COL, LASTNAME_COL, GENDER_COL, COUNTRY_COL, CITY_COL, PHONE_NUMBER_COL, NATIONALITY_COL
+                        , SALARY_COL, FAMILY_SIZE_COL, OCCUPATION_COL},
+                ID_COL + "=?", new String[]{userId.toString()}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            User user = new User();
+            user.setId(cursor.getInt(0));
+            user.setEmailAddress(cursor.getString(1));
+            user.setHashedPassword(cursor.getString(2));
+            user.setFirstName(cursor.getString(3));
+            user.setLastName(cursor.getString(4));
+            user.setGender(cursor.getString(5));
+            user.setCountry(cursor.getString(6));
+            user.setCity(cursor.getString(7));
+            user.setPhoneNumber(cursor.getString(8));
+            user.setNationality(cursor.getString(9));
+            user.setSalary(cursor.getString(10));
+            user.setFamilySize(cursor.getString(11));
+            user.setOccupation(cursor.getString(12));
+            cursor.close();
+            sqLiteDatabase.close();
+            return user;
+        }
+
+        cursor.close();
+        sqLiteDatabase.close();
+        return null;
+    }
+
     public AgencyUser getAgencyUserByEmailAddress(String emailAddress) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(TABLE_AGENCY_USERS, new String[]{ID_COL, EMAIL_COL, HASHED_PASSWORD_COL,
@@ -253,6 +290,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             user.setCity(cursor.getString(7));
             user.setPhoneNumber(cursor.getString(8));
 
+            return user;
+        }
+
+        return null;
+    }
+
+    public User getCustomerNameById(Integer customerId) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(TABLE_USERS, new String[]{FIRSTNAME_COL, LASTNAME_COL},
+                ID_COL + "=" + customerId, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            User user = new User();
+            user.setFirstName(cursor.getString(0));
+            user.setLastName(cursor.getString(1));
             return user;
         }
 
@@ -664,6 +716,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.insert(TABLE_RESERVATIONS, null, contentValues) != -1;
     }
 
+    public boolean newPendingReserve(Reservation reservation) {
+
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USER_ID_COL, reservation.getCustomerId());
+        contentValues.put(HOUSE_ID_COL, reservation.getHouseId());
+        contentValues.put(PERIOD_COL, reservation.getPeriod());
+        contentValues.put(AGENCY_USER_ID_COL, reservation.getAgencyId());
+
+        return sqLiteDatabase.insert(TABLE_PENDING_RESERVATIONS, null, contentValues) != -1;
+    }
+
     public List<Reservation> getReservationsByCustomerId(Integer customerId){
         List<Reservation> reservationList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -722,5 +786,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return reservationList;
         }
         return null;
+    }
+
+    public List<Reservation> getPendingReservationsByAgencyId(Integer AgencyId){
+        List<Reservation> reservationList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(
+                TABLE_PENDING_RESERVATIONS, new String[]{HOUSE_ID_COL, AGENCY_USER_ID_COL, PERIOD_COL,USER_ID_COL},
+                AGENCY_USER_ID_COL + "=" + AgencyId, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                Integer houseId = cursor.getInt(0);
+                Integer agencyID = cursor.getInt(1);
+                String period = cursor.getString(2);
+                Integer customerId = cursor.getInt(3);
+
+                Reservation reservation = new Reservation();
+                reservation.setHouseId(houseId);
+                reservation.setPeriod(period);
+                reservation.setCustomerId(customerId);
+                reservation.setAgencyId(agencyID);
+                reservationList.add(reservation);
+
+                cursor.moveToNext();
+            }
+
+            return reservationList;
+        }
+        return null;
+    }
+
+    public void removeFromPendingReserve(Integer houseID){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.delete(TABLE_PENDING_RESERVATIONS, HOUSE_ID_COL + "=" + houseID , null);
+
     }
 }
