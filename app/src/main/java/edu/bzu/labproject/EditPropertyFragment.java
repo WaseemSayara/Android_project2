@@ -65,7 +65,6 @@ public class EditPropertyFragment extends Fragment {
                 args.putString("PHOTO", house.getPhotos());
                 args.putString("DATE", house.getAvailabilityDate());
                 args.putString("DESCRIPTION", house.getDescription());
-                System.out.println("hiii4");
 
                 EditPropertyCardViewFragment editPropertyCardViewFragment = new EditPropertyCardViewFragment();
                 editPropertyCardViewFragment.setArguments(args);

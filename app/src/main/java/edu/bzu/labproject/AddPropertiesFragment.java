@@ -1,8 +1,14 @@
 package edu.bzu.labproject;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -34,6 +41,7 @@ public class AddPropertiesFragment extends Fragment {
     private Integer  area, year, bedroom, price;
     private String date;
     private Boolean status, furnished;
+    ImageView img;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -82,6 +90,22 @@ public class AddPropertiesFragment extends Fragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 100){
+            if (resultCode == Activity.RESULT_OK) {
+                // do something here
+                Uri uri = data.getData();
+                System.out.println(uri);
+                photo = uri.toString();
+                System.out.println(photo);
+                img.setImageURI(uri);
+            }
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getActivity().setTitle("Post Properties");
@@ -101,24 +125,38 @@ public class AddPropertiesFragment extends Fragment {
         RadioGroup radioGroupStatus = (RadioGroup) getActivity().findViewById(R.id.Post_Status_radioGroup);
         RadioGroup radioGroupFurnished = (RadioGroup) getActivity().findViewById(R.id.Post_furnished_radioGroup);
 
+        img = (ImageView) getActivity().findViewById(R.id.imageView2);
 
-//        takePhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivityForResult(takePicture, 0);
-//            }
-//        });
-//
-//        choosePhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent pickPhoto = new Intent(Intent.ACTION_PICK,
-//                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(pickPhoto , 1);//one can be replaced with any action code
-//
-//            }
-//        });
+
+        takePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(takePicture, 100);
+            }
+        });
+
+        choosePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent;
+
+                if (Build.VERSION.SDK_INT < 19) {
+                    intent = new Intent();
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, 100);
+                } else {
+                    intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, 100);
+                }
+            }
+        });
+
+
 
 
         final DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
@@ -203,7 +241,6 @@ public class AddPropertiesFragment extends Fragment {
 
                 date = dateInputField.getText().toString().trim();
                 description = descriptionInputField.getText().toString().trim();
-                photo = "none";
                 allInputsValidated = true;
 
 

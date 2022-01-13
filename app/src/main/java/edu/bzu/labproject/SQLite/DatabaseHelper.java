@@ -434,7 +434,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             house.setPrice(cursor.getInt(6));
             house.setStatus(cursor.getInt(7) == 1);
             house.setFurnished(cursor.getInt(8) == 1);
-            house.setPhotos(String.valueOf(cursor.getInt(9)));
+            house.setPhotos(cursor.getString(9));
             house.setAvailabilityDate(String.valueOf(cursor.getInt(10)));
             house.setDescription(cursor.getString(11));
             house.setAgencyId(cursor.getInt(12));
@@ -527,7 +527,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 house.setPrice(cursor.getInt(6));
                 house.setStatus(cursor.getInt(7) == 1);
                 house.setFurnished(cursor.getInt(8) == 1);
-                house.setPhotos(String.valueOf(cursor.getInt(9)));
+                house.setPhotos(cursor.getString(9));
                 house.setAvailabilityDate(cursor.getString(10));
                 house.setDescription(cursor.getString(11));
                 house.setAgencyId(cursor.getInt(12));
@@ -562,7 +562,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     house.setPrice(cursor.getInt(6));
                     house.setStatus(cursor.getInt(7) == 1);
                     house.setFurnished(cursor.getInt(8) == 1);
-                    house.setPhotos(String.valueOf(cursor.getInt(9)));
+                    house.setPhotos(cursor.getString(9));
                     house.setAvailabilityDate(cursor.getString(10));
                     house.setDescription(cursor.getString(11));
                     house.setAgencyId(cursor.getInt(12));
@@ -626,7 +626,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 house.setPrice(cursor.getInt(6));
                 house.setStatus(cursor.getInt(7) == 1);
                 house.setFurnished(cursor.getInt(8) == 1);
-                house.setPhotos(String.valueOf(cursor.getInt(9)));
+                house.setPhotos(cursor.getString(9));
                 house.setAvailabilityDate(cursor.getString(10));
                 house.setDescription(cursor.getString(11));
                 house.setAgencyId(cursor.getInt(12));

@@ -3,6 +3,7 @@ package edu.bzu.labproject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -56,6 +58,8 @@ public class EditPropertyCardViewFragment extends Fragment {
         final TextView propeditfurnishedTextView = (TextView) fragView.findViewById(R.id.propeditfurnishedTextView);
         final TextView propeditdateTextView = (TextView) fragView.findViewById(R.id.propeditavailabilityDateTextView);
         final TextView propeditdescriptionTextView = (TextView) fragView.findViewById(R.id.propeditdescriptionTextView);
+        final ImageView houseImage = (ImageView) fragView.findViewById(R.id.houseImage);
+
 
         String houseCity = String.valueOf(getArguments().getString("CITY"));
         String houseAddress  = getArguments().getString("ADDRESS");
@@ -79,6 +83,8 @@ public class EditPropertyCardViewFragment extends Fragment {
         propeditfurnishedTextView.setText(houseFurnished);
         propeditdateTextView.setText(houseDate);
         propeditdescriptionTextView.setText(houseDescription);
+        houseImage.setImageURI(Uri.parse(housePhoto));
+
 
         final Button propeditEditButton = (Button) fragView.findViewById(R.id.propeditEditButton);
         final Button propeditRemoveButton = (Button) fragView.findViewById(R.id.propeditRemoveButton);
@@ -121,11 +127,15 @@ public class EditPropertyCardViewFragment extends Fragment {
                 final Spinner popfurnishedEditText = (Spinner) reservePopupView.findViewById(R.id.popFurnishedspinner);
                 final EditText popdateEditText = (EditText) reservePopupView.findViewById(R.id.popavailabilityDateTextView);
                 final EditText popdescriptionEditText = (EditText) reservePopupView.findViewById(R.id.popdescriptionTextView);
+                final ImageView popHouseImage = (ImageView) reservePopupView.findViewById(R.id.popHouseImage);
+
 
                 popbedroomEditText.setHint(houseBedroom.toString());
                 poppriceEditText.setHint(housePrice.toString());
                 popdescriptionEditText.setHint(houseDescription);
                 popdateEditText.setHint(houseDate);
+                popHouseImage.setImageURI(Uri.parse(housePhoto));
+
 
                 String[] statusOptions = {"Rented", "Un Rented"};
                 ArrayAdapter statusArrayAdapter = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item, statusOptions);

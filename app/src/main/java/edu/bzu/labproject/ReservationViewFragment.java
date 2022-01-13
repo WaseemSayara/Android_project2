@@ -1,12 +1,14 @@
 package edu.bzu.labproject;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import edu.bzu.labproject.SQLite.DatabaseHelper;
@@ -36,6 +38,9 @@ public class ReservationViewFragment extends Fragment {
         final TextView resperiodTextView = (TextView) fragView.findViewById(R.id.resPeriodTextView);
         final TextView resagencyTextView = (TextView) fragView.findViewById(R.id.resAgencyLabelTextView);
 
+        final ImageView houseImage = (ImageView) fragView.findViewById(R.id.houseImage);
+
+
 
         String houseCity = String.valueOf(getArguments().getString("CITY"));
         String houseAddress  = getArguments().getString("ADDRESS");
@@ -44,6 +49,8 @@ public class ReservationViewFragment extends Fragment {
         Integer housePrice = getArguments().getInt("PRICE");
         String houseDescription = getArguments().getString("DESCRIPTION");
         String reservePeriod = getArguments().getString("PERIOD");
+        String housePhoto = getArguments().getString("PHOTO");
+
 
         final DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
         String agencyName = databaseHelper.getAgencyNameByHouseId(getArguments().getInt("ID"));
@@ -57,6 +64,8 @@ public class ReservationViewFragment extends Fragment {
         resdescriptionTextView.setText(houseDescription);
         resperiodTextView.setText(reservePeriod);
         resagencyTextView.setText(agencyName);
+        houseImage.setImageURI(Uri.parse(housePhoto));
+
 
         return fragView;
 

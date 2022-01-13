@@ -3,6 +3,7 @@ package edu.bzu.labproject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -53,6 +55,8 @@ public class MyFavoritesViewFragment extends Fragment {
         final TextView favfurnishedTextView = (TextView) fragView.findViewById(R.id.favfurnishedTextView);
         final TextView favdateTextView = (TextView) fragView.findViewById(R.id.favavailabilityDateTextView);
         final TextView favdescriptionTextView = (TextView) fragView.findViewById(R.id.favdescriptionTextView);
+        final ImageView houseImage = (ImageView) fragView.findViewById(R.id.houseImage);
+
 
         String houseCity = String.valueOf(getArguments().getString("CITY"));
         String houseAddress  = getArguments().getString("ADDRESS");
@@ -76,6 +80,8 @@ public class MyFavoritesViewFragment extends Fragment {
         favfurnishedTextView.setText(houseFurnished);
         favdateTextView.setText(houseDate);
         favdescriptionTextView.setText(houseDescription);
+        houseImage.setImageURI(Uri.parse(housePhoto));
+
 
         final Button removeFavoriteButton = (Button) fragView.findViewById(R.id.favRemoveButton);
         final Button favReserveButton = (Button) fragView.findViewById(R.id.favreserveButton);
@@ -116,6 +122,7 @@ public class MyFavoritesViewFragment extends Fragment {
                 final TextView popfurnishedTextView = (TextView) reservePopupView.findViewById(R.id.popfurnishedTextView);
                 final TextView popdateTextView = (TextView) reservePopupView.findViewById(R.id.popavailabilityDateTextView);
                 final TextView popdescriptionTextView = (TextView) reservePopupView.findViewById(R.id.popdescriptionTextView);
+                final ImageView popHouseImage = (ImageView) reservePopupView.findViewById(R.id.popHouseImage);
 
                 popcityTextView.setText(houseCity);
                 popaddressTextView.setText(houseAddress);
@@ -127,6 +134,7 @@ public class MyFavoritesViewFragment extends Fragment {
                 popfurnishedTextView.setText(houseFurnished);
                 popdateTextView.setText(houseDate);
                 popdescriptionTextView.setText(houseDescription);
+                popHouseImage.setImageURI(Uri.parse(housePhoto));
 
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity())
                         .setView(reservePopupView)
