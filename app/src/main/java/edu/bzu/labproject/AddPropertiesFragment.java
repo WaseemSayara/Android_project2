@@ -110,7 +110,6 @@ public class AddPropertiesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         getActivity().setTitle("Post Properties");
 
-        final Button takePhoto = (Button) getActivity().findViewById(R.id.Take_Photo_button);
         final Button choosePhoto = (Button) getActivity().findViewById(R.id.Choose_Photo_button);
         final Button postProperty = (Button) getActivity().findViewById(R.id.Post_button);
 
@@ -126,15 +125,6 @@ public class AddPropertiesFragment extends Fragment {
         RadioGroup radioGroupFurnished = (RadioGroup) getActivity().findViewById(R.id.Post_furnished_radioGroup);
 
         img = (ImageView) getActivity().findViewById(R.id.imageView2);
-
-
-        takePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(takePicture, 100);
-            }
-        });
 
         choosePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
