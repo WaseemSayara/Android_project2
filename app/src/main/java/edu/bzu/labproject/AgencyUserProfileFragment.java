@@ -113,7 +113,8 @@ public class AgencyUserProfileFragment extends Fragment {
                         updatedUser.setEmailAddress(loggedInUser.getEmailAddress());
                         if(!updatedPhone.isEmpty()){
                             if(Validator.checkPhoneNumberValidity(updatedPhone)){
-                                updatedUser.setPhoneNumber(updatedPhone);
+                                String preNumber = loggedInUser.getPhoneNumber().substring(0,5);
+                                updatedUser.setPhoneNumber(preNumber + updatedPhone);
                             }
                             else {
                                 updatedPhoneEt.setError(getResources().getString(R.string.error_invalid_phone));

@@ -192,7 +192,8 @@ public class UserProfileFragment extends Fragment {
 
                         if(!updatePhone.isEmpty()){
                             if(Validator.checkPhoneNumberValidity(updatePhone)){
-                                updatedUser.setPhoneNumber(updatePhone);
+                                String preNumber = loggedInUser.getPhoneNumber().substring(0,6);
+                                updatedUser.setPhoneNumber(preNumber + updatePhone);
                             }
                             else {
                                 updatePhoneEt.setError(getResources().getString(R.string.error_invalid_phone));

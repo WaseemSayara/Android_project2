@@ -3,6 +3,7 @@
     <string name="dialog_ok_button">OK</string>
     <string name="dialog_cancel_button">CANCEL</string>
     <string name="dialog_title">Confirm Registration</string>
+    <string name="add_house_title">Confirm Adding House</string>
     <string name="dialog_message">You Agree to Our Terms of Service and Privacy Policy ?</string>
     <string name="error_required_field">Required Field</string>
     <string name="error_invalid_email">Invalid Email Address</string>

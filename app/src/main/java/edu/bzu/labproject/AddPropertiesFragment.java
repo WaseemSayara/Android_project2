@@ -146,14 +146,11 @@ public class AddPropertiesFragment extends Fragment {
             }
         });
 
-
-
-
         final DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
 
 
         final AlertDialog.Builder registrationConfirmationAlertDialog = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.dialog_title)
+                .setTitle(R.string.add_house_title)
                 .setMessage(R.string.dialog_message)
                 .setPositiveButton(R.string.dialog_ok_button, new DialogInterface.OnClickListener() {
                     @Override
@@ -269,6 +266,11 @@ public class AddPropertiesFragment extends Fragment {
                 if (!Validator.checkRequiredFieldConstraint(price)) {
 
                     priceInputField.setError(getResources().getString(R.string.error_required_field));
+                    allInputsValidated = false;
+                }
+
+                if (photo == null){
+                    choosePhoto.setError(getResources().getString(R.string.error_required_field));
                     allInputsValidated = false;
                 }
 
