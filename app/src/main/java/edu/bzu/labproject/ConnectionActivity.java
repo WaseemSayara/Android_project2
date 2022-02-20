@@ -44,8 +44,8 @@ public class ConnectionActivity extends Activity {
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 RestApi restApi = retrofit.create(RestApi.class);
-                Call<List<House>> callToFetchListOfCars = restApi.getHouses();
-                callToFetchListOfCars.enqueue(new Callback<List<House>>() {
+                Call<List<House>> callToFetchListOfHouses = restApi.getHouses();
+                callToFetchListOfHouses.enqueue(new Callback<List<House>>() {
                     @Override
                     public void onResponse(Call<List<House>> call, Response<List<House>> response) {
                         if(response.isSuccessful()) {
