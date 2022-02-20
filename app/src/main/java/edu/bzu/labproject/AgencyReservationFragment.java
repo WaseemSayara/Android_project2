@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import edu.bzu.labproject.Models.Car;
 import edu.bzu.labproject.Models.House;
 import edu.bzu.labproject.Models.Reservation;
 import edu.bzu.labproject.SQLite.DatabaseHelper;

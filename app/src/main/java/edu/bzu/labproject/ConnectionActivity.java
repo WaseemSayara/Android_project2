@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import java.util.List;
 
-import edu.bzu.labproject.Models.Car;
+import edu.bzu.labproject.Models.House;
 import edu.bzu.labproject.REST.RestApi;
 import edu.bzu.labproject.SQLite.DatabaseHelper;
 import retrofit2.Call;
@@ -44,17 +44,17 @@ public class ConnectionActivity extends Activity {
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 RestApi restApi = retrofit.create(RestApi.class);
-                Call<List<Car>> callToFetchListOfCars = restApi.getCars();
-                callToFetchListOfCars.enqueue(new Callback<List<Car>>() {
+                Call<List<House>> callToFetchListOfCars = restApi.getHouses();
+                callToFetchListOfCars.enqueue(new Callback<List<House>>() {
                     @Override
-                    public void onResponse(Call<List<Car>> call, Response<List<Car>> response) {
+                    public void onResponse(Call<List<House>> call, Response<List<House>> response) {
                         if(response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Connection Successful", Toast.LENGTH_SHORT).show();
                             connectProgressBar.setVisibility(View.GONE);
-                            if(databaseHelper.getAllCars() == null){
-                                List<Car> carsList = response.body();
-                                for(Car car: carsList){
-                                    databaseHelper.addCar(car);
+                            if(databaseHelper.getAllHouses() == null){
+                                List<House> housesList = response.body();
+                                for(House house: housesList){
+                                    databaseHelper.addHouse(house);
                                 }
                             }
 
@@ -65,7 +65,7 @@ public class ConnectionActivity extends Activity {
                     }
 
                     @Override
-                    public void onFailure(Call<List<Car>> call, Throwable t) {
+                    public void onFailure(Call<List<House>> call, Throwable t) {
                         connectProgressBar.setVisibility(View.GONE);
                         connectButton.setText("Reconnect..");
                         connectButton.setBackgroundColor(Color.rgb(0,255,0));

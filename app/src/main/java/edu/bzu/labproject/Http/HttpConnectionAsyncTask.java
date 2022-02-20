@@ -10,18 +10,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.util.List;
-
 import edu.bzu.labproject.ConnectionActivity;
 import edu.bzu.labproject.LoginActivity;
-import edu.bzu.labproject.Models.Car;
 import edu.bzu.labproject.R;
-import edu.bzu.labproject.REST.RestApi;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpConnectionAsyncTask extends AsyncTask<String, String, String> {
     private Activity connectionActivity;

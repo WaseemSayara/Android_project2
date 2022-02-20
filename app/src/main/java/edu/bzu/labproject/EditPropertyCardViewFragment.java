@@ -96,7 +96,6 @@ public class EditPropertyCardViewFragment extends Fragment {
                 databaseHelper.deleteHouseById(houseId);
                 Snackbar.make(v, "Removed From propeditorites", Snackbar.LENGTH_LONG).show();
 
-                //This is to reload the Cars Menu Fragment after successfully adding a car to propeditorites by customer
                 final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment houseMenuFragment = fragmentManager.findFragmentByTag("Edit_Property");

@@ -35,10 +35,10 @@ public class House {
     public House() {
     }
 
-    public House(Integer carId, String city, String postalAddress, Integer area,
+    public House(Integer houseId, String city, String postalAddress, Integer area,
                  Integer constructionYear, Integer bedrooms, Integer price, boolean status,
                  boolean furnished, String photos, String availabilityDate, String description) {
-        this.houseId = carId;
+        this.houseId = houseId;
         this.city = city;
         this.postalAddress = postalAddress;
         this.area = area;
@@ -65,8 +65,8 @@ public class House {
         return houseId;
     }
 
-    public void setHouseId(Integer carId) {
-        this.houseId = carId;
+    public void setHouseId(Integer houseId) {
+        this.houseId = houseId;
     }
 
     public String getCity() {
@@ -168,7 +168,7 @@ public class House {
     @Override
     public String toString() {
         return "House{" +
-                "carId=" + houseId +
+                "houseId=" + houseId +
                 ", city='" + city + '\'' +
                 ", postalAddress='" + postalAddress + '\'' +
                 ", area=" + area +

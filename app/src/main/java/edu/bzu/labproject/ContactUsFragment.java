@@ -65,7 +65,7 @@ public class ContactUsFragment extends Fragment {
                 Intent emailIntent = new Intent();
                 emailIntent.setAction(Intent.ACTION_SENDTO);
                 emailIntent.setType("message/rfc822");
-                emailIntent.setData(Uri.parse("mailto:CarDealer@cars.com"));
+                emailIntent.setData(Uri.parse("mailto:ihouse@house.com"));
 
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Unexpected Error Report");
                 emailIntent.putExtra(Intent.EXTRA_TEXT, "Hey, I would like to report error");

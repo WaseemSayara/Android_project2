@@ -9,12 +9,9 @@ import android.util.Log;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Period;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import edu.bzu.labproject.Models.Car;
 import edu.bzu.labproject.Models.House;
 import edu.bzu.labproject.Models.Reservation;
 import edu.bzu.labproject.Models.User;
@@ -29,7 +26,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Table Names
     private static final String TABLE_USERS = "USERS";
     private static final String TABLE_AGENCY_USERS = "AGENCY_USERS";
-    private static final String TABLE_CARS = "CARS";
     private static final String TABLE_HOUSES = "HOUSES";
     private static final String TABLE_RESERVATIONS = "RESERVATIONS";
     private static final String TABLE_PENDING_RESERVATIONS = "PENDING_RESERVATIONS";
@@ -39,8 +35,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String ID_COL = "ID";
     private static final String USER_ID_COL = "USER_ID";
     private static final String AGENCY_USER_ID_COL = "AGENCY_ID";
-    private static final String CAR_ID_COL = "CAR_ID";
     private static final String HOUSE_ID_COL = "HOUSE_ID";
+
     //Customers Table Column Names
     private static final String EMAIL_COL = "EMAIL_ADDRESS";
     private static final String HASHED_PASSWORD_COL = "PASSWORD_HASH";
@@ -55,13 +51,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String FAMILY_SIZE_COL = "FAMILY_SIZE";
     private static final String OCCUPATION_COL = "OCCUPATION";
     private static final String AGENCY_NAME_COL = "AGENCY_NAME";
-
-    //Cars Table Column Names
-    private static final String YEAR_COL = "YEAR";
-    private static final String MAKE_COL = "MAKE";
-    private static final String MODEL_COL = "MODEL";
-    private static final String DISTANCE_COL = "DISTANCE";
-    private static final String ACCIDENTS_COL = "HAD_ACCIDENTS";
 
     //HOUSES Table Column Names
     private static final String POSTAL_ADDRESS_COL = "POSTAL_ADDRESS";
@@ -93,11 +82,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             HASHED_PASSWORD_COL + " TEXT NOT NULL," + AGENCY_NAME_COL + " TEXT NOT NULL," + COUNTRY_COL + " TEXT NOT NULL," + CITY_COL +
             " TEXT NOT NULL," + PHONE_NUMBER_COL + " TEXT NOT NULL)";
 
-
-    String SQL_CREATE_TABLE_CARS = "CREATE TABLE " + TABLE_CARS + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + YEAR_COL + " INTEGER NOT NULL," +
-            MAKE_COL + " TEXT NOT NULL," + MODEL_COL + " TEXT NOT NULL," + DISTANCE_COL + " TEXT NOT NULL," + PRICE_COL + " INTEGER NOT NULL," +
-            ACCIDENTS_COL + " BOOLEAN NOT NULL)";
-
     String SQL_CREATE_TABLE_HOUSES = "CREATE TABLE " + TABLE_HOUSES + "(" + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT," + AGENCY_NAME_COL + " TEXT NOT NULL,"+ AGENCY_USER_ID_COL + " INTEGAR NOT NULL,"
             + CITY_COL + " TEXT NOT NULL," + POSTAL_ADDRESS_COL + " TEXT NOT NULL," + AREA_COL + " INTEGER NOT NULL," + CONSTRUCTION_COL + " INTEGER NOT NULL," + BEDROOMS_COL + " INTEGER NOT NULL," +
             PRICE_COL + " INTEGER NOT NULL,"+ STATUS_COL + " BOOLEAN NOT NULL,"+ FURNISHED_COL + " BOOLEAN NOT NULL,"+ PHOTOS_COL +
@@ -123,7 +107,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_TABLE_USERS);
         db.execSQL(SQL_CREATE_TABLE_AGENCY_USERS);
-        db.execSQL(SQL_CREATE_TABLE_CARS);
         db.execSQL(SQL_CREATE_TABLE_RESERVATIONS);
         db.execSQL(SQL_CREATE_TABLE_FAVORITES);
         db.execSQL(SQL_CREATE_TABLE_HOUSES);
@@ -374,23 +357,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return (getUserByEmailAddress(emailAddress) != null);
     }
 
-    public boolean addCar(Car car) {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(YEAR_COL, car.getYearOfProduction());
-        contentValues.put(MAKE_COL, car.getManufacturingCompany());
-        contentValues.put(MODEL_COL, car.getCarModel());
-        contentValues.put(DISTANCE_COL, car.getDistanceTraveled());
-        contentValues.put(PRICE_COL, Integer.valueOf(car.getCarPrice()));
-        contentValues.put(ACCIDENTS_COL, car.HadAccidents());
-
-        long result;
-        if ((result = sqLiteDatabase.insert(TABLE_CARS, null, contentValues)) != -1)
-            return true;
-        else
-            return false;
-    }
-
     public boolean addHouse(House house) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -481,32 +447,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-
-    public List<Car> getAllCars() {
-        List<Car> allCarsList = new ArrayList<>();
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(
-                TABLE_CARS, new String[]{ID_COL, YEAR_COL, MAKE_COL, MODEL_COL, DISTANCE_COL, PRICE_COL, ACCIDENTS_COL},
-                null,null, null, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                Car car = new Car();
-                car.setCarId(cursor.getInt(0));
-                car.setYearOfProduction(cursor.getInt(1));
-                car.setManufacturingCompany(cursor.getString(2));
-                car.setCarModel(cursor.getString(3));
-                car.setDistanceTraveled(cursor.getString(4));
-                car.setCarPrice(String.valueOf(cursor.getInt(5)));
-                car.setHadAccidents(cursor.getInt(6) == 1);
-                allCarsList.add(car);
-                cursor.moveToNext();
-            }
-            return allCarsList;
-        }
-        return null;
-    }
-
     public List<House> getAllHouses() {
         List<House> allHousesList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -579,33 +519,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public List<Car> getCustomerAvailableCars(Integer customerId) {
-        List<Car> allCarsList = new ArrayList<>();
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(
-                TABLE_CARS, new String[]{ID_COL, YEAR_COL, MAKE_COL, MODEL_COL, DISTANCE_COL, PRICE_COL, ACCIDENTS_COL},
-                ID_COL + " NOT IN (SELECT " + CAR_ID_COL + " FROM " + TABLE_RESERVATIONS + " WHERE " + USER_ID_COL + "=" + customerId +")" + " AND "
-                        + ID_COL + " NOT IN (SELECT " + CAR_ID_COL + " FROM " + TABLE_FAVORITES + " WHERE " + USER_ID_COL + "=" + customerId +")" ,null, null, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                Car car = new Car();
-                car.setCarId(cursor.getInt(0));
-                car.setYearOfProduction(cursor.getInt(1));
-                car.setManufacturingCompany(cursor.getString(2));
-                car.setCarModel(cursor.getString(3));
-                car.setDistanceTraveled(cursor.getString(4));
-                car.setCarPrice(String.valueOf(cursor.getInt(5)));
-                car.setHadAccidents(cursor.getInt(6) == 1);
-                allCarsList.add(car);
-                cursor.moveToNext();
-            }
-            return allCarsList;
-        }
-        return null;
-    }
-
-
     public List<House> getSearchedHouses(String myQuery) {
         List<House> allHousesList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -661,14 +574,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
 
 
-    }
-
-    public boolean addFavoriteCarToCustomer(Integer customerId, Integer carId) {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(USER_ID_COL, customerId);
-        contentValues.put(CAR_ID_COL, carId);
-        return sqLiteDatabase.insert(TABLE_FAVORITES, null, contentValues) != -1;
     }
 
     public boolean addFavoriteHouseToCustomer(Integer customerId, Integer houseId) {

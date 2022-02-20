@@ -195,7 +195,6 @@ public class HouseDetailsViewFragment extends Fragment {
                 databaseHelper.addFavoriteHouseToCustomer(customerId, houseId);
                 Snackbar.make(v, "Added to Favorites", Snackbar.LENGTH_LONG).show();
 
-                //This is to reload the Cars Menu Fragment after successfully adding a car to favorites by customer
                 final FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment houseMenuFragment = fragmentManager.findFragmentByTag("House_Menu");
