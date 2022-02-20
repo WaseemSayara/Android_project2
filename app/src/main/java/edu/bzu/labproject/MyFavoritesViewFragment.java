@@ -80,7 +80,11 @@ public class MyFavoritesViewFragment extends Fragment {
         favfurnishedTextView.setText(houseFurnished);
         favdateTextView.setText(houseDate);
         favdescriptionTextView.setText(houseDescription);
-        houseImage.setImageURI(Uri.parse(housePhoto));
+        try {
+            houseImage.setImageURI(Uri.parse(housePhoto));
+        } catch (Exception e){
+            houseImage.setImageResource(R.drawable.i_house_logo);
+        }
 
 
         final Button removeFavoriteButton = (Button) fragView.findViewById(R.id.favRemoveButton);
@@ -133,7 +137,11 @@ public class MyFavoritesViewFragment extends Fragment {
                 popfurnishedTextView.setText(houseFurnished);
                 popdateTextView.setText(houseDate);
                 popdescriptionTextView.setText(houseDescription);
-                popHouseImage.setImageURI(Uri.parse(housePhoto));
+                try {
+                    popHouseImage.setImageURI(Uri.parse(housePhoto));
+                } catch (Exception e){
+                    houseImage.setImageResource(R.drawable.i_house_logo);
+                }
 
                 final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity())
                         .setView(reservePopupView)

@@ -64,7 +64,11 @@ public class ReservationViewFragment extends Fragment {
         resdescriptionTextView.setText(houseDescription);
         resperiodTextView.setText(reservePeriod);
         resagencyTextView.setText(agencyName);
-        houseImage.setImageURI(Uri.parse(housePhoto));
+        try {
+            houseImage.setImageURI(Uri.parse(housePhoto));
+        } catch (Exception e){
+            houseImage.setImageResource(R.drawable.i_house_logo);
+        }
 
 
         return fragView;

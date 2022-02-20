@@ -95,7 +95,11 @@ public class SearchDeatilsViewFragment extends Fragment {
         furnishedTextView.setText(houseFurnished);
         dateTextView.setText(houseDate);
         descriptionTextView.setText(houseDescription);
-        houseImage.setImageURI(Uri.parse(housePhoto));
+        try {
+            houseImage.setImageURI(Uri.parse(housePhoto));
+        } catch (Exception e){
+            houseImage.setImageResource(R.drawable.i_house_logo);
+        }
 
 
 
@@ -131,7 +135,11 @@ public class SearchDeatilsViewFragment extends Fragment {
                 popfurnishedTextView.setText(houseFurnished);
                 popdateTextView.setText(houseDate);
                 popdescriptionTextView.setText(houseDescription);
-                popHouseImage.setImageURI(Uri.parse(housePhoto));
+                try {
+                    popHouseImage.setImageURI(Uri.parse(housePhoto));
+                } catch (Exception e){
+                    houseImage.setImageResource(R.drawable.i_house_logo);
+                }
 
 
 

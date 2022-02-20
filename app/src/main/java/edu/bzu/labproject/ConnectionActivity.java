@@ -54,6 +54,7 @@ public class ConnectionActivity extends Activity {
                             if(databaseHelper.getAllHouses() == null){
                                 List<House> housesList = response.body();
                                 for(House house: housesList){
+                                    System.out.println(house);
                                     databaseHelper.addHouse(house);
                                 }
                             }

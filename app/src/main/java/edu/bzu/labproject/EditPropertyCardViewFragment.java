@@ -83,7 +83,11 @@ public class EditPropertyCardViewFragment extends Fragment {
         propeditfurnishedTextView.setText(houseFurnished);
         propeditdateTextView.setText(houseDate);
         propeditdescriptionTextView.setText(houseDescription);
-        houseImage.setImageURI(Uri.parse(housePhoto));
+        try {
+            houseImage.setImageURI(Uri.parse(housePhoto));
+        } catch (Exception e){
+            houseImage.setImageResource(R.drawable.i_house_logo);
+        }
 
 
         final Button propeditEditButton = (Button) fragView.findViewById(R.id.propeditEditButton);
@@ -133,7 +137,11 @@ public class EditPropertyCardViewFragment extends Fragment {
                 poppriceEditText.setHint(housePrice.toString());
                 popdescriptionEditText.setHint(houseDescription);
                 popdateEditText.setHint(houseDate);
-                popHouseImage.setImageURI(Uri.parse(housePhoto));
+                try {
+                    popHouseImage.setImageURI(Uri.parse(housePhoto));
+                } catch (Exception e){
+                    houseImage.setImageResource(R.drawable.i_house_logo);
+                }
 
 
                 String[] statusOptions = {"Rented", "Un Rented"};

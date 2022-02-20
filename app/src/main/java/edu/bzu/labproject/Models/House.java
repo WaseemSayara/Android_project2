@@ -169,6 +169,7 @@ public class House {
     public String toString() {
         return "House{" +
                 "houseId=" + houseId +
+                ", agencyId=" + agencyId +
                 ", city='" + city + '\'' +
                 ", postalAddress='" + postalAddress + '\'' +
                 ", area=" + area +
@@ -178,8 +179,9 @@ public class House {
                 ", status=" + status +
                 ", furnished=" + furnished +
                 ", photos='" + photos + '\'' +
-                ", availabilityDate=" + availabilityDate +
+                ", availabilityDate='" + availabilityDate + '\'' +
                 ", description='" + description + '\'' +
+                ", agencyName='" + agencyName + '\'' +
                 '}';
     }
 }
