@@ -63,7 +63,6 @@ public class ConnectionActivity extends Activity {
                             ConnectionActivity.this.finish();
                         }
                     }
-
                     @Override
                     public void onFailure(Call<List<House>> call, Throwable t) {
                         connectProgressBar.setVisibility(View.GONE);
