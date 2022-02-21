@@ -401,7 +401,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             house.setStatus(cursor.getInt(7) == 1);
             house.setFurnished(cursor.getInt(8) == 1);
             house.setPhotos(cursor.getString(9));
-            house.setAvailabilityDate(String.valueOf(cursor.getInt(10)));
+            house.setAvailabilityDate(cursor.getString(10));
             house.setDescription(cursor.getString(11));
             house.setAgencyId(cursor.getInt(12));
             return house;
@@ -564,6 +564,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Integer houseId = cursor.getInt(2);
                 House house = this.getHouseById(houseId);
                 Log.d("FAV", house.getCity());
+                Log.d("FAV", house.toString());
                 if (house != null)
                     favorites.add(house);
 
